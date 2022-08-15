@@ -1,0 +1,80 @@
+<template>
+    <div class="decomol_container">
+        <div class="column is-2 is-offset-9">
+            <router-link to="/adicionar"><button class="button is-dark">Adicionar Decomol</button></router-link>
+        </div>
+        <!-- se o status:liberado não estiver blank, o decomol pode sumir (depois fazer um historico) -->
+        <div class="decomol_content" v-for="decomol in decs" v-bind:key="decomol.id">            
+            <div v-if="decomol.liberado == null">
+                <h1>{{ decomol.producao }}</h1> <br>
+                <button :class= " corAtual(decomol.liberado) ">{{ decomolStatus(decomol.liberado) }}</button>
+                <router-link v-bind:to="'/decomol/' + decomol.id"><button class='button is-info is-light'>Enviar Resultado</button></router-link>
+                <button class='button is-info is-light' @click="deleteDecomol(decomol.id)">Deletar</button> <br>
+                <br><br><br>
+            </div>
+            <div v-else>
+                <h1>{{ decomol.producao }}</h1> <br>
+                <button :class= " corAtual(decomol.liberado) ">{{ decomolStatus(decomol.liberado) }}</button>
+                <router-link v-bind:to="'/decomol/' + decomol.id"><button class='button is-info is-light'>Editar Resultado</button></router-link>
+                <button class='button is-danger is-light' @click="deleteDecomol(decomol.id)">Deletar</button> <br>
+                <br><br><br>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    import axios from 'axios'
+
+    export default {
+        name: 'DecomolView',
+        data() {
+            return{
+                decs: [],
+            } 
+        },
+        mounted() {
+            this.getDecomol()
+        },
+        methods: {
+            getDecomol() {
+                axios({
+                    method: 'get',
+                    url: 'http://127.0.0.1:8000/decomol/',
+                }) .then (response => this.decs = response.data)
+            },
+
+
+            deleteDecomol(id) {
+                axios({
+                    method: 'delete',
+                    url: 'http://127.0.0.1:8000/decomol/' + id + '/'
+                }) .then (response => console.log(response.data))
+            },
+
+            corAtual(status){
+                if (status == true){
+                    return 'button is-success'
+                }
+                else if (status == false){
+                    return 'button is-danger'
+                }
+                else{
+                    return 'button is-warning'
+                }
+            },
+
+            decomolStatus(status){
+                 if (status == true){
+                    return 'Liberado'
+                }
+                else if (status == false){
+                    return 'Não Liberado'
+                }
+                else{
+                    return 'Em Análise'
+                }
+            }
+        }
+    }
+</script>

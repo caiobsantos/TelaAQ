@@ -1,0 +1,61 @@
+<template>
+    <div class="decomol_content" v-for="decomol in decs" v-bind:key="decomol.id">            
+        <h2>{{decomol.producao}}</h2>
+        <button :class= " corAtual(decomol.liberado) ">{{ decomolStatus(decomol.liberado) }}</button>
+        <br> <br>
+        </div>
+</template>
+
+<script>
+    import axios from "axios";
+
+    export default {
+        name: 'FabricacaoView',
+        data() {
+            return{
+                decs: []
+            }
+        },
+        mounted() {
+            this.isReady()
+        },
+        methods: {
+            isReady(){
+                axios({
+                    method: 'get',
+                    url: 'http://127.0.0.1:8000/decomol/',
+                }) .then (response => this.decs = response.data)
+
+                setTimeout(this.isReady, 2000)
+            },
+
+            corAtual(status){
+                if (status == true){
+                    return 'button is-success'
+                }
+                else if (status == false){
+                    return 'button is-danger'
+                }
+                else{
+                    return 'button is-warning'
+                }
+            },
+
+            decomolStatus(status){
+                 if (status == true){
+                    return 'Liberado'
+                }
+                else if (status == false){
+                    return 'Não Liberado'
+                }
+                else{
+                    return 'Em Análise'
+                }
+            }
+        },
+
+        ready() {
+            this.isReady()
+        }
+    }
+</script>
