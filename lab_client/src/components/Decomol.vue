@@ -6,14 +6,14 @@
         <!-- se o status:liberado não estiver blank, o decomol pode sumir (depois fazer um historico) -->
         <div class="decomol_content" v-for="decomol in decs" v-bind:key="decomol.id">            
             <div v-if="decomol.liberado == null">
-                <h1>{{ decomol.producao }}</h1> <br>
+                <h1 class="title is-4">{{ decomol.producao }}</h1>
                 <button :class= " corAtual(decomol.liberado) ">{{ decomolStatus(decomol.liberado) }}</button>
                 <router-link v-bind:to="'/decomol/' + decomol.id"><button class='button is-info is-light'>Enviar Resultado</button></router-link>
-                <button class='button is-info is-light' @click="deleteDecomol(decomol.id)">Deletar</button> <br>
+                <button class='button is-danger is-light' @click="deleteDecomol(decomol.id)">Deletar</button> <br>
                 <br><br><br>
             </div>
             <div v-else>
-                <h1>{{ decomol.producao }}</h1> <br>
+                <h1 class="title is-4">{{ decomol.producao }}</h1>
                 <button :class= " corAtual(decomol.liberado) ">{{ decomolStatus(decomol.liberado) }}</button>
                 <router-link v-bind:to="'/decomol/' + decomol.id"><button class='button is-info is-light'>Editar Resultado</button></router-link>
                 <button class='button is-danger is-light' @click="deleteDecomol(decomol.id)">Deletar</button> <br>
@@ -25,6 +25,8 @@
 
 <script>
     import axios from 'axios'
+
+    
 
     export default {
         name: 'DecomolView',
@@ -45,8 +47,16 @@
             },
 
 
-            deleteDecomol(id) {
-                axios({
+            async deleteDecomol(id) {
+                 const c = confirm("Do you really want to delete it? You will not be able to restore this data again!")
+                if (c) {
+                    await this.deletar(id)
+                    window.location.reload()
+                }
+            },
+
+            deletar(id){
+                 axios({
                     method: 'delete',
                     url: 'http://127.0.0.1:8000/decomol/' + id + '/'
                 }) .then (response => console.log(response.data))
@@ -74,7 +84,7 @@
                 else{
                     return 'Em Análise'
                 }
-            }
+            },
         }
     }
 </script>

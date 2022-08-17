@@ -1,7 +1,8 @@
 <template>
     <div class="decomol_content" v-for="decomol in decs" v-bind:key="decomol.id">            
-        <h2>{{decomol.producao}}</h2>
+        <br> <h1 class="title is-4">{{decomol.producao}}</h1>
         <button :class= " corAtual(decomol.liberado) ">{{ decomolStatus(decomol.liberado) }}</button>
+        <router-link v-bind:to="'/fabricacao/detalhes/' + decomol.id"><button class='button is-info is-light'>Detalhes</button></router-link>
         <br> <br>
         </div>
 </template>
@@ -25,6 +26,8 @@
                     method: 'get',
                     url: 'http://127.0.0.1:8000/decomol/',
                 }) .then (response => this.decs = response.data)
+
+                // fazer excecao para quando o decomol for excluido
 
                 setTimeout(this.isReady, 2000)
             },

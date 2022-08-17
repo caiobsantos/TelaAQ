@@ -1,6 +1,7 @@
 <template>
     <div id='edit'>
         <form class="inputs" @submit.prevent="getDecomol" v-bind:key="decomol.id">
+            <input class="input is-danger" type="text" placeholder="Resultado Cor" v-model="decomol.producao">
             <input class="input is-danger" type="text" placeholder="Resultado Cor" v-model="decomol.resultado_cor">
             <input class="input is-danger" type="text" placeholder="Sensorial" v-model="decomol.sensorial">
             <input class="input is-danger" type="text" placeholder="P.H." v-model="decomol.ph">
@@ -64,6 +65,7 @@
             return{
                 id: this.$route.params.id,
                 decomol: [],
+                producao: "",
                 resultado_cor: "",
                 sensorial: "",
                 ph: "",
