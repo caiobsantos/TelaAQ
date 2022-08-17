@@ -4,6 +4,7 @@ import DecomolView from '../components/Decomol.vue'
 import AdicionarView from '../components/AdicionarDecomol.vue'
 import EditView from '../components/EditarDecomol.vue'
 import FabricacaoView from '../views/Fabricacao.vue'
+import DetailView from '../components/Detalhes.vue'
 
 const routes = [
   {
@@ -44,6 +45,12 @@ const routes = [
     name: 'fabricacao',
     component: FabricacaoView
   },
+
+  {
+    path: '/fabricacao/detalhes/:id',
+    name: 'detalhe',
+    component: DetailView
+  }
 ]
 
 const router = createRouter({
