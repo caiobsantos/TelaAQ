@@ -44,6 +44,8 @@
                     method: 'get',
                     url: 'http://127.0.0.1:8000/decomol/',
                 }) .then (response => this.decs = response.data)
+
+                setTimeout(this.getDecomol, 2000)
             },
 
 
@@ -85,6 +87,9 @@
                     return 'Em Análise'
                 }
             },
+        },
+        ready() {
+            this.getDecomol()
         }
     }
 </script>

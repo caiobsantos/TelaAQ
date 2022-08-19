@@ -27,7 +27,9 @@
                     url: 'http://127.0.0.1:8000/decomol/',
                 }) .then (response => this.decs = response.data)
 
-                // fazer excecao para quando o decomol for excluido
+                    .catch(err => {
+                    console.log(err)
+                })
 
                 setTimeout(this.isReady, 2000)
             },
