@@ -19,12 +19,13 @@ import axios from 'axios'
             return {
                 decs: [],
                 producao: "",
+                baseUrl: 'http://172.16.19.116:8000/decomol/',
             }
         },
         methods: {
             addDecomol() {
                 axios
-                    .post('http://127.0.0.1:8000/decomol/', {
+                    .post(this.baseUrl, {
                         producao: this.producao
                     }) .then (this.$router.push('decomol')
                     )

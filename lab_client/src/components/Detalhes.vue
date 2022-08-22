@@ -43,7 +43,8 @@
             return {
                 id: this.$route.params.id,
                 decomol: [],
-                router: this.$router
+                router: this.$router,
+                baseUrl: 'http://172.16.19.116:8000/decomol/',
             }
         },
 
@@ -55,7 +56,7 @@
         getDecomol() {
             axios({
                 method: 'get',
-                url: 'http://127.0.0.1:8000/decomol/' + this.id,
+                url: this.baseUrl + this.id,
                 cancelToken: request.token
             }) .then(response => this.decomol = response.data)
 

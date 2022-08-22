@@ -70,7 +70,8 @@
                 sensorial: "",
                 ph: "",
                 brix: "",
-                liberado: null
+                liberado: null,
+                baseUrl: 'http://172.16.19.116:8000/decomol/',
             }
         },
         mounted() {
@@ -80,12 +81,12 @@
             getDecomol() {
                 axios({
                     method: 'get',
-                    url: 'http://127.0.0.1:8000/decomol/' + this.id,
+                    url: this.baseUrl + this.id,
                 }) .then (response => this.decomol = response.data)
             },
 
             editDecomol() {
-                axios.put('http://127.0.0.1:8000/decomol/' + this.id + '/',{
+                axios.put(this.baseUrl + this.id + '/',{
                     resultado_cor: this.decomol.resultado_cor,
                     sensorial: this.decomol.sensorial,
                     ph: this.decomol.ph,

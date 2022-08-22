@@ -14,7 +14,8 @@
         name: 'FabricacaoView',
         data() {
             return{
-                decs: []
+                decs: [],
+                baseUrl: 'http://172.16.19.116:8000/decomol/',
             }
         },
         mounted() {
@@ -24,7 +25,7 @@
             isReady(){
                 axios({
                     method: 'get',
-                    url: 'http://127.0.0.1:8000/decomol/',
+                    url: this.baseUrl,
                 }) .then (response => this.decs = response.data)
 
                     .catch(err => {

@@ -33,6 +33,7 @@
         data() {
             return{
                 decs: [],
+                baseUrl: 'http://172.16.19.116:8000/decomol/'
             } 
         },
         mounted() {
@@ -42,8 +43,9 @@
             getDecomol() {
                 axios({
                     method: 'get',
-                    url: 'http://127.0.0.1:8000/decomol/',
+                    url: this.baseUrl,
                 }) .then (response => this.decs = response.data)
+
 
                 setTimeout(this.getDecomol, 2000)
             },
@@ -60,7 +62,7 @@
             deletar(id){
                  axios({
                     method: 'delete',
-                    url: 'http://127.0.0.1:8000/decomol/' + id + '/'
+                    url: this.baseUrl + id + '/'
                 }) .then (response => console.log(response.data))
             },
 
@@ -89,7 +91,7 @@
             },
         },
         ready() {
-            this.getDecomol()
+        this.getDecomol()
         }
     }
 </script>
