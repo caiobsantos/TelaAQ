@@ -26,7 +26,7 @@
 <script>
     import axios from 'axios'
 
-    
+    // criar funcionalidade para a pagina atualizar apenas quando houver alguma alteracao nos elementos
 
     export default {
         name: 'DecomolView',
@@ -56,7 +56,7 @@
                  const c = confirm("Do you really want to delete it? You will not be able to restore this data again!")
                 if (c) {
                     await this.deletar(id)
-                    window.location.reload()
+                    // window.location.reload()
                 }
             },
 
