@@ -35,12 +35,15 @@
     import axios from 'axios'
     import moment from 'moment'
 
+    const request = axios.CancelToken.source();
+
     export default {
         name: 'DetalheView',
         data () {
             return {
                 id: this.$route.params.id,
-                decomol: []
+                decomol: [],
+                router: this.$router,
             }
         },
 
@@ -52,10 +55,15 @@
         getDecomol() {
             axios({
                 method: 'get',
-                url: 'http://127.0.0.1:8000/decomol/' + this.id,
+                url: process.env.VUE_APP_ROOT_URL + this.id,
+                cancelToken: request.token
             }) .then(response => this.decomol = response.data)
 
-        // fazer excecao para quando o decomol for excluido
+                .catch(err => {
+                    console.log(err)
+                    request.cancel()
+                    this.router.push({path: '/fabricacao'})
+                })
 
             setTimeout(this.getDecomol, 2000)
         },
