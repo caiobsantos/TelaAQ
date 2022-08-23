@@ -71,7 +71,6 @@
                 ph: "",
                 brix: "",
                 liberado: null,
-                baseUrl: 'http://172.16.19.116:8000/decomol/',
             }
         },
         mounted() {
@@ -81,22 +80,22 @@
             getDecomol() {
                 axios({
                     method: 'get',
-                    url: this.baseUrl + this.id,
+                    url: process.env.VUE_APP_ROOT_URL + this.id,
                 }) .then (response => this.decomol = response.data)
             },
 
             editDecomol() {
-                axios.put(this.baseUrl + this.id + '/',{
+                axios.put(process.env.VUE_APP_ROOT_URL + this.id + '/',{
                     resultado_cor: this.decomol.resultado_cor,
                     sensorial: this.decomol.sensorial,
                     ph: this.decomol.ph,
                     brix: this.decomol.brix,
                     producao: this.decomol.producao,
                     liberado: this.liberado
-                }) .then(response => {
-                    this.refreshData()
-                    alert(response.data)
-                    })
+                }) //.then(response => {
+                //     this.refreshData()
+                //     alert(response.data)
+                //     })
             },
 
             liberaDecomol() {

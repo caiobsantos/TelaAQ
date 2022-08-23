@@ -15,7 +15,6 @@
         data() {
             return{
                 decs: [],
-                baseUrl: 'http://172.16.19.116:8000/decomol/',
             }
         },
         mounted() {
@@ -25,7 +24,7 @@
             isReady(){
                 axios({
                     method: 'get',
-                    url: this.baseUrl,
+                    url: process.env.VUE_APP_ROOT_URL,
                 }) .then (response => this.decs = response.data)
 
                     .catch(err => {
