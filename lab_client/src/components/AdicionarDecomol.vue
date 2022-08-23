@@ -24,7 +24,7 @@ import axios from 'axios'
         methods: {
             addDecomol() {
                 axios
-                    .post('http://127.0.0.1:8000/decomol/', {
+                    .post(process.env.VUE_APP_ROOT_URL, {
                         producao: this.producao
                     }) .then (this.$router.push('decomol')
                     )

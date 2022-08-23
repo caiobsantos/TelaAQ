@@ -14,7 +14,7 @@
         name: 'FabricacaoView',
         data() {
             return{
-                decs: []
+                decs: [],
             }
         },
         mounted() {
@@ -24,10 +24,12 @@
             isReady(){
                 axios({
                     method: 'get',
-                    url: 'http://127.0.0.1:8000/decomol/',
+                    url: process.env.VUE_APP_ROOT_URL,
                 }) .then (response => this.decs = response.data)
 
-                // fazer excecao para quando o decomol for excluido
+                    .catch(err => {
+                    console.log(err)
+                })
 
                 setTimeout(this.isReady, 2000)
             },

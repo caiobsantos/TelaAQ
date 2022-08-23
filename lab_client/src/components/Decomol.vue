@@ -37,13 +37,18 @@
         },
         mounted() {
             this.getDecomol()
+            console.log('oi')
+            console.log(process.env.VUE_APP_ROOT_URL)
         },
         methods: {
             getDecomol() {
                 axios({
                     method: 'get',
-                    url: 'http://127.0.0.1:8000/decomol/',
+                    url: process.env.VUE_APP_ROOT_URL,
                 }) .then (response => this.decs = response.data)
+
+
+                setTimeout(this.getDecomol, 2000)
             },
 
 
@@ -58,7 +63,7 @@
             deletar(id){
                  axios({
                     method: 'delete',
-                    url: 'http://127.0.0.1:8000/decomol/' + id + '/'
+                    url: process.env.VUE_APP_ROOT_URL + id + '/'
                 }) .then (response => console.log(response.data))
             },
 
@@ -85,6 +90,9 @@
                     return 'Em Análise'
                 }
             },
+        },
+        ready() {
+        this.getDecomol()
         }
     }
 </script>
