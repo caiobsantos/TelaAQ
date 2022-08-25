@@ -9,3 +9,4 @@ class Decomol(models.Model):
     brix = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     ph = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
     liberado = models.BooleanField(blank=True, null=True)
+    em_analise = models.BooleanField(default=True)

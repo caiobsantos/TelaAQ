@@ -4,7 +4,7 @@
         <button :class= " corAtual(decomol.liberado) ">{{ decomolStatus(decomol.liberado) }}</button>
         <router-link v-bind:to="'/fabricacao/detalhes/' + decomol.id"><button class='button is-info is-light'>Detalhes</button></router-link>
         <br> <br>
-        </div>
+    </div>
 </template>
 
 <script>
