@@ -34,21 +34,7 @@
                 </div>
             </div>
                 <div class="StatusDecomol">
-                    <div v-if="getStatus() == null">
-                        <label class="radio">
-                            <input type="radio" name="answer" @click="liberaDecomol()">
-                            Liberado
-                        </label>
-                        <label class="radio">
-                            <input type="radio" name="answer" @click="cancelaDecomol()">
-                            Não Liberado
-                        </label>
-                        <label class="radio">
-                            <input type="radio" name="answer" @click="analisaDecomol()" checked>
-                            Em Análise
-                        </label>
-                    </div>
-                    <div v-else-if="getStatus() == true">
+                    <div v-if="getStatus() == true">
                         <label class="radio">
                             <input type="radio" name="answer" @click="liberaDecomol()" checked>
                             Liberado
@@ -56,10 +42,6 @@
                         <label class="radio">
                             <input type="radio" name="answer" @click="cancelaDecomol()">
                             Não Liberado
-                        </label>
-                         <label class="radio">
-                            <input type="radio" name="answer" @click="analisaDecomol()">
-                            Em Análise
                         </label>
                     </div>
                       <div v-else>
@@ -70,10 +52,6 @@
                         <label class="radio">
                             <input type="radio" name="answer" @click="cancelaDecomol()" checked>
                             Não Liberado
-                        </label>
-                         <label class="radio">
-                            <input type="radio" name="answer" @click="analisaDecomol()">
-                            Em Análise
                         </label>
                     </div>
                 </div>
@@ -118,7 +96,8 @@
                     ph: this.decomol.ph,
                     brix: this.decomol.brix,
                     producao: this.decomol.producao,
-                    liberado: this.liberado
+                    liberado: this.liberado,
+                    troca_decomol: false
                 }) //.then(response => {
                 //     this.refreshData()
                 //     alert(response.data)
