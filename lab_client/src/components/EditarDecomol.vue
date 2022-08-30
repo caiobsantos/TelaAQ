@@ -1,58 +1,63 @@
 <template>
-    <div id='edit'>
-        <form class="inputs" @submit.prevent="getDecomol" v-bind:key="decomol.id">
-            <input class="input is-danger" type="text" placeholder="Resultado Cor" v-model="decomol.producao">
-            <input class="input is-danger" type="text" placeholder="Resultado Cor" v-model="decomol.resultado_cor">
-            <input class="input is-danger" type="text" placeholder="Sensorial" v-model="decomol.sensorial">
-            <input class="input is-danger" type="text" placeholder="P.H." v-model="decomol.ph">
-            <input class="input is-danger" type="text" placeholder="Brix" v-model="decomol.brix"> <br>
-            <div class="StatusDecomol">
-                <div v-if="getStatus() == null">
-                    <label class="radio">
-                        <input type="radio" name="answer" @click="liberaDecomol()">
-                        Liberado
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="answer" @click="cancelaDecomol()">
-                        Não Liberado
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="answer" @click="analisaDecomol()" checked>
-                        Em Análise
-                    </label>
+    <div class="all">
+        <form class="box">
+            <div class="column">
+                <div class="field">
+                    <label class="label">Resultado Cor</label>
+                        <div class="control">
+                            <input class="input" type="text" v-model="decomol.resultado_cor">
+                        </div>
                 </div>
-
-                <div v-else-if="getStatus() == true">
-                    <label class="radio">
-                        <input type="radio" name="answer" @click="liberaDecomol()" checked>
-                        Liberado
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="answer" @click="cancelaDecomol()">
-                        Não Liberado
-                    </label>
-                     <label class="radio">
-                        <input type="radio" name="answer" @click="analisaDecomol()">
-                        Em Análise
-                    </label>
+                <div class="field">
+                    <label class="label">Sensorial</label>
+                        <div class="control">
+                            <input class="input" type="text" v-model="decomol.sensorial">
+                        </div>
                 </div>
-
-                  <div v-else>
-                    <label class="radio">
-                        <input type="radio" name="answer" @click="liberaDecomol()">
-                        Liberado
-                    </label>
-                    <label class="radio">
-                        <input type="radio" name="answer" @click="cancelaDecomol()" checked>
-                        Não Liberado
-                    </label>
-                     <label class="radio">
-                        <input type="radio" name="answer" @click="analisaDecomol()">
-                        Em Análise
-                    </label>
+                <div class="columns">
+                    <div class="column">
+                        <div class="field">
+                            <label class="label">PH</label>
+                                <div class="control">
+                                    <input class="input" type="text" v-model="decomol.ph">
+                                </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="field">
+                            <label class="label">Brix</label>
+                                <div class="control">
+                                    <input class="input" type="text" v-model="decomol.brix">
+                                </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <router-link to="/decomol"><button class="button is-sucess" @click="editDecomol()">Salvar</button></router-link>
+                <div class="StatusDecomol">
+                    <div v-if="getStatus() == true">
+                        <label class="radio">
+                            <input type="radio" name="answer" @click="liberaDecomol()" checked>
+                            Liberado
+                        </label>
+                        <label class="radio">
+                            <input type="radio" name="answer" @click="cancelaDecomol()">
+                            Não Liberado
+                        </label>
+                    </div>
+                      <div v-else>
+                        <label class="radio">
+                            <input type="radio" name="answer" @click="liberaDecomol()">
+                            Liberado
+                        </label>
+                        <label class="radio">
+                            <input type="radio" name="answer" @click="cancelaDecomol()" checked>
+                            Não Liberado
+                        </label>
+                    </div>
+                </div>
+                <div class="box-button">
+                    <router-link to="/decomol"><button class="button is-link" @click="editDecomol()">Salvar</button></router-link>
+                </div>
         </form>
     </div>
 </template>
@@ -91,7 +96,8 @@
                     ph: this.decomol.ph,
                     brix: this.decomol.brix,
                     producao: this.decomol.producao,
-                    liberado: this.liberado
+                    liberado: this.liberado,
+                    troca_decomol: false
                 }) //.then(response => {
                 //     this.refreshData()
                 //     alert(response.data)
@@ -117,3 +123,37 @@
         }
     }
 </script>
+
+<style scoped>
+
+    .label {
+        position: relative;
+        text-align: left;
+        margin-left: 0.25rem;
+    }
+
+    .field {
+        margin-top: 1.0rem;
+        margin-bottom: 1.0rem;
+        margin-left: 1.5rem;
+        margin-right: 1.5rem;
+    }
+
+    .box {
+        margin-left: 150px;
+        margin-right: 150px;
+        margin-top: 50px;
+    }
+
+    .box-button {
+        margin-left: 143vh;
+    }
+
+    
+
+    .StatusDecomol {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+</style>

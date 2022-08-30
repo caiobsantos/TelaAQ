@@ -1,24 +1,28 @@
 <template>
-    <div class="decomol_container">
-        <div class="column is-2 is-offset-9">
-            <router-link to="/adicionar"><button class="button is-dark">Adicionar Decomol</button></router-link>
-        </div>
-        <!-- se o status:liberado não estiver blank, o decomol pode sumir (depois fazer um historico) -->
-        <div class="decomol_content" v-for="decomol in decs" v-bind:key="decomol.id">            
-            <div v-if="decomol.liberado == null">
-                <h1 class="title is-4">{{ decomol.producao }}</h1>
-                <button :class= " corAtual(decomol.liberado) ">{{ decomolStatus(decomol.liberado) }}</button>
-                <router-link v-bind:to="'/decomol/' + decomol.id"><button class='button is-info is-light'>Enviar Resultado</button></router-link>
-                <button class='button is-danger is-light' @click="deleteDecomol(decomol.id)">Deletar</button> <br>
-                <br><br><br>
-            </div>
-            <div v-else>
-                <h1 class="title is-4">{{ decomol.producao }}</h1>
-                <button :class= " corAtual(decomol.liberado) ">{{ decomolStatus(decomol.liberado) }}</button>
-                <router-link v-bind:to="'/decomol/' + decomol.id"><button class='button is-info is-light'>Editar Resultado</button></router-link>
-                <button class='button is-danger is-light' @click="deleteDecomol(decomol.id)">Deletar</button> <br>
-                <br><br><br>
-            </div>
+    <div class="decomol-container">
+        <div class="columns">
+                    <div class="column is-one-third">
+                        <button :class= " corAtual(decomol1.liberado, decomol1.troca_decomol) ">
+                            {{ decomolStatus(decomol1.liberado, decomol1.troca_decomol) }}
+                        </button>
+                        <p>Decomol 1</p>
+                        <router-link class="links" v-bind:to="'/decomol/' + decomol1.id"><span class='tag is-link'>Registrar Análise</span></router-link> <br>
+                    </div>
+                <div class="column">
+                    <button :class= " corAtual(decomol2.liberado, decomol2.troca_decomol) ">
+                        {{ decomolStatus(decomol2.liberado, decomol2.troca_decomol) }}
+                    </button>
+                    <p>Decomol 2</p>
+                    <router-link class="links" v-bind:to="'/decomol/' + decomol2.id"><span class='tag is-link'>Registrar Análise</span></router-link> <br>
+                </div>
+                <div class="column">
+                    <button :class= " corAtual(decomol3.liberado, decomol3.troca_decomol) ">
+                        {{ decomolStatus(decomol3.liberado, decomol3.troca_decomol) }}
+                    </button>
+                    <p>Decomol 3</p>
+                    <router-link class="links" v-bind:to="'/decomol/' + decomol3.id"><span class='tag is-link'>Registrar Análise</span></router-link> <br>
+
+                </div>
         </div>
     </div>
 </template>
@@ -32,25 +36,40 @@
         name: 'DecomolView',
         data() {
             return{
-                decs: [],
+                decomol1: [],
+                decomol2: [],
+                decomol3: [],
             } 
         },
-        mounted() {
-            this.getDecomol()
-            console.log('oi')
-            console.log(process.env.VUE_APP_ROOT_URL)
+        created() {
+            this.getDecomol1()
+            this.getDecomol2()
+            this.getDecomol3()
         },
         methods: {
-            getDecomol() {
+            getDecomol1() {
                 axios({
                     method: 'get',
-                    url: process.env.VUE_APP_ROOT_URL,
-                }) .then (response => this.decs = response.data)
-
-
-                setTimeout(this.getDecomol, 2000)
+                    url: process.env.VUE_APP_ROOT_URL + '47',
+                }) .then (response => this.decomol1 = response.data)
+                setTimeout(this.getDecomol1, 2000)
             },
 
+            getDecomol2() {
+                axios({
+                    method: 'get',
+                    url: process.env.VUE_APP_ROOT_URL + '48',
+                }) .then (response => this.decomol2 = response.data)
+                setTimeout(this.getDecomol2, 2000)
+            },
+
+            getDecomol3() {
+                axios({
+                    method: 'get',
+                    url: process.env.VUE_APP_ROOT_URL + '49',
+                }) .then (response => this.decomol3 = response.data)
+                setTimeout(this.getDecomol3, 2000)
+            },
 
             async deleteDecomol(id) {
                  const c = confirm("Do you really want to delete it? You will not be able to restore this data again!")
@@ -67,24 +86,34 @@
                 }) .then (response => console.log(response.data))
             },
 
-            corAtual(status){
+            corAtual(status, troca){
                 if (status == true){
                     return 'button is-success'
                 }
                 else if (status == false){
-                    return 'button is-danger'
+                    if(troca == false){
+                        return 'button is-danger'
+                    }
+                    else{
+                        return 'button is-warning'
+                    }
                 }
                 else{
                     return 'button is-warning'
                 }
             },
 
-            decomolStatus(status){
+            decomolStatus(status, troca){
                  if (status == true){
                     return 'Liberado'
                 }
                 else if (status == false){
-                    return 'Não Liberado'
+                    if(troca == false){
+                        return 'Não Liberado'
+                    }
+                    else{
+                        return 'A ser analisado'
+                    }
                 }
                 else{
                     return 'Em Análise'
@@ -92,7 +121,34 @@
             },
         },
         ready() {
-        this.getDecomol()
+        this.getDecomol1()
+        this.getDecomol2()
+        this.getDecomol3()
         }
     }
 </script>
+
+<style scoped>
+    .block:not(:last-child) {
+        margin-bottom: 1.5rem;
+}
+    .decomol-container { 
+        position: relative;
+        margin-top: 1.5rem;
+    }
+
+    .columns {
+        position: relative;
+        margin-top: 40vh;
+    }
+
+    button {
+        margin-bottom: 1.0rem;
+    }
+
+    .tag {
+        position: relative;
+        margin-top: 1.0rem;
+        margin-bottom: 1.0rem;
+    }
+</style>
