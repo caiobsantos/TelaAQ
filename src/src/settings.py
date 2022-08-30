@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'lab_api',
     'corsheaders',
+    'historico',
 ]
 
 MIDDLEWARE = [
