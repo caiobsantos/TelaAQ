@@ -30,7 +30,8 @@ ALLOWED_HOSTS = ['*']
 CORS_ALLOWED_ORIGINS = (
       'http://localhost:8080',
       'http://172.16.19.116:8080',
-      'http://172.16.19.149:8080'
+      'http://172.16.19.149:8080',
+      'http://172.16.19.170:8080',
   )
 
 

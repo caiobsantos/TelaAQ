@@ -66,15 +66,11 @@
     import axios from 'axios'
 
     export default {
+        name: 'EditView',
         data() {
             return{
                 id: this.$route.params.id,
                 decomol: [],
-                producao: "",
-                resultado_cor: "",
-                sensorial: "",
-                ph: "",
-                brix: "",
                 liberado: null,
             }
         },
@@ -102,6 +98,14 @@
                 //     this.refreshData()
                 //     alert(response.data)
                 //     })
+                axios.post(process.env.VUE_APP_ROOT_URL_HISTORICO,{
+                    decomol: this.decomol.producao,
+                    resultado_cor: this.decomol.resultado_cor,
+                    sensorial: this.decomol.sensorial,
+                    ph: this.decomol.ph,
+                    brix: this.decomol.brix,
+                    resultado_analise: this.liberado
+                })
             },
 
             liberaDecomol() {
