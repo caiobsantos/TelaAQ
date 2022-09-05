@@ -56,7 +56,7 @@ import axios from "axios";
             getDecomol1() {
                 axios({
                     method: 'get',
-                    url: process.env.VUE_APP_ROOT_URL + '47',
+                    url: process.env.VUE_APP_ROOT_URL + '1',
                 }) .then (response => {
                     this.decomol1 = response.data})
                 setTimeout(this.getDecomol1, 2000)
@@ -65,7 +65,7 @@ import axios from "axios";
             getDecomol1Status() {
                 axios({
                     method: 'get',
-                    url: process.env.VUE_APP_ROOT_URL + '47',
+                    url: process.env.VUE_APP_ROOT_URL + '1',
                 }) .then (response => {
                     this.status1 = response.data.troca_decomol})
             },
@@ -73,7 +73,7 @@ import axios from "axios";
             getDecomol2() {
                 axios({
                     method: 'get',
-                    url: process.env.VUE_APP_ROOT_URL + '48',
+                    url: process.env.VUE_APP_ROOT_URL + '2',
                 }) .then (response => this.decomol2 = response.data)
                 setTimeout(this.getDecomol2, 2000)
             },
@@ -81,7 +81,7 @@ import axios from "axios";
             getDecomol2Status() {
                 axios({
                     method: 'get',
-                    url: process.env.VUE_APP_ROOT_URL + '48',
+                    url: process.env.VUE_APP_ROOT_URL + '2',
                 }) .then (response => {
                     this.status2 = response.data.troca_decomol})
             },
@@ -89,7 +89,7 @@ import axios from "axios";
             getDecomol3() {
                 axios({
                     method: 'get',
-                    url: process.env.VUE_APP_ROOT_URL + '49',
+                    url: process.env.VUE_APP_ROOT_URL + '3',
                 }) .then (response => {
                     this.decomol3 = response.data,
                     this.status3 = response.data.troca_decomol
@@ -100,7 +100,7 @@ import axios from "axios";
             getDecomol3Status() {
                 axios({
                     method: 'get',
-                    url: process.env.VUE_APP_ROOT_URL + '49',
+                    url: process.env.VUE_APP_ROOT_URL + '3',
                 }) .then (response => {
                     this.status3 = response.data.troca_decomol})
             },
