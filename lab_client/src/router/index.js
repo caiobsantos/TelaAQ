@@ -5,6 +5,7 @@ import AdicionarView from '../components/AdicionarDecomol.vue'
 import EditView from '../components/EditarDecomol.vue'
 import FabricacaoView from '../views/Fabricacao.vue'
 import DetailView from '../components/Detalhes.vue'
+import HistoricoView from '../components/Historico.vue'
 
 const routes = [
   {
@@ -50,6 +51,12 @@ const routes = [
     path: '/fabricacao/detalhes/:id',
     name: 'detalhe',
     component: DetailView
+  },
+
+  {
+    path: '/historico/:id',
+    name: 'historico',
+    component: HistoricoView
   }
 ]
 

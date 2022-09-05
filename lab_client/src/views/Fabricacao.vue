@@ -142,10 +142,10 @@ import axios from "axios";
             trocarDecomol(decomol){
                     this.status3 = true
                     axios.put(process.env.VUE_APP_ROOT_URL + decomol.id + '/', {
-                        resultado_cor: decomol.resultado_cor,
-                        sensorial: decomol.sensorial,
-                        ph: decomol.ph,
-                        brix: decomol.brix,
+                        resultado_cor: "",
+                        sensorial: "",
+                        ph: "",
+                        brix: "",
                         producao: decomol.producao,
                         liberado: false,
                         troca_decomol: true

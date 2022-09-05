@@ -1,27 +1,51 @@
 <template>
     <div class="decomol-container">
         <div class="columns">
-                    <div class="column is-one-third">
+                    <div class="column is-one-third" v-if="decomol1.troca_decomol==true">
+                        <button :class= " corAtual(decomol1.liberado, decomol1.troca_decomol) ">
+                            {{ decomolStatus(decomol1.liberado, decomol1.troca_decomol) }}
+                        </button>
+                        <!-- colocar um ONFOCUS mostrando os resultados da ultima analise -->
+                        <p>Decomol 1</p>
+                        <router-link class="links" v-bind:to="'/decomol/' + decomol1.id"><span class='tag is-link'>Registrar Análise</span></router-link> <br>
+                        <router-link class="links" to='/historico/decomol1'><span class='tag is-link'>Histórico</span></router-link>
+                    </div>
+                    <div class="column is-one-third" v-else>
                         <button :class= " corAtual(decomol1.liberado, decomol1.troca_decomol) ">
                             {{ decomolStatus(decomol1.liberado, decomol1.troca_decomol) }}
                         </button>
                         <p>Decomol 1</p>
-                        <router-link class="links" v-bind:to="'/decomol/' + decomol1.id"><span class='tag is-link'>Registrar Análise</span></router-link> <br>
+                        <router-link class="links" to='/historico/decomol1'><span class='tag is-link'>Histórico</span></router-link>
                     </div>
-                <div class="column">
+                <div class="column" v-if="decomol2.troca_decomol == true">
                     <button :class= " corAtual(decomol2.liberado, decomol2.troca_decomol) ">
                         {{ decomolStatus(decomol2.liberado, decomol2.troca_decomol) }}
                     </button>
                     <p>Decomol 2</p>
                     <router-link class="links" v-bind:to="'/decomol/' + decomol2.id"><span class='tag is-link'>Registrar Análise</span></router-link> <br>
+                    <router-link class="links" to='/historico/decomol2'><span class='tag is-link'>Histórico</span></router-link>
                 </div>
-                <div class="column">
+                <div class="column" v-else>
+                    <button :class= " corAtual(decomol2.liberado, decomol2.troca_decomol) ">
+                        {{ decomolStatus(decomol2.liberado, decomol2.troca_decomol) }}
+                    </button>
+                    <p>Decomol 2</p>
+                    <router-link class="links" to='/historico/decomol2'><span class='tag is-link'>Histórico</span></router-link>
+                </div>
+                <div class="column" v-if="decomol3.troca_decomol == true">
                     <button :class= " corAtual(decomol3.liberado, decomol3.troca_decomol) ">
                         {{ decomolStatus(decomol3.liberado, decomol3.troca_decomol) }}
                     </button>
                     <p>Decomol 3</p>
                     <router-link class="links" v-bind:to="'/decomol/' + decomol3.id"><span class='tag is-link'>Registrar Análise</span></router-link> <br>
-
+                    <router-link class="links" to='/historico/decomol3'><span class='tag is-link'>Histórico</span></router-link> 
+                </div>
+                <div class="column" v-else>
+                    <button :class= " corAtual(decomol3.liberado, decomol3.troca_decomol) ">
+                        {{ decomolStatus(decomol3.liberado, decomol3.troca_decomol) }}
+                    </button>
+                    <p>Decomol 3</p>
+                    <router-link class="links" to='/historico/decomol3'><span class='tag is-link'>Histórico</span></router-link> 
                 </div>
         </div>
     </div>
@@ -149,6 +173,6 @@
     .tag {
         position: relative;
         margin-top: 1.0rem;
-        margin-bottom: 1.0rem;
+        
     }
 </style>
