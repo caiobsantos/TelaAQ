@@ -14,7 +14,14 @@
                         <button :class= " corAtual(decomol1.liberado, decomol1.troca_decomol) ">
                             {{ decomolStatus(decomol1.liberado, decomol1.troca_decomol) }}
                         </button>
-                        <p>Decomol 1</p>
+                        <p>Decomol 1</p> <br>
+                        <div class="spec">
+                            Data da Liberação: {{decomol1.data_liberacao}} <br>
+                            Resultado de Cor: {{decomol1.resultado_cor}}<br>
+                            Sensorial: {{decomol1.sensorial}}<br>
+                            Brix: {{decomol1.brix}}<br>
+                            Ph: {{decomol1.ph}}<br>
+                        </div>
                         <router-link class="links" to='/historico/decomol1'><span class='tag is-link'>Histórico</span></router-link>
                     </div>
                 <div class="column" v-if="decomol2.troca_decomol == true">
@@ -30,6 +37,13 @@
                         {{ decomolStatus(decomol2.liberado, decomol2.troca_decomol) }}
                     </button>
                     <p>Decomol 2</p>
+                    <div class="spec">
+                            Data da Liberação: {{decomol2.data_liberacao}} <br>
+                            Resultado de Cor: {{decomol2.resultado_cor}}<br>
+                            Sensorial: {{decomol2.sensorial}}<br>
+                            Brix: {{decomol2.brix}}<br>
+                            Ph: {{decomol2.ph}}<br>
+                        </div>
                     <router-link class="links" to='/historico/decomol2'><span class='tag is-link'>Histórico</span></router-link>
                 </div>
                 <div class="column" v-if="decomol3.troca_decomol == true">
@@ -45,6 +59,13 @@
                         {{ decomolStatus(decomol3.liberado, decomol3.troca_decomol) }}
                     </button>
                     <p>Decomol 3</p>
+                    <div class="spec">
+                            Data da Liberação: {{decomol3.data_liberacao}} <br>
+                            Resultado de Cor: {{decomol3.resultado_cor}}<br>
+                            Sensorial: {{decomol3.sensorial}}<br>
+                            Brix: {{decomol3.brix}}<br>
+                            Ph: {{decomol3.ph}}<br>
+                        </div>
                     <router-link class="links" to='/historico/decomol3'><span class='tag is-link'>Histórico</span></router-link> 
                 </div>
         </div>
@@ -53,6 +74,7 @@
 
 <script>
     import axios from 'axios'
+    // import moment from 'moment'
 
     // criar funcionalidade para a pagina atualizar apenas quando houver alguma alteracao nos elementos
 
@@ -175,4 +197,6 @@
         margin-top: 1.0rem;
         
     }
+
+
 </style>
