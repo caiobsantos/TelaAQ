@@ -25,12 +25,10 @@ SECRET_KEY = 'django-insecure-pr3=&$l%z(n^1g3ra6r)nj@uivz2jdp8mq=(mzgx05xw(b&t2w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-CORS_ORIGINS_ALLOW_ALL = True
-ALLOWED_HOSTS = ['*']
+# CORS_ORIGINS_ALLOW_ALL = True
+ALLOWED_HOSTS = ['172.16.19.182']
 CORS_ALLOWED_ORIGINS = (
       'http://localhost:8080',
-      'http://172.16.19.116:8080',
-      'http://172.16.19.149:8080',
       'http://172.16.19.182:8080',
   )
 
@@ -49,6 +47,7 @@ INSTALLED_APPS = [
     'lab_api',
     'corsheaders',
     'historico',
+    'troca',
 ]
 
 MIDDLEWARE = [

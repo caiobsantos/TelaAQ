@@ -140,7 +140,10 @@ import axios from "axios";
             },
 
             trocarDecomol(decomol){
-                    this.status3 = true
+                    axios.post(process.env.VUE_APP_ROOT_URL_TROCA, {
+                        decomol_troca: decomol.producao
+                    })
+
                     axios.put(process.env.VUE_APP_ROOT_URL + decomol.id + '/', {
                         resultado_cor: "",
                         sensorial: "",
@@ -150,6 +153,8 @@ import axios from "axios";
                         liberado: false,
                         troca_decomol: true
                     })
+
+                    
                     //  .then(response => {
                     //     console.log(response.data)
                     // })
