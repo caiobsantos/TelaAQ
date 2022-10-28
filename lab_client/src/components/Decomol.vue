@@ -37,8 +37,9 @@
                         {{ decomolStatus(decomol2.liberado, decomol2.troca_decomol) }}
                     </button>
                     <p>Decomol 2</p>
+                    <br><br>
                     <div class="spec">
-                            Data da Liberação: {{decomol2.data_liberacao}} <br>
+                            Data da Liberação: {{formatData(decomol2.data_liberacao)}} <br>
                             Resultado de Cor: {{decomol2.resultado_cor}}<br>
                             Sensorial: {{decomol2.sensorial}}<br>
                             Brix: {{decomol2.brix}}<br>
@@ -59,8 +60,9 @@
                         {{ decomolStatus(decomol3.liberado, decomol3.troca_decomol) }}
                     </button>
                     <p>Decomol 3</p>
+                    <br><br>
                     <div class="spec">
-                            Data da Liberação: {{decomol3.data_liberacao}} <br>
+                            Data da Liberação: {{formatData(decomol3.data_liberacao)}} <br>
                             Resultado de Cor: {{decomol3.resultado_cor}}<br>
                             Sensorial: {{decomol3.sensorial}}<br>
                             Brix: {{decomol3.brix}}<br>
@@ -74,7 +76,7 @@
 
 <script>
     import axios from 'axios'
-    // import moment from 'moment'
+    import moment from 'moment'
 
     // criar funcionalidade para a pagina atualizar apenas quando houver alguma alteracao nos elementos
 
@@ -87,7 +89,7 @@
                 decomol3: [],
             } 
         },
-        created() {
+        mounted() {
             this.getDecomol1()
             this.getDecomol2()
             this.getDecomol3()
@@ -165,6 +167,11 @@
                     return 'Em Análise'
                 }
             },
+
+            formatData(data) {
+            return moment(data).format('DD/MM/YY [-] HH:mm')
+            },
+
         },
         ready() {
         this.getDecomol1()

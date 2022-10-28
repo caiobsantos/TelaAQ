@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,6 +25,10 @@ SECRET_KEY = 'django-insecure-pr3=&$l%z(n^1g3ra6r)nj@uivz2jdp8mq=(mzgx05xw(b&t2w
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+# INITIALIZE ENVIRONMENT VARIABLES
+env = environ.Env()
+environ.Env.read_env()
 
 # CORS_ORIGINS_ALLOW_ALL = True
 ALLOWED_HOSTS = ['172.16.19.182']

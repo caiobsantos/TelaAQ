@@ -1,19 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import DecomolView from '../components/Decomol.vue'
 import AdicionarView from '../components/AdicionarDecomol.vue'
 import EditView from '../components/EditarDecomol.vue'
-import FabricacaoView from '../views/Fabricacao.vue'
+import FabricacaoView from '../components/Fabricacao.vue'
 import DetailView from '../components/Detalhes.vue'
 import HistoricoView from '../components/Historico.vue'
+import HistoricoTrocaView from '../components/HistoricoTrocas.vue'
+
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
-
   {
     path: '/decomol',
     name: 'decomol',
@@ -26,14 +21,6 @@ const routes = [
     component: EditView
   },
 
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  },
 
   {
     path: '/adicionar',
@@ -56,8 +43,20 @@ const routes = [
   {
     path: '/historico/:id',
     name: 'historico',
-    component: HistoricoView
-  }
+    component: HistoricoView,
+    meta: {
+      hideNavbar: true,
+     }
+  },
+
+  {
+    path: '/historico/:id/troca',
+    name: 'historicoTroca',
+    component: HistoricoTrocaView,
+    meta: {
+      hideNavbar: true,
+     }
+  },
 ]
 
 const router = createRouter({

@@ -1,12 +1,24 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
+  <div>
+    <nav v-if="! $route.meta.hideNavbar" >
     <router-link to="/decomol">Laboratorio</router-link> |
     <router-link to="/fabricacao">Fabricação</router-link>
   </nav>
+  </div>
+  
   <router-view/>
 </template>
+
+<script>
+  export default{
+    name: 'App',
+    data (){
+      return {
+        nome: this.$route.params.name
+      }
+    }
+  }
+</script>
 
 <style>
 #app {

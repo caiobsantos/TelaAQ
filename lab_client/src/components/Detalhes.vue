@@ -1,5 +1,12 @@
 <template>
     <div class="table-column">
+        <div class="volta">
+            <router-link to="/fabricacao">
+                <button class="button is-info is-inverted">
+                    Voltar
+                </button>
+            </router-link>
+        </div>
         <table class="table is-bordered is-striped">
             <tr>
                 <th>Decomol</th>
@@ -21,14 +28,15 @@
             </tr>
         </table>
     </div> 
+    <div class="sla">
+                <router-link to="/historico/">
+                    <button class="button is-info is-inverted">
+                        Ver Mais
+                    </button>
+                </router-link>     
+        </div>
     <br>
-    <div class="voltar">
-        <router-link to="/fabricacao">
-            <button class="button is-info is-inverted">
-                Voltar
-            </button>
-        </router-link>
-    </div>
+        
 </template>
 
 <script>
@@ -102,7 +110,17 @@
 
 <style scoped>
     table{
-         margin-left: auto;
+        margin-left: auto;
         margin-right: auto;
+    }
+
+    .sla{
+        align-items: center;
+        margin-top: 4px;
+    }
+
+    .volta{
+        align-items: left;
+        margin-bottom: 4px
     }
 </style>

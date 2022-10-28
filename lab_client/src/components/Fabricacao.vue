@@ -140,6 +140,8 @@ import axios from "axios";
             },
 
             trocarDecomol(decomol){
+                const c = confirm("Deseja trocar o " + decomol.producao+"?")
+                if (c) {
                     axios.post(process.env.VUE_APP_ROOT_URL_TROCA, {
                         decomol_troca: decomol.producao
                     })
@@ -151,9 +153,10 @@ import axios from "axios";
                         brix: "",
                         producao: decomol.producao,
                         liberado: false,
-                        troca_decomol: true
+                        troca_decomol: true,
+                        data_liberacao: null
                     })
-
+                }
                     
                     //  .then(response => {
                     //     console.log(response.data)

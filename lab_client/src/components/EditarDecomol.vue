@@ -64,6 +64,7 @@
 
 <script>
     import axios from 'axios'
+    import moment from 'moment'
 
     export default {
         name: 'EditView',
@@ -76,6 +77,7 @@
         },
         mounted() {
             this.getDecomol()
+            console.log(moment().format())
         },
         methods: {
             getDecomol() {
@@ -86,6 +88,7 @@
             },
 
             editDecomol() {
+                var now = moment().format()
                 axios.put(process.env.VUE_APP_ROOT_URL + this.id + '/',{
                     resultado_cor: this.decomol.resultado_cor,
                     sensorial: this.decomol.sensorial,
@@ -93,7 +96,8 @@
                     brix: this.decomol.brix,
                     producao: this.decomol.producao,
                     liberado: this.liberado,
-                    troca_decomol: false
+                    troca_decomol: false,
+                    data_liberado: now
                 }) //.then(response => {
                 //     this.refreshData()
                 //     alert(response.data)
