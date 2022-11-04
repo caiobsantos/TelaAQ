@@ -1,26 +1,76 @@
 <template>
     <div class="decomol-container">
         <div class="columns">
-                <div class="column is-one-third">
-                    <button :class= " corAtual(decomol1.liberado, decomol1.troca_decomol) ">
-                        {{ decomolStatus(decomol1.liberado, decomol1.troca_decomol) }}
-                    </button>
+                <div class="column is-one-third" v-if="decomol1.troca_decomol==true">
+                    <svg class="svg" width="300" height="300">
+                        <image href="../assets/tanques/A.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                    </svg>
                     <p>Decomol 1</p>
                     <router-link v-bind:to="'/fabricacao/detalhes/' + decomol1.id"><span class='tag is-link'>Detalhes</span></router-link> <br>
                     <button class="button" @click="trocarDecomol(decomol1)">Trocar Decomol</button>
                 </div>
-                <div class="column">
-                    <button :class= " corAtual(decomol2.liberado, decomol2.troca_decomol) ">
-                        {{ decomolStatus(decomol2.liberado, decomol2.troca_decomol) }}
-                    </button>
+                <div class="column is-one-third" v-else-if="decomol1.liberado==true">
+                    <svg class="svg" width="300" height="300">
+                        <image href="../assets/tanques/VD.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                    </svg>
+                    <p>Decomol 1</p>
+                    <router-link v-bind:to="'/fabricacao/detalhes/' + decomol1.id"><span class='tag is-link'>Detalhes</span></router-link> <br>
+                    <button class="button" @click="trocarDecomol(decomol1)">Trocar Decomol</button>
+                </div>
+                <div class="column is-one-third" v-else>
+                    <svg class="svg" width="300" height="300">
+                        <image href="../assets/tanques/V.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                    </svg>
+                    <p>Decomol 1</p>
+                    <router-link v-bind:to="'/fabricacao/detalhes/' + decomol1.id"><span class='tag is-link'>Detalhes</span></router-link> <br>
+                    <button class="button" @click="trocarDecomol(decomol1)">Trocar Decomol</button>
+                </div>
+
+                <div class="column" v-if="decomol2.troca_decomol==true">
+                    <svg class="svg" width="300" height="300">
+                        <image href="../assets/tanques/A.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                    </svg>
                     <p>Decomol 2</p>
                     <router-link v-bind:to="'/fabricacao/detalhes/' + decomol2.id"><span class='tag is-link'>Detalhes</span></router-link> <br>
                     <button class="button" @click="trocarDecomol(decomol2)">Trocar Decomol</button>
                 </div>
-                <div class="column">
-                    <button :class= " corAtual(decomol3.liberado, decomol3.troca_decomol) ">
-                        {{ decomolStatus(decomol3.liberado, decomol3.troca_decomol) }}
-                    </button>
+                <div class="column" v-else-if="decomol2.liberado==true">
+                    <svg class="svg" width="300" height="300">
+                        <image href="../assets/tanques/VD.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                    </svg>
+                    <p>Decomol 2</p>
+                    <router-link v-bind:to="'/fabricacao/detalhes/' + decomol2.id"><span class='tag is-link'>Detalhes</span></router-link> <br>
+                    <button class="button" @click="trocarDecomol(decomol2)">Trocar Decomol</button>
+                </div>
+                <div class="column" v-else>
+                    <svg class="svg" width="300" height="300">
+                        <image href="../assets/tanques/V.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                    </svg>
+                    <p>Decomol 2</p>
+                    <router-link v-bind:to="'/fabricacao/detalhes/' + decomol2.id"><span class='tag is-link'>Detalhes</span></router-link> <br>
+                    <button class="button" @click="trocarDecomol(decomol2)">Trocar Decomol</button>
+                </div>
+
+                <div class="column" v-if="decomol3.troca_decomol==true">
+                    <svg class="svg" width="300" height="300">
+                        <image href="../assets/tanques/A.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                    </svg>
+                    <p>Decomol 3</p>
+                    <router-link v-bind:to="'/fabricacao/detalhes/' + decomol3.id"><span class='tag is-link'>Detalhes</span></router-link> <br>
+                    <button class="button" @click="trocarDecomol(decomol3)">Trocar Decomol</button>
+                </div>
+                <div class="column" v-else-if="decomol3.liberado==true">
+                    <svg class="svg" width="300" height="300">
+                        <image href="../assets/tanques/VD.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                    </svg>
+                    <p>Decomol 3</p>
+                    <router-link v-bind:to="'/fabricacao/detalhes/' + decomol3.id"><span class='tag is-link'>Detalhes</span></router-link> <br>
+                    <button class="button" @click="trocarDecomol(decomol3)">Trocar Decomol</button>
+                </div>
+                <div class="column" v-else>
+                    <svg class="svg" width="300" height="300">
+                        <image href="../assets/tanques/V.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                    </svg>
                     <p>Decomol 3</p>
                     <router-link v-bind:to="'/fabricacao/detalhes/' + decomol3.id"><span class='tag is-link'>Detalhes</span></router-link> <br>
                     <button class="button" @click="trocarDecomol(decomol3)">Trocar Decomol</button>
@@ -184,7 +234,7 @@ import axios from "axios";
 
     .columns {
         position: relative;
-        margin-top: 40vh;
+        /* margin-top: 40vh; */
     }
 
     button {

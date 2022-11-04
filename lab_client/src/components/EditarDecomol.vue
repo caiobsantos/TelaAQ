@@ -5,13 +5,13 @@
                 <div class="field">
                     <label class="label">Resultado Cor</label>
                         <div class="control">
-                            <input class="input" type="text" v-model="decomol.resultado_cor">
+                            <input class="input" type="text" v-model="decomol.resultado_cor" required>
                         </div>
                 </div>
                 <div class="field">
                     <label class="label">Sensorial</label>
                         <div class="control">
-                            <input class="input" type="text" v-model="decomol.sensorial">
+                            <input class="input" type="text" v-model="decomol.sensorial" required>
                         </div>
                 </div>
                 <div class="columns">
@@ -19,7 +19,7 @@
                         <div class="field">
                             <label class="label">PH</label>
                                 <div class="control">
-                                    <input class="input" type="text" v-model="decomol.ph">
+                                    <input class="input" type="number" min="0" max="14" v-model="decomol.ph" placeholder="0.00" required>
                                 </div>
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                         <div class="field">
                             <label class="label">Brix</label>
                                 <div class="control">
-                                    <input class="input" type="text" v-model="decomol.brix">
+                                    <input class="input" type="number" v-model="decomol.brix" required>
                                 </div>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="box-button">
-                    <router-link to="/decomol"><button class="button is-link" @click="editDecomol()">Salvar</button></router-link>
+                    <button class="button is-link" @click="editDecomol()">Salvar</button>
                 </div>
         </form>
     </div>
@@ -64,7 +64,6 @@
 
 <script>
     import axios from 'axios'
-    import moment from 'moment'
 
     export default {
         name: 'EditView',
@@ -77,7 +76,6 @@
         },
         mounted() {
             this.getDecomol()
-            console.log(moment().format())
         },
         methods: {
             getDecomol() {
@@ -88,28 +86,36 @@
             },
 
             editDecomol() {
-                var now = moment().format()
-                axios.put(process.env.VUE_APP_ROOT_URL + this.id + '/',{
-                    resultado_cor: this.decomol.resultado_cor,
-                    sensorial: this.decomol.sensorial,
-                    ph: this.decomol.ph,
-                    brix: this.decomol.brix,
-                    producao: this.decomol.producao,
-                    liberado: this.liberado,
-                    troca_decomol: false,
-                    data_liberado: now
-                }) //.then(response => {
-                //     this.refreshData()
-                //     alert(response.data)
-                //     })
-                axios.post(process.env.VUE_APP_ROOT_URL_HISTORICO,{
-                    decomol: this.decomol.producao,
-                    resultado_cor: this.decomol.resultado_cor,
-                    sensorial: this.decomol.sensorial,
-                    ph: this.decomol.ph,
-                    brix: this.decomol.brix,
-                    resultado_analise: this.liberado
+                if(this.decomol.resultado_cor ==null || this.decomol.sensorial ==null || this.decomol.ph ==null || this.decomol.brix==null || this.decomol.resultado_cor =="" || this.decomol.sensorial == "" || this.decomol.ph =="" || this.decomol.brix==""){
+                    return 0
+                }
+                else{
+                    axios.put(process.env.VUE_APP_ROOT_URL + this.id + '/',{
+                        resultado_cor: this.decomol.resultado_cor,
+                        sensorial: this.decomol.sensorial,
+                        ph: this.decomol.ph,
+                        brix: this.decomol.brix,
+                        producao: this.decomol.producao,
+                        liberado: this.liberado,
+                        troca_decomol: false,
+                    }) 
+
+                    try {
+                        axios.post(process.env.VUE_APP_ROOT_URL_HISTORICO,{
+                        decomol: this.decomol.producao,
+                        resultado_cor: this.decomol.resultado_cor,
+                        sensorial: this.decomol.sensorial,
+                        ph: this.decomol.ph,
+                        brix: this.decomol.brix,
+                        resultado_analise: this.liberado,
                 })
+                this.$router.push('/decomol')
+                        
+                    } catch (error) {
+                        console("Não foi possível")
+                        
+                    }
+                }
             },
 
             liberaDecomol() {

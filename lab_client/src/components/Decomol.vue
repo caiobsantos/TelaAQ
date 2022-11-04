@@ -2,22 +2,42 @@
     <div class="decomol-container">
         <div class="columns">
                     <div class="column is-one-third" v-if="decomol1.troca_decomol==true">
-                        <button :class= " corAtual(decomol1.liberado, decomol1.troca_decomol) ">
-                            {{ decomolStatus(decomol1.liberado, decomol1.troca_decomol) }}
-                        </button>
+                        <svg class="svg" width="300" height="300">
+                            <image href="../assets/tanques/A.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                        </svg>
                         <!-- colocar um ONFOCUS mostrando os resultados da ultima analise -->
-                        <p>Decomol 1</p>
+                        <p><b>Decomol 1</b></p>
                         <router-link class="links" v-bind:to="'/decomol/' + decomol1.id"><span class='tag is-link'>Registrar Análise</span></router-link> <br>
                         <router-link class="links" to='/historico/decomol1'><span class='tag is-link'>Histórico</span></router-link>
                     </div>
-                    <div class="column is-one-third" v-else>
-                        <button :class= " corAtual(decomol1.liberado, decomol1.troca_decomol) ">
+                    <div class="column is-one-third" v-else-if="decomol1.liberado==true">
+                        <!-- <button :class= " corAtual(decomol1.liberado, decomol1.troca_decomol) ">
                             {{ decomolStatus(decomol1.liberado, decomol1.troca_decomol) }}
-                        </button>
-                        <p>Decomol 1</p> <br>
+                        </button> -->
+                        <svg class="svg" width="300" height="300">
+                            <image href="../assets/tanques/VD.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                        </svg>
+                        <p><b>Decomol 1</b></p>
                         <div class="spec">
-                            Data da Liberação: {{decomol1.data_liberacao}} <br>
-                            Resultado de Cor: {{decomol1.resultado_cor}}<br>
+                            Data da Liberação: {{formatData(decomol1.data_liberacao)}} <br>
+                            Resultado cor: {{decomol1.resultado_cor}}<br>
+                            Sensorial: {{decomol1.sensorial}}<br>
+                            Brix: {{decomol1.brix}}<br>
+                            Ph: {{decomol1.ph}}<br>
+                        </div>
+                        <router-link class="links" to='/historico/decomol1'><span class='tag is-link'>Histórico</span></router-link>
+                    </div>
+                    <div class="column is-one-third" v-else>
+                        <!-- <button :class= " corAtual(decomol1.liberado, decomol1.troca_decomol) ">
+                            {{ decomolStatus(decomol1.liberado, decomol1.troca_decomol) }}
+                        </button> -->
+                        <svg class="svg" width="300" height="300">
+                            <image href="../assets/tanques/V.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                        </svg>
+                        <p><b>Decomol 1</b></p>
+                        <div class="spec">
+                            Data da Liberação: {{formatData(decomol1.data_liberacao)}} <br>
+                            Resultado cor: {{decomol1.resultado_cor}}<br>
                             Sensorial: {{decomol1.sensorial}}<br>
                             Brix: {{decomol1.brix}}<br>
                             Ph: {{decomol1.ph}}<br>
@@ -25,22 +45,35 @@
                         <router-link class="links" to='/historico/decomol1'><span class='tag is-link'>Histórico</span></router-link>
                     </div>
                 <div class="column" v-if="decomol2.troca_decomol == true">
-                    <button :class= " corAtual(decomol2.liberado, decomol2.troca_decomol) ">
-                        {{ decomolStatus(decomol2.liberado, decomol2.troca_decomol) }}
-                    </button>
-                    <p>Decomol 2</p>
+                    <svg class="svg" width="300" height="300">
+                        <image href="../assets/tanques/A.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                    </svg>
+                    <p><b>Decomol 2</b></p>
                     <router-link class="links" v-bind:to="'/decomol/' + decomol2.id"><span class='tag is-link'>Registrar Análise</span></router-link> <br>
                     <router-link class="links" to='/historico/decomol2'><span class='tag is-link'>Histórico</span></router-link>
                 </div>
-                <div class="column" v-else>
-                    <button :class= " corAtual(decomol2.liberado, decomol2.troca_decomol) ">
-                        {{ decomolStatus(decomol2.liberado, decomol2.troca_decomol) }}
-                    </button>
-                    <p>Decomol 2</p>
-                    <br><br>
+                <div class="column" v-else-if="decomol2.liberado==true">
+                    <svg class="svg" width="300" height="300">
+                        <image href="../assets/tanques/VD.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                    </svg>
+                    <p><b>Decomol 2</b></p>
                     <div class="spec">
                             Data da Liberação: {{formatData(decomol2.data_liberacao)}} <br>
-                            Resultado de Cor: {{decomol2.resultado_cor}}<br>
+                            Resultado cor: {{decomol2.resultado_cor}}<br>
+                            Sensorial: {{decomol2.sensorial}}<br>
+                            Brix: {{decomol2.brix}}<br>
+                            Ph: {{decomol2.ph}}<br>
+                        </div>
+                    <router-link class="links" to='/historico/decomol2'><span class='tag is-link'>Histórico</span></router-link>
+                </div>
+                <div class="column" v-else>
+                    <svg class="svg" width="300" height="300">
+                        <image href="../assets/tanques/V.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                    </svg>
+                    <p><b>Decomol 2</b></p>
+                    <div class="spec">
+                            Data da Liberação: {{formatData(decomol2.data_liberacao)}} <br>
+                            Resultado cor: {{decomol2.resultado_cor}}<br>
                             Sensorial: {{decomol2.sensorial}}<br>
                             Brix: {{decomol2.brix}}<br>
                             Ph: {{decomol2.ph}}<br>
@@ -48,22 +81,37 @@
                     <router-link class="links" to='/historico/decomol2'><span class='tag is-link'>Histórico</span></router-link>
                 </div>
                 <div class="column" v-if="decomol3.troca_decomol == true">
-                    <button :class= " corAtual(decomol3.liberado, decomol3.troca_decomol) ">
-                        {{ decomolStatus(decomol3.liberado, decomol3.troca_decomol) }}
-                    </button>
-                    <p>Decomol 3</p>
+                    <svg class="svg" width="300" height="300">
+                        <image href="../assets/tanques/A.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                    </svg>
+                    <p><b>Decomol 3</b></p>
                     <router-link class="links" v-bind:to="'/decomol/' + decomol3.id"><span class='tag is-link'>Registrar Análise</span></router-link> <br>
                     <router-link class="links" to='/historico/decomol3'><span class='tag is-link'>Histórico</span></router-link> 
                 </div>
-                <div class="column" v-else>
-                    <button :class= " corAtual(decomol3.liberado, decomol3.troca_decomol) ">
-                        {{ decomolStatus(decomol3.liberado, decomol3.troca_decomol) }}
-                    </button>
-                    <p>Decomol 3</p>
-                    <br><br>
+                <div class="column" v-else-if="decomol3.liberado==true">
+                    <svg class="svg" width="300" height="300">
+                        <image href="../assets/tanques/VD.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                    </svg>
+                    <p><b>Decomol 3</b></p>
+                    
                     <div class="spec">
                             Data da Liberação: {{formatData(decomol3.data_liberacao)}} <br>
-                            Resultado de Cor: {{decomol3.resultado_cor}}<br>
+                            Resultado cor: {{decomol3.resultado_cor}}<br>
+                            Sensorial: {{decomol3.sensorial}}<br>
+                            Brix: {{decomol3.brix}}<br>
+                            Ph: {{decomol3.ph}}<br>
+                        </div>
+                    <router-link class="links" to='/historico/decomol3'><span class='tag is-link'>Histórico</span></router-link> 
+                </div>
+                <div class="column" v-else>
+                    <svg class="svg" width="300" height="300">
+                        <image href="../assets/tanques/V.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                    </svg>
+                    <p><b>Decomol 3</b></p>
+                    
+                    <div class="spec">
+                            Data da Liberação: {{formatData(decomol3.data_liberacao)}} <br>
+                            Resultado cor: {{decomol3.resultado_cor}}<br>
                             Sensorial: {{decomol3.sensorial}}<br>
                             Brix: {{decomol3.brix}}<br>
                             Ph: {{decomol3.ph}}<br>
@@ -169,7 +217,7 @@
             },
 
             formatData(data) {
-            return moment(data).format('DD/MM/YY [-] HH:mm')
+            return moment(data).format('DD/MM/YY [-] HH:mm:ss')
             },
 
         },
@@ -192,7 +240,7 @@
 
     .columns {
         position: relative;
-        margin-top: 40vh;
+        /* margin-top: 20vh; */
     }
 
     button {
@@ -204,6 +252,16 @@
         margin-top: 1.0rem;
         
     }
+
+    .spec{
+        position: inherit;
+        text-align: center;
+        margin-top: 5px;
+    }
+
+   .svg{
+    position: relative;
+   }
 
 
 </style>

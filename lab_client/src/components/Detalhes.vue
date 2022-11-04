@@ -1,12 +1,5 @@
 <template>
     <div class="table-column">
-        <div class="volta">
-            <router-link to="/fabricacao">
-                <button class="button is-info is-inverted">
-                    Voltar
-                </button>
-            </router-link>
-        </div>
         <table class="table is-bordered is-striped">
             <tr>
                 <th>Decomol</th>
@@ -24,17 +17,33 @@
                 <td>{{ formatBlankSpace(decomol.ph) }}</td>
                 <td>{{ formatBlankSpace(decomol.brix) }}</td>
                 <td>{{ formatData(decomol.data_liberacao) }}</td>
-                <td>{{ formatStatus(decomol.liberado) }}</td>
+                <td>{{ formatStatus(decomol.liberado, decomol.troca_decomol) }}</td>
             </tr>
         </table>
     </div> 
     <div class="sla">
-                <router-link to="/historico/">
-                    <button class="button is-info is-inverted">
-                        Ver Mais
-                    </button>
-                </router-link>     
+        <div v-if="id==1">
+            <router-link to="/historico/decomol1" >
+                <button class="button is-info is-inverted">
+                    Ver Mais
+                </button>
+            </router-link>
         </div>
+        <div v-else-if="id==2">
+            <router-link to="/historico/decomol2" >
+                <button class="button is-info is-inverted">
+                    Ver Mais
+                </button>
+            </router-link>
+        </div> 
+        <div v-else>
+            <router-link to="/historico/decomol3" >
+                <button class="button is-info is-inverted">
+                    Ver Mais
+                </button>
+            </router-link>
+        </div>  
+    </div>
     <br>
         
 </template>
@@ -80,11 +89,11 @@
             return moment(data).format('DD/MM/YY [] HH:mm')
         },
 
-        formatStatus(status) {
+        formatStatus(status, troca) {
             if (status == true){
                 return 'Liberado'
             }
-            else if (status == false){
+            else if (status == false && troca == false){
                 return 'Não Liberado'
             }
             else{
@@ -93,8 +102,8 @@
         },
 
         formatBlankSpace(data){
-            if (data == null){
-                return 'Não Especificado'
+            if (data == null || data == ""){
+                return '-'
             }
             else{
                 return data
@@ -116,11 +125,13 @@
 
     .sla{
         align-items: center;
-        margin-top: 4px;
+        margin-top: 1.5rem;
     }
 
     .volta{
-        align-items: left;
-        margin-bottom: 4px
+        position: inherit;
+        text-align: left;
+        margin-left: 15rem;
+        margin-bottom: 2rem
     }
 </style>
