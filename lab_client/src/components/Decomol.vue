@@ -1,16 +1,19 @@
 <template>
     <div class="decomol-container">
         <div class="columns">
-                    <div class="column is-one-third" v-if="decomol1.troca_decomol==true">
+                    <div class="column is-one-third" v-if="checker('DECOMOL_1_PRODUCAO', decomol1.troca_decomol) == 'StandBy'">
                         <svg class="svg" width="300" height="300">
                             <image href="../assets/tanques/A.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
                         </svg>
                         <!-- colocar um ONFOCUS mostrando os resultados da ultima analise -->
                         <p><b>Decomol 1</b></p>
-                        <router-link class="links" v-bind:to="'/decomol/' + decomol1.id"><span class='tag is-link'>Registrar Análise</span></router-link> <br>
-                        <router-link class="links" to='/historico/decomol1'><span class='tag is-link'>Histórico</span></router-link>
+                        <div class="spec">
+                            Última Análise: {{formatData(decomol1.data_liberacao)}} <br>
+                        </div>
+                        <router-link class="links" to='/historico/decomol1'><span class="historico">Ver Mais</span></router-link> <br>
+                        <router-link class="links" v-bind:to="'/decomol/' + decomol1.id"><span class='tag is-link'>Registrar Análise</span></router-link>
                     </div>
-                    <div class="column is-one-third" v-else-if="decomol1.liberado==true">
+                    <div class="column is-one-third" v-else-if="checker('DECOMOL_1_PRODUCAO', decomol1.troca_decomol) == 'Produzindo'">
                         <!-- <button :class= " corAtual(decomol1.liberado, decomol1.troca_decomol) ">
                             {{ decomolStatus(decomol1.liberado, decomol1.troca_decomol) }}
                         </button> -->
@@ -19,13 +22,10 @@
                         </svg>
                         <p><b>Decomol 1</b></p>
                         <div class="spec">
-                            Data da Liberação: {{formatData(decomol1.data_liberacao)}} <br>
-                            Resultado cor: {{decomol1.resultado_cor}}<br>
-                            Sensorial: {{decomol1.sensorial}}<br>
-                            Brix: {{decomol1.brix}}<br>
-                            Ph: {{decomol1.ph}}<br>
+                            Última Análise: {{formatData(decomol1.data_liberacao)}} <br>
                         </div>
-                        <router-link class="links" to='/historico/decomol1'><span class='tag is-link'>Histórico</span></router-link>
+                        <router-link class="links" to='/historico/decomol1'><span class="historico">Ver Mais</span></router-link> <br>
+                        <router-link class="links" v-bind:to="'/decomol/' + decomol1.id"><span class='tag is-link'>Registrar Análise</span></router-link>
                     </div>
                     <div class="column is-one-third" v-else>
                         <!-- <button :class= " corAtual(decomol1.liberado, decomol1.troca_decomol) ">
@@ -36,23 +36,21 @@
                         </svg>
                         <p><b>Decomol 1</b></p>
                         <div class="spec">
-                            Data da Liberação: {{formatData(decomol1.data_liberacao)}} <br>
-                            Resultado cor: {{decomol1.resultado_cor}}<br>
-                            Sensorial: {{decomol1.sensorial}}<br>
-                            Brix: {{decomol1.brix}}<br>
-                            Ph: {{decomol1.ph}}<br>
+                            Início Regeneração: {{formatData(decomol1.data_liberacao)}} <br>
+                            
                         </div>
-                        <router-link class="links" to='/historico/decomol1'><span class='tag is-link'>Histórico</span></router-link>
+                        <router-link class="links" to='/historico/decomol1'><span class="historico">Ver Mais</span></router-link> <br>
+                        <router-link class="links" v-bind:to="'/decomol/' + decomol1.id"><span class='tag is-link'>Registrar Análise</span></router-link>
                     </div>
-                <div class="column" v-if="decomol2.troca_decomol == true">
+                <div class="column" v-if="checker('DECOMOL_2_PRODUCAO', decomol2.troca_decomol, decomol2.liberado) == 'StandBy'">
                     <svg class="svg" width="300" height="300">
                         <image href="../assets/tanques/A.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
                     </svg>
-                    <p><b>Decomol 2</b></p>
+                    <p><b>Decomol 2</b></p> 
                     <router-link class="links" v-bind:to="'/decomol/' + decomol2.id"><span class='tag is-link'>Registrar Análise</span></router-link> <br>
                     <router-link class="links" to='/historico/decomol2'><span class='tag is-link'>Histórico</span></router-link>
                 </div>
-                <div class="column" v-else-if="decomol2.liberado==true">
+                <div class="column" v-else-if="checker('DECOMOL_2_PRODUCAO', decomol2.troca_decomol, decomol2.liberado) == 'Produzindo'">
                     <svg class="svg" width="300" height="300">
                         <image href="../assets/tanques/VD.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
                     </svg>
@@ -80,7 +78,7 @@
                         </div>
                     <router-link class="links" to='/historico/decomol2'><span class='tag is-link'>Histórico</span></router-link>
                 </div>
-                <div class="column" v-if="decomol3.troca_decomol == true">
+                <div class="column" v-if="checker('DECOMOL_3_PRODUCAO', decomol3.troca_decomol, decomol3.liberado) == 'StandBy'">
                     <svg class="svg" width="300" height="300">
                         <image href="../assets/tanques/A.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
                     </svg>
@@ -88,7 +86,7 @@
                     <router-link class="links" v-bind:to="'/decomol/' + decomol3.id"><span class='tag is-link'>Registrar Análise</span></router-link> <br>
                     <router-link class="links" to='/historico/decomol3'><span class='tag is-link'>Histórico</span></router-link> 
                 </div>
-                <div class="column" v-else-if="decomol3.liberado==true">
+                <div class="column" v-else-if="checker('DECOMOL_3_PRODUCAO', decomol3.troca_decomol, decomol3.liberado) == 'Produzindo'">
                     <svg class="svg" width="300" height="300">
                         <image href="../assets/tanques/VD.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
                     </svg>
@@ -135,12 +133,14 @@
                 decomol1: [],
                 decomol2: [],
                 decomol3: [],
+                sinal: [],
             } 
         },
-        mounted() {
+        created() {
             this.getDecomol1()
             this.getDecomol2()
             this.getDecomol3()
+            this.getSignalDecomol()
         },
         methods: {
             getDecomol1() {
@@ -167,19 +167,56 @@
                 setTimeout(this.getDecomol3, 2000)
             },
 
-            async deleteDecomol(id) {
-                 const c = confirm("Do you really want to delete it? You will not be able to restore this data again!")
-                if (c) {
-                    await this.deletar(id)
-                    // window.location.reload()
+            getSignalDecomol(){
+                var axios = require('axios');
+                var data = JSON.stringify("DECOMOL");
+
+                var config = {
+                method: 'post',
+                url: 'http://10.15.100.110:50000/api/ObterValores',
+                headers: { 
+                    'Content-Type': 'application/json'
+                },
+                data : data
+                };
+
+                axios(config)
+                .then(response =>
+                    this.sinal = response.data
+                )
+                .catch(function (error) {
+                console.log(error);
+                });
+            },
+
+
+            getProducao(nome){ 
+                for(let i = 0; i < this.sinal.length; i++){
+                    if (this.sinal[i].nome == nome){
+                        if(this.sinal[i].valor == 1){
+                            return true
+                        }
+                        else{
+                            return false
+                        }
+                    }
                 }
             },
 
-            deletar(id){
-                 axios({
-                    method: 'delete',
-                    url: process.env.VUE_APP_ROOT_URL + id + '/'
-                }) .then (response => console.log(response.data))
+            checker(nomeProd, troca){
+                var a = troca
+                var b = this.getProducao(nomeProd)
+                
+
+                if(!a && b){
+                    return "Regenerando"
+                }
+                else if(a && b){
+                    return "StandBy"
+                }
+                else{
+                    return "Produzindo"
+                }
             },
 
             corAtual(status, troca){
@@ -225,6 +262,7 @@
         this.getDecomol1()
         this.getDecomol2()
         this.getDecomol3()
+        this.getSignalDecomol()
         }
     }
 </script>
@@ -257,11 +295,11 @@
         position: inherit;
         text-align: center;
         margin-top: 5px;
+        margin-bottom: 0.5rem;
     }
 
    .svg{
-    position: relative;
+        position: relative;
    }
-
 
 </style>

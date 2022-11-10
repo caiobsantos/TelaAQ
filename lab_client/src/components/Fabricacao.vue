@@ -1,7 +1,7 @@
 <template>
     <div class="decomol-container">
         <div class="columns">
-                <div class="column is-one-third" v-if="decomol1.troca_decomol==true">
+                <div class="column is-one-third" v-if="checker('DECOMOL_1_PRODUCAO', decomol1.troca_decomol) == 'StandBy'">
                     <svg class="svg" width="300" height="300">
                         <image href="../assets/tanques/A.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
                     </svg>
@@ -9,7 +9,7 @@
                     <router-link v-bind:to="'/fabricacao/detalhes/' + decomol1.id"><span class='tag is-link'>Detalhes</span></router-link> <br>
                     <button class="button" @click="trocarDecomol(decomol1)">Trocar Decomol</button>
                 </div>
-                <div class="column is-one-third" v-else-if="decomol1.liberado==true">
+                <div class="column is-one-third" v-else-if="checker('DECOMOL_1_PRODUCAO', decomol1.troca_decomol) == 'Produzindo'">
                     <svg class="svg" width="300" height="300">
                         <image href="../assets/tanques/VD.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
                     </svg>
@@ -91,7 +91,8 @@ import axios from "axios";
                 decomol3: [],
                 status1: null,
                 status2: null,
-                status3: null
+                status3: null,
+                sinal: []
             } 
         },
         created() {
@@ -101,6 +102,7 @@ import axios from "axios";
             this.getDecomol2Status()
             this.getDecomol3()
             this.getDecomol3Status()
+            this.getSignalDecomol()
         },
         methods: {
             getDecomol1() {
@@ -153,6 +155,58 @@ import axios from "axios";
                     url: process.env.VUE_APP_ROOT_URL + '3',
                 }) .then (response => {
                     this.status3 = response.data.troca_decomol})
+            },
+
+            getSignalDecomol(){
+                var axios = require('axios');
+                var data = JSON.stringify("DECOMOL");
+
+                var config = {
+                method: 'post',
+                url: 'http://10.15.100.110:50000/api/ObterValores',
+                headers: { 
+                    'Content-Type': 'application/json'
+                },
+                data : data
+                };
+
+                axios(config)
+                .then(response =>
+                    this.sinal = response.data
+                )
+                .catch(function (error) {
+                console.log(error);
+                });
+            },
+
+
+            getProducao(nome){ 
+                for(let i = 0; i < this.sinal.length; i++){
+                    if (this.sinal[i].nome == nome){
+                        if(this.sinal[i].valor == 1){
+                            return true
+                        }
+                        else{
+                            return false
+                        }
+                    }
+                }
+            },
+
+            checker(nomeProd, troca){
+                var a = troca
+                var b = this.getProducao(nomeProd)
+                
+
+                if(!a && b){
+                    return "Regenerando"
+                }
+                else if(a && b){
+                    return "StandBy"
+                }
+                else{
+                    return "Produzindo"
+                }
             },
 
             corAtual(status, troca){
@@ -219,6 +273,7 @@ import axios from "axios";
             this.getDecomol1()
             this.getDecomol2()
             this.getDecomol3()
+            this.getSignalDecomol()
         }
     }
 </script>
