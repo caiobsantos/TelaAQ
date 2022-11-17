@@ -9,3 +9,4 @@ class DecomolHistorico(models.Model):
     brix = models.DecimalField(max_digits=5, decimal_places=2)
     ph = models.DecimalField(max_digits=4, decimal_places=2)
     resultado_analise = models.BooleanField()
+    status = models.CharField(max_length=50, default='')

@@ -33,7 +33,7 @@
                 <th>Sensorial</th>
                 <th>Ph</th>
                 <th>Brix</th>
-                <th>Data de Liberação</th>
+                <th>Data da Análise</th>
                 <th>Resultado Análise</th>
             </tr>
             <tbody v-for="dec in decs.reverse()"  v-bind:key="dec.id"> 

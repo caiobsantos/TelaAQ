@@ -7,7 +7,7 @@
                 <th>Sensorial</th>
                 <th>Ph</th>
                 <th>Brix</th>
-                <th>Data de Liberação</th>
+                <th>Data de Análise</th>
                 <th>Status</th>
             </tr>
             <tr v-bind:key="decomol.id"> 
@@ -17,7 +17,7 @@
                 <td>{{ formatBlankSpace(decomol.ph) }}</td>
                 <td>{{ formatBlankSpace(decomol.brix) }}</td>
                 <td>{{ formatData(decomol.data_liberacao) }}</td>
-                <td>{{ formatStatus(decomol.liberado, decomol.troca_decomol) }}</td>
+                <td>{{ formatStatus(decomol.liberado, decomol.regenerando) }}</td>
             </tr>
         </table>
     </div> 

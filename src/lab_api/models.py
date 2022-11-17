@@ -8,5 +8,5 @@ class Decomol(models.Model):
     sensorial = models.CharField(max_length=100, blank=True, null=True)
     brix = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     ph = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
-    liberado = models.BooleanField(blank=True, null=True)
-    troca_decomol = models.BooleanField(default=False)
+    liberado = models.BooleanField(blank=True, null=True, default=False)
+    regenerando = models.BooleanField(default=True)

@@ -1,7 +1,7 @@
 <template>
     <div class="decomol-container">
         <div class="columns">
-                    <div class="column is-one-third" v-if="checker('DECOMOL_1_PRODUCAO', decomol1.troca_decomol) == 'StandBy'">
+                    <div class="column is-one-third" v-if="checker('DECOMOL_1_PRODUCAO', decomol1.regenerando) == 'StandBy'">
                         <svg class="svg" width="300" height="300">
                             <image href="../assets/tanques/A.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
                         </svg>
@@ -13,9 +13,9 @@
                         <router-link class="links" to='/historico/decomol1'><span class="historico">Ver Mais</span></router-link> <br>
                         <router-link class="links" v-bind:to="'/decomol/' + decomol1.id"><span class='tag is-link'>Registrar Análise</span></router-link>
                     </div>
-                    <div class="column is-one-third" v-else-if="checker('DECOMOL_1_PRODUCAO', decomol1.troca_decomol) == 'Produzindo'">
-                        <!-- <button :class= " corAtual(decomol1.liberado, decomol1.troca_decomol) ">
-                            {{ decomolStatus(decomol1.liberado, decomol1.troca_decomol) }}
+                    <div class="column is-one-third" v-else-if="checker('DECOMOL_1_PRODUCAO', decomol1.regenerando) == 'Produzindo'">
+                        <!-- <button :class= " corAtual(decomol1.liberado, decomol1.regenerando) ">
+                            {{ decomolStatus(decomol1.liberado, decomol1.regenerando) }}
                         </button> -->
                         <svg class="svg" width="300" height="300">
                             <image href="../assets/tanques/VD.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
@@ -28,8 +28,8 @@
                         <router-link class="links" v-bind:to="'/decomol/' + decomol1.id"><span class='tag is-link'>Registrar Análise</span></router-link>
                     </div>
                     <div class="column is-one-third" v-else>
-                        <!-- <button :class= " corAtual(decomol1.liberado, decomol1.troca_decomol) ">
-                            {{ decomolStatus(decomol1.liberado, decomol1.troca_decomol) }}
+                        <!-- <button :class= " corAtual(decomol1.liberado, decomol1.regenerando) ">
+                            {{ decomolStatus(decomol1.liberado, decomol1.regenerando) }}
                         </button> -->
                         <svg class="svg" width="300" height="300">
                             <image href="../assets/tanques/V.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
@@ -42,7 +42,7 @@
                         <router-link class="links" to='/historico/decomol1'><span class="historico">Ver Mais</span></router-link> <br>
                         <router-link class="links" v-bind:to="'/decomol/' + decomol1.id"><span class='tag is-link'>Registrar Análise</span></router-link>
                     </div>
-                <div class="column" v-if="checker('DECOMOL_2_PRODUCAO', decomol2.troca_decomol, decomol2.liberado) == 'StandBy'">
+                <div class="column" v-if="checker('DECOMOL_2_PRODUCAO', decomol2.regenerando, decomol2.liberado) == 'StandBy'">
                     <svg class="svg" width="300" height="300">
                         <image href="../assets/tanques/A.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
                     </svg>
@@ -50,7 +50,7 @@
                     <router-link class="links" v-bind:to="'/decomol/' + decomol2.id"><span class='tag is-link'>Registrar Análise</span></router-link> <br>
                     <router-link class="links" to='/historico/decomol2'><span class='tag is-link'>Histórico</span></router-link>
                 </div>
-                <div class="column" v-else-if="checker('DECOMOL_2_PRODUCAO', decomol2.troca_decomol, decomol2.liberado) == 'Produzindo'">
+                <div class="column" v-else-if="checker('DECOMOL_2_PRODUCAO', decomol2.regenerando, decomol2.liberado) == 'Produzindo'">
                     <svg class="svg" width="300" height="300">
                         <image href="../assets/tanques/VD.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
                     </svg>
@@ -78,7 +78,7 @@
                         </div>
                     <router-link class="links" to='/historico/decomol2'><span class='tag is-link'>Histórico</span></router-link>
                 </div>
-                <div class="column" v-if="checker('DECOMOL_3_PRODUCAO', decomol3.troca_decomol, decomol3.liberado) == 'StandBy'">
+                <div class="column" v-if="checker('DECOMOL_3_PRODUCAO', decomol3.regenerando, decomol3.liberado) == 'StandBy'">
                     <svg class="svg" width="300" height="300">
                         <image href="../assets/tanques/A.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
                     </svg>
@@ -86,7 +86,7 @@
                     <router-link class="links" v-bind:to="'/decomol/' + decomol3.id"><span class='tag is-link'>Registrar Análise</span></router-link> <br>
                     <router-link class="links" to='/historico/decomol3'><span class='tag is-link'>Histórico</span></router-link> 
                 </div>
-                <div class="column" v-else-if="checker('DECOMOL_3_PRODUCAO', decomol3.troca_decomol, decomol3.liberado) == 'Produzindo'">
+                <div class="column" v-else-if="checker('DECOMOL_3_PRODUCAO', decomol3.regenerando, decomol3.liberado) == 'Produzindo'">
                     <svg class="svg" width="300" height="300">
                         <image href="../assets/tanques/VD.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
                     </svg>
@@ -203,15 +203,15 @@
                 }
             },
 
-            checker(nomeProd, troca){
-                var a = troca
+            checker(nomeProd, regenerando){
+                var a = regenerando
                 var b = this.getProducao(nomeProd)
                 
 
-                if(!a && b){
+                if(a && b){
                     return "Regenerando"
                 }
-                else if(a && b){
+                else if(!a && b){
                     return "StandBy"
                 }
                 else{
@@ -236,20 +236,12 @@
                 }
             },
 
-            decomolStatus(status, troca){
+            decomolStatus(status){
                  if (status == true){
                     return 'Liberado'
                 }
                 else if (status == false){
-                    if(troca == false){
-                        return 'Não Liberado'
-                    }
-                    else{
-                        return 'A ser analisado'
-                    }
-                }
-                else{
-                    return 'Em Análise'
+                    return 'Não Liberado'               
                 }
             },
 

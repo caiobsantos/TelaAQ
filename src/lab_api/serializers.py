@@ -5,4 +5,4 @@ from .models import Decomol
 class DecomolSerializer(serializers.ModelSerializer):
     class Meta:
         model = Decomol
-        fields = ['id', 'data_liberacao', 'resultado_cor', 'sensorial', 'brix', 'ph', 'liberado', 'producao', 'troca_decomol']
+        fields = ['id', 'data_liberacao', 'resultado_cor', 'sensorial', 'brix', 'ph', 'liberado', 'producao', 'regenerando']

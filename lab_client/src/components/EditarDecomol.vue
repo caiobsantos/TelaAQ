@@ -90,6 +90,8 @@
                     return 0
                 }
                 else{
+                    if(this.decomol)
+                    try {
                     axios.put(process.env.VUE_APP_ROOT_URL + this.id + '/',{
                         resultado_cor: this.decomol.resultado_cor,
                         sensorial: this.decomol.sensorial,
@@ -97,10 +99,9 @@
                         brix: this.decomol.brix,
                         producao: this.decomol.producao,
                         liberado: this.liberado,
-                        troca_decomol: false,
+                        regenerando: false
                     }) 
 
-                    try {
                         axios.post(process.env.VUE_APP_ROOT_URL_HISTORICO,{
                         decomol: this.decomol.producao,
                         resultado_cor: this.decomol.resultado_cor,
