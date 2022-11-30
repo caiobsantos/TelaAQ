@@ -3,7 +3,7 @@
         <div class="columns">
                     <div class="column is-one-third" v-if="checker('DECOMOL_1_PRODUCAO', decomol1.regenerando) == 'StandBy'">
                         <svg class="svg" width="300" height="300">
-                            <image href="../assets/tanques/A.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                            <image href="../assets/tanques/Standby.svg" alt="sla" width="275" y="-15%" x="3%"/>
                         </svg>
                         <!-- colocar um ONFOCUS mostrando os resultados da ultima analise -->
                         <p><b>Decomol 1</b></p>
@@ -18,7 +18,7 @@
                             {{ decomolStatus(decomol1.liberado, decomol1.regenerando) }}
                         </button> -->
                         <svg class="svg" width="300" height="300">
-                            <image href="../assets/tanques/VD.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                            <image href="../assets/tanques/Produzindo.svg" alt="sla" width="275" y="-15%" x="3%"/>
                         </svg>
                         <p><b>Decomol 1</b></p>
                         <div class="spec">
@@ -32,7 +32,7 @@
                             {{ decomolStatus(decomol1.liberado, decomol1.regenerando) }}
                         </button> -->
                         <svg class="svg" width="300" height="300">
-                            <image href="../assets/tanques/V.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                            <image href="../assets/tanques/Regenerando.svg" alt="sla" width="275" y="-15%" x="3%"/>
                         </svg>
                         <p><b>Decomol 1</b></p>
                         <div class="spec">
@@ -44,7 +44,7 @@
                     </div>
                 <div class="column" v-if="checker('DECOMOL_2_PRODUCAO', decomol2.regenerando, decomol2.liberado) == 'StandBy'">
                     <svg class="svg" width="300" height="300">
-                        <image href="../assets/tanques/A.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                        <image href="../assets/tanques/Standby.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
                     </svg>
                     <p><b>Decomol 2</b></p> 
                     <router-link class="links" v-bind:to="'/decomol/' + decomol2.id"><span class='tag is-link'>Registrar Análise</span></router-link> <br>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="column" v-else-if="checker('DECOMOL_2_PRODUCAO', decomol2.regenerando, decomol2.liberado) == 'Produzindo'">
                     <svg class="svg" width="300" height="300">
-                        <image href="../assets/tanques/VD.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                        <image href="../assets/tanques/Produzindo.svg" alt="sla" width="275" y="-15%" x="3%"/>
                     </svg>
                     <p><b>Decomol 2</b></p>
                     <div class="spec">
@@ -66,7 +66,7 @@
                 </div>
                 <div class="column" v-else>
                     <svg class="svg" width="300" height="300">
-                        <image href="../assets/tanques/V.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                        <image href="../assets/tanques/Regenerando.svg" alt="sla" width="275" y="-15%" x="3%"/>
                     </svg>
                     <p><b>Decomol 2</b></p>
                     <div class="spec">
@@ -80,7 +80,7 @@
                 </div>
                 <div class="column" v-if="checker('DECOMOL_3_PRODUCAO', decomol3.regenerando, decomol3.liberado) == 'StandBy'">
                     <svg class="svg" width="300" height="300">
-                        <image href="../assets/tanques/A.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                        <image href="../assets/tanques/Standby.svg" alt="sla" width="275" y="-15%" x="3%"/>
                     </svg>
                     <p><b>Decomol 3</b></p>
                     <router-link class="links" v-bind:to="'/decomol/' + decomol3.id"><span class='tag is-link'>Registrar Análise</span></router-link> <br>
@@ -88,7 +88,7 @@
                 </div>
                 <div class="column" v-else-if="checker('DECOMOL_3_PRODUCAO', decomol3.regenerando, decomol3.liberado) == 'Produzindo'">
                     <svg class="svg" width="300" height="300">
-                        <image href="../assets/tanques/VD.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                        <image href="../assets/tanques/Produzindo.svg" alt="sla" width="275" y="-15%" x="3%"/>
                     </svg>
                     <p><b>Decomol 3</b></p>
                     
@@ -103,7 +103,7 @@
                 </div>
                 <div class="column" v-else>
                     <svg class="svg" width="300" height="300">
-                        <image href="../assets/tanques/V.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                        <image href="../assets/tanques/Regenerando.svg" alt="sla" width="275" y="-15%" x="3%"/>
                     </svg>
                     <p><b>Decomol 3</b></p>
                     
@@ -127,7 +127,7 @@
     // criar funcionalidade para a pagina atualizar apenas quando houver alguma alteracao nos elementos
 
     export default {
-        name: 'DecomolView',
+        name: 'AQDecomolView',
         data() {
             return{
                 decomol1: [],

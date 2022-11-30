@@ -1,37 +1,87 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import DecomolView from '../components/Decomol.vue'
-import AdicionarView from '../components/AdicionarDecomol.vue'
+import AQDecomolView from '../components/Decomol.vue'
+import AQPulmaoView from '../components/Pulmao.vue'
 import EditView from '../components/EditarDecomol.vue'
-import FabricacaoView from '../components/Fabricacao.vue'
+import FabDecomolView from '../components/FabDecomol.vue'
 import DetailView from '../components/Detalhes.vue'
 import HistoricoView from '../components/Historico.vue'
 import HistoricoTrocaView from '../components/HistoricoTrocas.vue'
+import EditPulmaoView from '../components/EditarPulmao.vue'
+import HistoricoPulmaoView from '../components/HistoricoPulmao.vue'
+import FabPulmaoView from '../components/FabPulmao.vue'
 
 
 const routes = [
+  // {
+  //   path: '/aq',
+  //   name: 'aq',
+  //   component: AQView,
+  //   meta: {
+  //     isLab: true,
+  //    }
+  // },
+
   {
-    path: '/decomol',
-    name: 'decomol',
-    component: DecomolView
+    path: '/aq/decomol',
+    name: 'AQDecomol',
+    component: AQDecomolView,
+    meta: {
+      isLab: true,
+    }
+  },
+
+  {
+    path: '/aq/pulmao',
+    name: 'AQPulmao',
+    component: AQPulmaoView,
+    meta: {
+      isLab: true,
+    }
   },
 
   {
     path: '/decomol/:id',
     name: 'editdecomol',
-    component: EditView
-  },
-
-
-  {
-    path: '/adicionar',
-    name: 'adicionar',
-    component: AdicionarView
+    component: EditView,
+    meta: {
+      isLab: true,
+    }
   },
 
   {
-    path: '/fabricacao',
-    name: 'fabricacao',
-    component: FabricacaoView
+    path: '/pulmao/:id',
+    name: 'editpulmao',
+    component: EditPulmaoView,
+    meta: {
+      isLab: true,
+    }
+  },
+
+  // {
+  //   path: '/fab',
+  //   name: 'fabricacao',
+  //   component: FabricacaoView,
+  //   meta: {
+  //     isLab: false,
+  //   }
+  // },
+
+  {
+    path: '/fab/decomol',
+    name: 'FabDecomol',
+    component: FabDecomolView,
+    meta: {
+      isLab: false,
+    }
+  },
+
+  {
+    path: '/fab/pulmao',
+    name: 'FabPulmao',
+    component: FabPulmaoView,
+    meta: {
+      isLab: false,
+    }
   },
 
   {
@@ -50,6 +100,15 @@ const routes = [
   },
 
   {
+    path: '/pulmao/historico/:id',
+    name: 'historico',
+    component: HistoricoPulmaoView,
+    meta: {
+      hideNavbar: true,
+     }
+  },
+
+  {
     path: '/historico/:id/troca',
     name: 'historicoTroca',
     component: HistoricoTrocaView,
@@ -57,6 +116,7 @@ const routes = [
       hideNavbar: true,
      }
   },
+  
 ]
 
 const router = createRouter({

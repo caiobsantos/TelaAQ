@@ -1,9 +1,15 @@
 <template>
   <div>
-    <nav v-if="! $route.meta.hideNavbar" >
-    <router-link to="/decomol">Laboratorio</router-link> |
-    <router-link to="/fabricacao">Fabricação</router-link>
-  </nav>
+    <div v-if="! $route.meta.hideNavbar" >
+      <nav v-if="$route.meta.isLab">
+        <router-link to="/aq/decomol">Decomol</router-link> |
+        <router-link to="/aq/pulmao">Pulmão</router-link>
+      </nav>
+      <nav v-else>
+        <router-link to="/fab/decomol">Decomol</router-link> |
+        <router-link to="/fab/pulmao">Pulmão</router-link>
+      </nav>
+    </div>
   </div>
   
   <router-view/>

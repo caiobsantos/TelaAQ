@@ -20,5 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('lab_api.urls')),
     path('', include('historico.urls')),
-    path('', include('troca.urls'))
+    path('', include('troca.urls')),
+    path('', include('pulmao.urls')),
+    path('', include('historico_pulmao.urls')),
 ]

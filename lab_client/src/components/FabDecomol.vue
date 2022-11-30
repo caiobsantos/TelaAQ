@@ -141,7 +141,7 @@ import axios from "axios";
 import moment from 'moment'
 
     export default {
-        name: 'FabricacaoView',
+        name: 'FabDecomolView',
         data() {
             return{
                 decomol1: [],
