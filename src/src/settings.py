@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'historico',
     'troca',
+    'pulmao',
+    'historico_pulmao',
 ]
 
 MIDDLEWARE = [

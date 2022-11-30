@@ -110,7 +110,7 @@
                         brix: this.decomol.brix,
                         resultado_analise: this.liberado,
                 })
-                this.$router.push('/decomol')
+                this.$router.push('/aq/decomol')
                         
                     } catch (error) {
                         console("Não foi possível")
