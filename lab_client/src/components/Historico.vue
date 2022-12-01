@@ -58,6 +58,7 @@
 
   export default {
     name: 'HistoricoView',
+    props: ['origin'],
 
     data(){
         return {

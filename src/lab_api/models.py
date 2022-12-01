@@ -10,3 +10,4 @@ class Decomol(models.Model):
     ph = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
     liberado = models.BooleanField(blank=True, null=True, default=False)
     regenerando = models.BooleanField(default=True)
+    produzindo = models.BooleanField(default=False)
