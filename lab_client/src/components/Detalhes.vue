@@ -23,21 +23,21 @@
     </div> 
     <div class="sla">
         <div v-if="id==1">
-            <router-link to="/historico/decomol1" >
+            <router-link to="/fab/historico/decomol1" >
                 <button class="button is-info is-inverted">
                     Ver Mais
                 </button>
             </router-link>
         </div>
         <div v-else-if="id==2">
-            <router-link to="/historico/decomol2" >
+            <router-link to="/fab/historico/decomol2" >
                 <button class="button is-info is-inverted">
                     Ver Mais
                 </button>
             </router-link>
         </div> 
         <div v-else>
-            <router-link to="/historico/decomol3" >
+            <router-link to="/fab/historico/decomol3" >
                 <button class="button is-info is-inverted">
                     Ver Mais
                 </button>

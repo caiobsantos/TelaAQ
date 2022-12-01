@@ -1,25 +1,25 @@
 <template>
     <div v-if="decomol_nome=='decomol1'">
         <nav>
-            <router-link to="/historico/decomol1">Histórico de Registros</router-link> |
-            <router-link to="/historico/decomol1/troca">Histórico de Trocas</router-link>
+            <router-link to="/fab/historico/decomol1">Histórico de Registros</router-link> |
+            <router-link to="/fab/historico/decomol1/troca">Histórico de Trocas</router-link>
         </nav>
     </div>
         <div v-else-if="decomol_nome=='decomol2'">
             <nav>
-                <router-link to="/historico/decomol2">Histórico de Registros</router-link> |
-                <router-link to="/historico/decomol2/troca">Histórico de Trocas</router-link>
+                <router-link to="/fab/historico/decomol2">Histórico de Registros</router-link> |
+                <router-link to="/fab/historico/decomol2/troca">Histórico de Trocas</router-link>
             </nav>
         </div> 
         <div v-else>
             <nav>
-                <router-link to="/historico/decomol3">Histórico de Registros</router-link> |
-                <router-link to="/historico/decomol3/troca">Histórico de Trocas</router-link>
+                <router-link to="/fab/historico/decomol3">Histórico de Registros</router-link> |
+                <router-link to="fab//historico/decomol3/troca">Histórico de Trocas</router-link>
             </nav>
         </div>
     <div class="table-column">
         <div class="voltar">
-        <router-link to="/aq/decomol">
+        <router-link to="/fab/decomol">
             <button class="button is-info is-inverted">
                 Voltar
             </button>
@@ -46,7 +46,7 @@
   import moment from 'moment'
 
   export default {
-    name: 'HistoricoTrocaView',
+    name: 'FabHistoricoTrocaView',
 
     data(){
         return {

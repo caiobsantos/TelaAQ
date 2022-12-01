@@ -9,6 +9,8 @@ import HistoricoTrocaView from '../components/HistoricoTrocas.vue'
 import EditPulmaoView from '../components/EditarPulmao.vue'
 import HistoricoPulmaoView from '../components/HistoricoPulmao.vue'
 import FabPulmaoView from '../components/FabPulmao.vue'
+import FabHistoricoView from '../components/FabHistorico.vue'
+import FabHistoricoTrocaView from '../components/FabHistoricoTrocas.vue'
 
 
 const routes = [
@@ -92,7 +94,7 @@ const routes = [
 
   {
     path: '/historico/:id',
-    name: 'historico',
+    name: 'historicodec',
     component: HistoricoView,
     meta: {
       hideNavbar: true,
@@ -112,6 +114,24 @@ const routes = [
     path: '/historico/:id/troca',
     name: 'historicoTroca',
     component: HistoricoTrocaView,
+    meta: {
+      hideNavbar: true,
+     }
+  },
+
+  {
+    path: '/fab/historico/:id/troca',
+    name: 'fabHistoricoTroca',
+    component: FabHistoricoTrocaView,
+    meta: {
+      hideNavbar: true,
+     }
+  },
+
+  {
+    path: '/fab/historico/:id',
+    name: 'fabHistorico',
+    component: FabHistoricoView,
     meta: {
       hideNavbar: true,
      }
