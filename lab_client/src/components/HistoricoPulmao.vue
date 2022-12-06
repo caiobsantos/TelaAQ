@@ -21,7 +21,7 @@
                         <td>{{ pulmao.sensorial }}</td>
                         <td>{{ pulmao.ph }}</td>
                         <td>{{ pulmao.brix }}</td>
-                        <td>{{ formatData(pulmao.data_liberacao) }}</td>
+                        <td>{{ formatData(pulmao.data_analise) }}</td>
                     </tr>
             </tbody>
         </table>

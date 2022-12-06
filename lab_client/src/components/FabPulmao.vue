@@ -2,7 +2,10 @@
     <div class="pulmao">
         <div class="columns">
             <div class="column is-half">
-                <p><b>{{pulmao1.tanque}}</b></p>
+                <svg class="svg" width="300" height="300">
+                    <image href="../assets/tanques/PULMÃO1.svg" alt="sla" width="275" y="-15%" x="3%"/>
+                </svg>
+                <p><b>{{pulmao1.tanque}}</b></p> <br>
                 <p>Resultado Cor: {{pulmao1.resultado_cor}}</p>
                 <p>Última Ánalise: {{formatData(pulmao1.data_analise)}}</p>
                 <div class="historico">
@@ -10,7 +13,10 @@
                 </div>
             </div>
             <div class="column">
-                <p><b>{{pulmao2.tanque}}</b></p> 
+                <svg class="svg" width="300" height="300">
+                    <image href="../assets/tanques/PULMÃO2.svg" alt="sla" width="275" y="-15%" x="3%"/>
+                </svg>
+                <p><b>{{pulmao2.tanque}}</b></p> <br>
                 <p>Resultado Cor: {{pulmao2.resultado_cor}}</p>
                 <p>Última Ánalise: {{formatData(pulmao2.data_analise)}}</p>
                 <div class="historico">
