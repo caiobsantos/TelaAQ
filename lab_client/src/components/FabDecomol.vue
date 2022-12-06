@@ -1,137 +1,207 @@
 <template>
     <div class="decomol-container">
         <div class="columns">
-                <div class="column is-one-third" v-if="checker('DECOMOL_1_PRODUCAO', decomol1.regenerando) == 'StandBy'">
-                    <div v-if="decomol1.liberado">
+                <div class="column is-one-third" v-if="decomol1.regenerando">
                         <svg class="svg" width="300" height="300">
-                            <image href="../assets/tanques/A.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                            <image href="../assets/tanques/Regenerando.svg" alt="sla" width="275" y="-15%" x="3%"/>
                         </svg>
-                        <p><router-link v-bind:to="'/fabricacao/detalhes/' + decomol1.id"><b>Decomol 1</b></router-link></p>
+                        <!-- colocar um ONFOCUS mostrando os resultados da ultima analise -->
+                        <p><router-link class="historico" v-bind:to="'/fab/historico/decomol1'"><b>Decomol 1</b></router-link></p>
                         <div class="spec">
-                            Última Análise: {{formatData(decomol1.data_liberacao)}} <br>
-                        </div>
-                        <button class="button" @click="trocarDecomol(decomol1)">Regenerar Decomol</button>
-                    </div>
-                    <div v-else>
-                        <svg class="svg" width="300" height="300">
-                            <image href="../assets/tanques/V.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
-                        </svg>
-                        <p><router-link v-bind:to="'/fabricacao/detalhes/' + decomol1.id"><b>Decomol 1</b></router-link></p>
-                        <div class="spec">
-                            Última Análise: {{formatData(decomol1.data_liberacao)}} <br>
-                        </div>
-                        <button class="button" @click="trocarDecomol(decomol1)">Regenerar Decomol</button>
-                    </div>
-                </div>
-                <div class="column is-one-third" v-else-if="checker('DECOMOL_1_PRODUCAO', decomol1.regenerando) == 'Produzindo'">
-                    <svg class="svg" width="300" height="300">
-                        <image href="../assets/tanques/VD.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
-                    </svg>
-                    <p><router-link v-bind:to="'/fabricacao/detalhes/' + decomol1.id"><b>Decomol 1</b></router-link></p>
-                    <div class="spec">
-                            Última Análise: {{formatData(decomol1.data_liberacao)}} <br>
-                    </div>
-                    <button class="button" @click="trocarDecomol(decomol1)">Regenerar Decomol</button>
-                </div>
-                <div class="column is-one-third" v-else>
-                        <svg class="svg" width="300" height="300">
-                            <image href="../assets/tanques/V.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
-                        </svg>
-                        <p><router-link v-bind:to="'/fabricacao/detalhes/' + decomol1.id"><b>Decomol 1</b></router-link></p>
-                        <div class="spec">
-                            Início Regeneração: {{formatData(decomol1.data_liberacao)}} <br>
-                            <b>{{decomolStatus(decomol1.liberado)}}</b> <br>
+                            <p>Início Regeneração: {{formatData(decomol1.data_liberacao)}}</p>
+                            <p><b>{{decomolStatus(decomol1.liberado)}}</b></p>
                         </div>
                         <button class="button" @click="concluirDecomol(decomol1)">Concluir Regeneração</button>
-                </div>
-
-                <div class="column" v-if="checker('DECOMOL_2_PRODUCAO', decomol2.regenerando) == 'StandBy'">
-                    <div v-if="decomol2.liberado">
+                    </div>
+                    <div class="column is-one-third" v-else-if="decomol1.liberado">
+                        <div v-if="decomol1.produzindo">
+                            <svg class="svg" width="300" height="300">
+                                <image href="../assets/tanques/Produzindo.svg" alt="sla" width="275" y="-15%" x="3%"/>
+                            </svg>
+                            <p><router-link class="historico" v-bind:to="'/fab/historico/decomol1'"><b>Decomol 1</b></router-link></p>
+                            <div class="spec">
+                                Última Análise: {{formatData(decomol1.data_liberacao)}} <br>
+                            </div>
+                            <div class="field is-grouped" id="maior">
+                                <p class="control">
+                                    <button class="button is-warning" @click="produzirDecomol(decomol1)">
+                                        Finalizar Produção
+                                    </button>
+                                </p>
+                                <p class="control">
+                                    <button class="button is-danger" @click="trocarDecomol(decomol1)">
+                                        Regenerar Decomol
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <svg class="svg" width="300" height="300">
+                                <image href="../assets/tanques/Standby.svg" alt="sla" width="275" y="-15%" x="3%"/>
+                            </svg>
+                            <p><router-link class="historico" v-bind:to="'/fab/historico/decomol1'"><b>Decomol 1</b></router-link></p>
+                            <div class="spec">
+                                Última Análise: {{formatData(decomol1.data_liberacao)}} <br>
+                            </div>
+                            <!-- <button class="button" @click="trocarDecomol(decomol1)">Regenerar Decomol</button> -->
+                            <div class="field is-grouped">
+                                <p class="control">
+                                    <button class="button is-success" @click="produzirDecomol(decomol1)">
+                                        Iniciar Produção
+                                    </button>
+                                </p>
+                                <p class="control">
+                                    <button class="button is-danger" @click="trocarDecomol(decomol1)">
+                                        Regenerar Decomol
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-one-third" v-else>
                         <svg class="svg" width="300" height="300">
-                            <image href="../assets/tanques/A.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                            <image href="../assets/tanques/V.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
                         </svg>
-                        <p><router-link v-bind:to="'/fabricacao/detalhes/' + decomol2.id"><b>Decomol 2</b></router-link></p>
+                        <p><router-link class="historico" v-bind:to="'/fab/historico/decomol1'"><b>Decomol 1</b></router-link></p>
+                        <div class="spec">
+                            Última Análise: {{formatData(decomol1.data_liberacao)}} <br>
+                        </div>
+                        <button class="button" @click="trocarDecomol(decomol1)">Regenerar Decomol</button>
+                    </div>
+                
+                    <div class="column" v-if="decomol2.regenerando">
+                        <svg class="svg" width="300" height="300">
+                            <image href="../assets/tanques/Regenerando.svg" alt="sla" width="275" y="-15%" x="3%"/>
+                        </svg>  
+                        <!-- colocar um ONFOCUS mostrando os resultados da ultima analise -->
+                        <p><router-link class="historico" v-bind:to="'/fab/historico/decomol2'"><b>Decomol 2</b></router-link></p>
+                        <div class="spec">
+                            <p>Início Regeneração: {{formatData(decomol2.data_liberacao)}}</p>
+                            <p><b>{{decomolStatus(decomol2.liberado)}}</b></p>
+                        </div>
+                        <button class="button" @click="concluirDecomol(decomol2)">Concluir Regeneração</button>
+                    </div>
+                    <div class="column is-one-third" v-else-if="decomol2.liberado">
+                        <div v-if="decomol2.produzindo">
+                            <svg class="svg" width="300" height="300">
+                                <image href="../assets/tanques/Produzindo.svg" alt="sla" width="275" y="-15%" x="3%"/>
+                            </svg>
+                            <p><router-link class="historico" v-bind:to="'/fab/historico/decomol2'"><b>Decomol 2</b></router-link></p>
+                            <div class="spec">
+                                Última Análise: {{formatData(decomol2.data_liberacao)}} <br>
+                            </div>
+                            <div class="field is-grouped" id="maior">
+                                <p class="control">
+                                    <button class="button is-warning" @click="produzirDecomol(decomol2)">
+                                        Finalizar Produção
+                                    </button>
+                                </p>
+                                <p class="control">
+                                    <button class="button is-danger" @click="trocarDecomol(decomol2)">
+                                        Regenerar Decomol
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <svg class="svg" width="300" height="300">
+                                <image href="../assets/tanques/Standby.svg" alt="sla" width="275" y="-15%" x="3%"/>
+                            </svg>
+                            <p><router-link class="historico" v-bind:to="'/fab/historico/decomol2'"><b>Decomol 2</b></router-link></p>
+                            <div class="spec">
+                                Última Análise: {{formatData(decomol2.data_liberacao)}} <br>
+                            </div>
+                            <div class="field is-grouped">
+                                <p class="control">
+                                    <button class="button is-success" @click="produzirDecomol(decomol2)">
+                                        Iniciar Produção
+                                    </button>
+                                </p>
+                                <p class="control">
+                                    <button class="button is-danger" @click="trocarDecomol(decomol2)">
+                                        Regenerar Decomol
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-one-third" v-else>
+                        <svg class="svg" width="300" height="300">
+                            <image href="../assets/tanques/V.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                        </svg>
+                        <p><router-link class="historico" v-bind:to="'/fab/historico/decomol2'"><b>Decomol 2</b></router-link></p>
                         <div class="spec">
                             Última Análise: {{formatData(decomol2.data_liberacao)}} <br>
                         </div>
                         <button class="button" @click="trocarDecomol(decomol2)">Regenerar Decomol</button>
                     </div>
-                    <div class="column is-one-third" v-else-if="checker('DECOMOL_2_PRODUCAO', decomol2.regenerando) == 'Produzindo'">
-                    <svg class="svg" width="300" height="300">
-                        <image href="../assets/tanques/VD.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
-                    </svg>
-                    <p><router-link v-bind:to="'/fabricacao/detalhes/' + decomol2.id"><b>Decomol 2</b></router-link></p>
-                    <div class="spec">
-                            Última Análise: {{formatData(decomol2.data_liberacao)}} <br>
-                    </div>
-                    <button class="button" @click="trocarDecomol(decomol2)">Regenerar Decomol</button>
-                </div>
-                </div>
-                <div class="column" v-else-if="checker('DECOMOL_2_PRODUCAO', decomol2.regenerando) == 'Produzindo'">
-                    <svg class="svg" width="300" height="300">
-                        <image href="../assets/tanques/VD.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
-                    </svg>
-                    <p><router-link v-bind:to="'/fabricacao/detalhes/' + decomol2.id"><b>Decomol 2</b></router-link></p>
-                    <div class="spec">
-                            Última Análise: {{formatData(decomol2.data_liberacao)}} <br>
-                    </div>
-                    <button class="button" @click="trocarDecomol(decomol2)">Regenerar Decomol</button>
-                </div>
-                <div class="column" v-else>
-                    <svg class="svg" width="300" height="300">
-                        <image href="../assets/tanques/V.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
-                    </svg>
-                    <p><router-link v-bind:to="'/fabricacao/detalhes/' + decomol2.id"><b>Decomol 2</b></router-link></p>
-                    <div class="spec">
-                            Início Regeneração:{{formatData(decomol2.data_liberacao)}} <br>
-                            Última Análise: {{decomolStatus(decomol2.liberado)}}<br>
-                    </div>
-                    <button class="button" @click="trocarDecomol(decomol2)">Concluir Regeneração</button>
-                </div>
 
-                <div class="column" v-if="checker('DECOMOL_3_PRODUCAO', decomol3.regenerando) == 'StandBy'">
-                    <div v-if="decomol3.liberado">
+                    <div class="column" v-if="decomol3.regenerando">
                         <svg class="svg" width="300" height="300">
-                            <image href="../assets/tanques/A.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                            <image href="../assets/tanques/Regenerando.svg" alt="sla" width="275" y="-15%" x="3%"/>
                         </svg>
-                        <p><router-link v-bind:to="'/fabricacao/detalhes/' + decomol3.id"><b>Decomol 3</b></router-link></p>
+                        <!-- colocar um ONFOCUS mostrando os resultados da ultima analise -->
+                        <p><router-link class="historico" v-bind:to="'/fab/historico/decomol3'"><b>Decomol 3</b></router-link></p>
+                        <div class="spec">
+                            <p>Início Regeneração: {{formatData(decomol3.data_liberacao)}}</p>
+                            <p><b>{{decomolStatus(decomol3.liberado)}}</b></p>
+                        </div>
+                        <button class="button" @click="concluirDecomol(decomol3)">Concluir Regeneração</button>
+                    </div>
+                    <div class="column is-one-third" v-else-if="decomol3.liberado">
+                        <div v-if="decomol3.produzindo">
+                            <svg class="svg" width="300" height="300">
+                                <image href="../assets/tanques/Produzindo.svg" alt="sla" width="275" y="-15%" x="3%"/>
+                            </svg>
+                            <p><router-link class="historico" v-bind:to="'/fab/historico/decomol3'"><b>Decomol 3</b></router-link></p>
+                            <div class="spec">
+                                Última Análise: {{formatData(decomol3.data_liberacao)}} <br>
+                            </div>
+                            <div class="field is-grouped" id="maior">
+                                <p class="control">
+                                    <button class="button is-warning" @click="produzirDecomol(decomol3)">
+                                        Finalizar Produção
+                                    </button>
+                                </p>
+                                <p class="control">
+                                    <button class="button is-danger" @click="trocarDecomol(decomol3)">
+                                        Regenerar Decomol
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <svg class="svg" width="300" height="300">
+                                <image href="../assets/tanques/Standby.svg" alt="sla" width="275" y="-15%" x="3%"/>
+                            </svg>
+                            <p><router-link class="historico" v-bind:to="'/fab/historico/decomol3'"><b>Decomol 3</b></router-link></p>
+                            <div class="spec">
+                                Última Análise: {{formatData(decomol3.data_liberacao)}} <br>
+                            </div>
+                            <div class="field is-grouped">
+                                <p class="control">
+                                    <button class="button is-success" >
+                                        Iniciar Produção
+                                    </button>
+                                </p>
+                                <p class="control">
+                                    <button class="button is-danger" @click="trocarDecomol(decomol3)">
+                                        Regenerar Decomol
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-one-third" v-else>
+                        <svg class="svg" width="300" height="300">
+                            <image href="../assets/tanques/V.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
+                        </svg>
+                        <p><router-link class="historico" v-bind:to="'/fab/historico/decomol3'"><b>Decomol 3</b></router-link></p>
                         <div class="spec">
                             Última Análise: {{formatData(decomol3.data_liberacao)}} <br>
                         </div>
                         <button class="button" @click="trocarDecomol(decomol3)">Regenerar Decomol</button>
                     </div>
-                    <div class="column is-one-third" v-else-if="checker('DECOMOL_3_PRODUCAO', decomol3.regenerando) == 'Produzindo'">
-                    <svg class="svg" width="300" height="300">
-                        <image href="../assets/tanques/VD.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
-                    </svg>
-                    <p><router-link v-bind:to="'/fabricacao/detalhes/' + decomol3.id"><b>Decomol 3</b></router-link></p>
-                    <div class="spec">
-                            Última Análise: {{formatData(decomol3.data_liberacao)}} <br>
-                    </div>
-                    <button class="button" @click="trocarDecomol(decomol3)">Regenerar Decomol</button>
-                </div>
-                </div>
-                <div class="column" v-else-if="checker('DECOMOL_3_PRODUCAO', decomol3.regenerando) == 'Produzindo'">
-                    <svg class="svg" width="300" height="300">
-                        <image href="../assets/tanques/VD.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
-                    </svg>
-                    <p><router-link v-bind:to="'/fabricacao/detalhes/' + decomol3.id"><b>Decomol 3</b></router-link></p>
-                    <div class="spec">
-                            Última Análise: {{formatData(decomol3.data_liberacao)}} <br>
-                    </div>
-                    <button class="button" @click="trocarDecomol(decomol3)">Regenerar Decomol</button>
-                </div>
-                <div class="column" v-else>
-                    <svg class="svg" width="300" height="300">
-                        <image href="../assets/tanques/V.svg" alt="sla" heigth="90" width="130" y="0%" x="27%"/>
-                    </svg>
-                    <p><router-link v-bind:to="'/fabricacao/detalhes/' + decomol3.id"><b>Decomol 3</b></router-link></p>
-                    <div class="spec">
-                            <b>Início Regeneração:</b> {{formatData(decomol3.data_liberacao)}} <br>
-                            <b>{{decomolStatus(decomol3.liberado)}}</b> <br>
-                    </div>
-                    <button class="button" @click="trocarDecomol(decomol3)">Concluir Regeneração</button>
-                </div>
         </div>
     </div>
 </template>
@@ -147,20 +217,12 @@ import moment from 'moment'
                 decomol1: [],
                 decomol2: [],
                 decomol3: [],
-                status1: null,
-                status2: null,
-                status3: null,
-                sinal: []
             } 
         },
         created() {
             this.getDecomol1()
-            this.getDecomol1Status()
             this.getDecomol2()
-            this.getDecomol2Status()
             this.getDecomol3()
-            this.getDecomol3Status()
-            this.getSignalDecomol()
         },
         methods: {
             getDecomol1() {
@@ -172,29 +234,13 @@ import moment from 'moment'
                 setTimeout(this.getDecomol1, 2000)
             },
 
-            getDecomol1Status() {
-                axios({
-                    method: 'get',
-                    url: process.env.VUE_APP_ROOT_URL + '1',
-                }) .then (response => {
-                    this.status1 = response.data.regenerando})
-            },
-
             getDecomol2() {
                 axios({
                     method: 'get',
                     url: process.env.VUE_APP_ROOT_URL + '2',
                 }) .then (response => this.decomol2 = response.data)
                 setTimeout(this.getDecomol2, 2000)
-            },
-
-            getDecomol2Status() {
-                axios({
-                    method: 'get',
-                    url: process.env.VUE_APP_ROOT_URL + '2',
-                }) .then (response => {
-                    this.status2 = response.data.regenerando})
-            },
+            },  
 
             getDecomol3() {
                 axios({
@@ -205,83 +251,6 @@ import moment from 'moment'
                     this.status3 = response.data.regenerando
                     })
                 setTimeout(this.getDecomol3, 2000)
-            },
-
-            getDecomol3Status() {
-                axios({
-                    method: 'get',
-                    url: process.env.VUE_APP_ROOT_URL + '3',
-                }) .then (response => {
-                    this.status3 = response.data.regenerando})
-            },
-
-            getSignalDecomol(){
-                var axios = require('axios');
-                var data = JSON.stringify("DECOMOL");
-
-                var config = {
-                method: 'post',
-                url: 'http://10.15.100.110:50000/api/ObterValores',
-                headers: { 
-                    'Content-Type': 'application/json'
-                },
-                data : data
-                };
-
-                axios(config)
-                .then(response =>
-                    this.sinal = response.data
-                )
-                .catch(function (error) {
-                console.log(error);
-                });
-            },
-
-
-            getProducao(nome){ 
-                for(let i = 0; i < this.sinal.length; i++){
-                    if (this.sinal[i].nome == nome){
-                        if(this.sinal[i].valor == 1){
-                            return true
-                        }
-                        else{
-                            return false
-                        }
-                    }
-                }
-            },
-
-            checker(nomeProd, regenerando){
-                var a = regenerando
-                var b = this.getProducao(nomeProd)
-                
-
-                if(a && b){
-                    return "Regenerando"
-                }
-                else if(!a && b){
-                    return "StandBy"
-                }
-                else{
-                    return "Produzindo"
-                }
-            },
-
-            corAtual(status, troca){
-                if (status == true){
-                    return 'button is-success'
-                }
-                else if (status == false){
-                    if(troca == false){
-                        return 'button is-danger'
-                    }
-                    else{
-                        return 'button is-warning'
-                    }
-                }
-                else{
-                    return 'button is-warning'
-                }
             },
 
             decomolStatus(status){
@@ -306,8 +275,9 @@ import moment from 'moment'
                         ph: "",
                         brix: "",
                         producao: decomol.producao,
-                        liberado: false,
                         regenerando: true,
+                        produzindo: false,
+                        liberado: false,
                     })
                 }
                     
@@ -319,9 +289,23 @@ import moment from 'moment'
             concluirDecomol(decomol){
                 axios.put(process.env.VUE_APP_ROOT_URL + decomol.id + '/', {
                         producao: decomol.producao,
-                        liberado: false,
                         regenerando: false,
                     })
+            },
+
+            produzirDecomol(decomol){
+                if(decomol.produzindo == true){
+                    axios.put(process.env.VUE_APP_ROOT_URL + decomol.id + '/', {
+                        producao: decomol.producao,
+                        produzindo: false,
+                    })
+                }
+                else{
+                    axios.put(process.env.VUE_APP_ROOT_URL + decomol.id + '/', {
+                        producao: decomol.producao,
+                        produzindo: true,
+                    })
+               }
             },
 
             formatData(data) {
@@ -334,7 +318,6 @@ import moment from 'moment'
             this.getDecomol1()
             this.getDecomol2()
             this.getDecomol3()
-            this.getSignalDecomol()
         }
     }
 </script>
@@ -344,7 +327,6 @@ import moment from 'moment'
         margin-bottom: 1.5rem;
     }
     .decomol-container { 
-        position: relative;
         margin-top: 1.5rem;
     }
 
@@ -369,4 +351,16 @@ import moment from 'moment'
         margin-top: 5px;
         margin-bottom: 0.5rem;
     }
+
+    #maior{
+        margin-left: 3.0rem;
+    }
+
+    .field{
+        display: flex;
+        padding: auto;  
+        margin-top: 1.0rem;
+        margin-left: 3.75rem;
+    }
+
 </style>

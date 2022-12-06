@@ -20,7 +20,7 @@
     
     <div class="table-column">
         <div class="voltar">
-        <router-link to="/decomol">
+        <router-link to="/aq/decomol">
             <button class="button is-info is-inverted">
                 Voltar
             </button>

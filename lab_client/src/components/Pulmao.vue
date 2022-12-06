@@ -5,7 +5,7 @@
                 <svg class="svg" width="300" height="300">
                     <image href="../assets/tanques/PULMÃO1.svg" alt="sla" width="275" y="-15%" x="3%"/>
                 </svg>
-                <p><b>{{pulmao1.tanque}}</b></p>
+                <p><b>{{pulmao1.tanque}}</b></p> <br>
                 <p>Última Ánalise: {{formatData(pulmao1.data_analise)}}</p>
                 <p>
                     <router-link class="links" to='/pulmao/historico/1'><span class="historico">Ver Mais</span></router-link>
@@ -16,7 +16,7 @@
                 <svg class="svg" width="300" height="300">
                     <image href="../assets/tanques/PULMÃO2.svg" alt="sla" width="275" y="-15%" x="3%"/>
                 </svg>
-                <p><b>{{pulmao2.tanque}}</b></p> 
+                <p><b>{{pulmao2.tanque}}</b></p> <br>
                 <p>Última Ánalise: {{formatData(pulmao2.data_analise)}}</p>
                 <p>
                     <router-link class="links" to='/pulmao/historico/2'><span class="historico">Ver Mais</span></router-link>

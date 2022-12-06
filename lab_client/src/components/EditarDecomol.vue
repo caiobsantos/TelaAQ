@@ -99,7 +99,6 @@
                         brix: this.decomol.brix,
                         producao: this.decomol.producao,
                         liberado: this.liberado,
-                        regenerando: false
                     }) 
 
                         axios.post(process.env.VUE_APP_ROOT_URL_HISTORICO,{
