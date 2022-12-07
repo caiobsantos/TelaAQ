@@ -5,13 +5,13 @@
                 <div class="field">
                     <label class="label">Resultado Cor</label>
                         <div class="control">
-                            <input class="input" type="text" v-model="decomol.resultado_cor" required>
+                            <input class="input" type="text" v-model="resultado_cor" required>
                         </div>
                 </div>
                 <div class="field">
                     <label class="label">Sensorial</label>
                         <div class="control">
-                            <input class="input" type="text" v-model="decomol.sensorial" required>
+                            <input class="input" type="text" v-model="sensorial" required>
                         </div>
                 </div>
                 <div class="columns">
@@ -19,7 +19,7 @@
                         <div class="field">
                             <label class="label">PH</label>
                                 <div class="control">
-                                    <input class="input" type="number" min="0" max="14" v-model="decomol.ph" placeholder="0.00" required>
+                                    <input class="input" type="number" min="0" max="14" v-model="ph" placeholder="0.00" required>
                                 </div>
                         </div>
                     </div>
@@ -27,33 +27,21 @@
                         <div class="field">
                             <label class="label">Brix</label>
                                 <div class="control">
-                                    <input class="input" type="number" v-model="decomol.brix" required>
+                                    <input class="input" type="number" v-model="brix" required>
                                 </div>
                         </div>
                     </div>
                 </div>
             </div>
-                <div class="StatusDecomol">
-                    <div v-if="getStatus() == true">
+                <div class="StatusDecomol">  
                         <label class="radio">
-                            <input type="radio" name="answer" @click="liberaDecomol()" checked>
+                            <input type="radio" name="answer" value="true" v-model="liberado" required>
                             Liberado
                         </label>
                         <label class="radio">
-                            <input type="radio" name="answer" @click="cancelaDecomol()">
+                            <input type="radio" name="answer" value="false" v-model="liberado">
                             Não Liberado
                         </label>
-                    </div>
-                      <div v-else>
-                        <label class="radio">
-                            <input type="radio" name="answer" @click="liberaDecomol()">
-                            Liberado
-                        </label>
-                        <label class="radio">
-                            <input type="radio" name="answer" @click="cancelaDecomol()" checked>
-                            Não Liberado
-                        </label>
-                    </div>
                 </div>
                 <div class="box-button">
                     <button class="button is-link" @click="editDecomol()">Salvar</button>
@@ -70,43 +58,42 @@
         data() {
             return{
                 id: this.$route.params.id,
-                decomol: [],
+                resultado_cor: '',
+                sensorial: '',
+                ph: '',
+                brix: '',
                 liberado: null,
             }
         },
-        mounted() {
-            this.getDecomol()
-        },
         methods: {
-            getDecomol() {
-                axios({
-                    method: 'get',
-                    url: process.env.VUE_APP_ROOT_URL + this.id,
-                }) .then (response => this.decomol = response.data)
-            },
-
             editDecomol() {
-                if(this.decomol.resultado_cor ==null || this.decomol.sensorial ==null || this.decomol.ph ==null || this.decomol.brix==null || this.decomol.resultado_cor =="" || this.decomol.sensorial == "" || this.decomol.ph =="" || this.decomol.brix==""){
+                if(this.resultado_cor ==null || this.sensorial ==null || this.ph ==null || this.brix==null || this.liberado==null || this.resultado_cor =="" || this.sensorial == "" || this.ph =="" || this.brix==""){
                     return 0
                 }
+                
                 else{
-                    if(this.decomol)
+                    if(this.liberado=='true'){
+                        this.liberado = true
+                    }
+                    else{
+                        this.liberado = false
+                    }
                     try {
                     axios.put(process.env.VUE_APP_ROOT_URL + this.id + '/',{
-                        resultado_cor: this.decomol.resultado_cor,
-                        sensorial: this.decomol.sensorial,
-                        ph: this.decomol.ph,
-                        brix: this.decomol.brix,
-                        producao: this.decomol.producao,
+                        resultado_cor: this.resultado_cor,
+                        sensorial: this.sensorial,
+                        ph: this.ph,
+                        brix: this.brix,
+                        producao: 'Decomol' + this.id,
                         liberado: this.liberado,
                     }) 
 
                         axios.post(process.env.VUE_APP_ROOT_URL_HISTORICO,{
-                        decomol: this.decomol.producao,
-                        resultado_cor: this.decomol.resultado_cor,
-                        sensorial: this.decomol.sensorial,
-                        ph: this.decomol.ph,
-                        brix: this.decomol.brix,
+                        decomol: 'Decomol' + this.id,
+                        resultado_cor: this.resultado_cor,
+                        sensorial: this.sensorial,
+                        ph: this.ph,
+                        brix: this.brix,
                         resultado_analise: this.liberado,
                 })
                 this.$router.push('/aq/decomol')
@@ -116,23 +103,6 @@
                         
                     }
                 }
-            },
-
-            liberaDecomol() {
-                this.liberado = true
-            },
-
-            cancelaDecomol() {
-                this.liberado = false
-            },
-
-            analisaDecomol() {
-                this.liberado = null
-            },
-
-            getStatus() {
-                this.liberado = this.decomol.liberado
-                return this.decomol.liberado
             },
         }
     }
