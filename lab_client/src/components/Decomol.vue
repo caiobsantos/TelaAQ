@@ -81,7 +81,7 @@
                     </div>
                     <div class="column is-one-third" v-else>
                         <svg class="svg" width="300" height="300">
-                            <image href="../assets/tanques/V.svg" alt="sla" hwidth="135" y="0%" x="26%"/>
+                            <image href="../assets/tanques/V.svg" alt="sla" width="135" y="0%" x="26%"/>
                         </svg>
                         <p><router-link class="historico" v-bind:to="'/historico/decomol2'"><b>Decomol 2</b></router-link></p>
                         <div class="spec">
