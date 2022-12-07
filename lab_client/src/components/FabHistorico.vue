@@ -7,7 +7,7 @@
     </div>
         <div v-else-if="decomol_nome=='decomol2'">
             <nav>
-                <router-link to="fab//historico/decomol2">Histórico de Registros</router-link> |
+                <router-link to="/fab/historico/decomol2">Histórico de Registros</router-link> |
                 <router-link to="/fab/historico/decomol2/troca">Histórico de Trocas</router-link>
             </nav>
         </div> 

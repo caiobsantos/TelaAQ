@@ -28,12 +28,14 @@
         <table class="table is-bordered is-striped">
             <tr>
                 <th>Decomol</th>
-                <th>Data da Troca</th>
+                <th>Início da Regeneração</th>
+                <th>Fim da Regeneração</th>
             </tr>
             <tbody v-for="dec in decs.reverse()"  v-bind:key="dec.id"> 
                     <tr v-if="comparaDecomol(dec.decomol_troca)">
                         <td>{{ dec.decomol_troca }}</td>
-                        <td>{{ formatData(dec.data_troca) }}</td>
+                        <td>{{ formatDataInicio(dec.data_troca) }}</td>
+                        <td>{{ formatDataFim(dec.data_fim, dec.data_troca)}}</td>
                     </tr>
             </tbody>
         </table>
@@ -65,8 +67,19 @@
             }) .then (response => this.decs = response.data)
         },
 
-        formatData(data) {
+        formatDataInicio(data) {
             return moment(data).format('DD/MM/YY [] HH:mm')
+        },
+
+        formatDataFim(datafim, datain){
+            var a = moment(datafim)
+            var b = moment(datain)
+            if (a.diff(b)<=100){
+                return '-'
+            }
+            else{
+                return moment(datafim).format('DD/MM/YY [] HH:mm')
+            }
         },
 
         comparaDecomol(nome){
@@ -92,6 +105,7 @@
         position: inherit;
         text-align: left;
         margin-left: 15rem;
-        margin-bottom: 2rem
+        margin-bottom: 2rem;
+        margin-top: 2.5rem;
     }
 </style>

@@ -11,7 +11,7 @@
                             <p>Início Regeneração: {{formatData(decomol1.data_liberacao)}}</p>
                             <p><b>{{decomolStatus(decomol1.liberado)}}</b></p>
                         </div>
-                        <button class="button" @click="concluirDecomol(decomol1)">Concluir Regeneração</button>
+                        <button class="button" @click="concluirDecomol(decomol1, id=1)">Concluir Regeneração</button>
                     </div>
                     <div class="column is-one-third" v-else-if="decomol1.liberado">
                         <div v-if="decomol1.produzindo">
@@ -29,7 +29,7 @@
                                     </button>
                                 </p>
                                 <p class="control">
-                                    <button class="button is-danger" @click="trocarDecomol(decomol1)">
+                                    <button class="button is-danger" @click="trocarDecomol(decomol1, id=1)">
                                         Regenerar Decomol
                                     </button>
                                 </p>
@@ -51,7 +51,7 @@
                                     </button>
                                 </p>
                                 <p class="control">
-                                    <button class="button is-danger" @click="trocarDecomol(decomol1)">
+                                    <button class="button is-danger" @click="trocarDecomol(decomol1, id=1)">
                                         Regenerar Decomol
                                     </button>
                                 </p>
@@ -66,7 +66,7 @@
                         <div class="spec">
                             Última Análise: {{formatData(decomol1.data_liberacao)}} <br>
                         </div>
-                        <button class="button" @click="trocarDecomol(decomol1)">Regenerar Decomol</button>
+                        <button class="button" @click="trocarDecomol(decomol1, id=1)">Regenerar Decomol</button>
                     </div>
                 
                     <div class="column" v-if="decomol2.regenerando">
@@ -79,7 +79,7 @@
                             <p>Início Regeneração: {{formatData(decomol2.data_liberacao)}}</p>
                             <p><b>{{decomolStatus(decomol2.liberado)}}</b></p>
                         </div>
-                        <button class="button" @click="concluirDecomol(decomol2)">Concluir Regeneração</button>
+                        <button class="button" @click="concluirDecomol(decomol2, id=2)">Concluir Regeneração</button>
                     </div>
                     <div class="column is-one-third" v-else-if="decomol2.liberado">
                         <div v-if="decomol2.produzindo">
@@ -97,7 +97,7 @@
                                     </button>
                                 </p>
                                 <p class="control">
-                                    <button class="button is-danger" @click="trocarDecomol(decomol2)">
+                                    <button class="button is-danger" @click="trocarDecomol(decomol2, id=2)">
                                         Regenerar Decomol
                                     </button>
                                 </p>
@@ -118,7 +118,7 @@
                                     </button>
                                 </p>
                                 <p class="control">
-                                    <button class="button is-danger" @click="trocarDecomol(decomol2)">
+                                    <button class="button is-danger" @click="trocarDecomol(decomol2, id=2)">
                                         Regenerar Decomol
                                     </button>
                                 </p>
@@ -133,7 +133,7 @@
                         <div class="spec">
                             Última Análise: {{formatData(decomol2.data_liberacao)}} <br>
                         </div>
-                        <button class="button" @click="trocarDecomol(decomol2)">Regenerar Decomol</button>
+                        <button class="button" @click="trocarDecomol(decomol2, id=2)">Regenerar Decomol</button>
                     </div>
 
                     <div class="column" v-if="decomol3.regenerando">
@@ -146,7 +146,7 @@
                             <p>Início Regeneração: {{formatData(decomol3.data_liberacao)}}</p>
                             <p><b>{{decomolStatus(decomol3.liberado)}}</b></p>
                         </div>
-                        <button class="button" @click="concluirDecomol(decomol3)">Concluir Regeneração</button>
+                        <button class="button" @click="concluirDecomol(decomol3, id=3)">Concluir Regeneração</button>
                     </div>
                     <div class="column is-one-third" v-else-if="decomol3.liberado">
                         <div v-if="decomol3.produzindo">
@@ -164,7 +164,7 @@
                                     </button>
                                 </p>
                                 <p class="control">
-                                    <button class="button is-danger" @click="trocarDecomol(decomol3)">
+                                    <button class="button is-danger" @click="trocarDecomol(decomol3, id=3)">
                                         Regenerar Decomol
                                     </button>
                                 </p>
@@ -185,7 +185,7 @@
                                     </button>
                                 </p>
                                 <p class="control">
-                                    <button class="button is-danger" @click="trocarDecomol(decomol3)">
+                                    <button class="button is-danger" @click="trocarDecomol(decomol3, id=3)">
                                         Regenerar Decomol
                                     </button>
                                 </p>
@@ -200,7 +200,7 @@
                         <div class="spec">
                             Última Análise: {{formatData(decomol3.data_liberacao)}} <br>
                         </div>
-                        <button class="button" @click="trocarDecomol(decomol3)">Regenerar Decomol</button>
+                        <button class="button" @click="trocarDecomol(decomol3, id=3)">Regenerar Decomol</button>
                     </div>
         </div>
     </div>
@@ -217,6 +217,9 @@ import moment from 'moment'
                 decomol1: [],
                 decomol2: [],
                 decomol3: [],
+                id1: 0,
+                id2: 0,
+                id3: 0
             } 
         },
         created() {
@@ -262,11 +265,21 @@ import moment from 'moment'
                 }
             },
 
-            trocarDecomol(decomol){
+            trocarDecomol(decomol, id){
                 const c = confirm("Deseja regenerar o " + decomol.producao+"?")
                 if (c) {
                     axios.post(process.env.VUE_APP_ROOT_URL_TROCA, {
                         decomol_troca: decomol.producao
+                    }) .then(response => {
+                        if(id==1){
+                            this.id1 = response.data.id
+                        }
+                        else if(id==2){
+                            this.id2 = response.data.id
+                        }
+                        else{
+                            this.id3 = response.data.id
+                        }
                     })
 
                     axios.put(process.env.VUE_APP_ROOT_URL + decomol.id + '/', {
@@ -286,11 +299,26 @@ import moment from 'moment'
                     // })
             },
 
-            concluirDecomol(decomol){
+            concluirDecomol(decomol, id){
                 axios.put(process.env.VUE_APP_ROOT_URL + decomol.id + '/', {
                         producao: decomol.producao,
                         regenerando: false,
                     })
+                if(id==1){
+                    axios.put(process.env.VUE_APP_ROOT_URL_TROCA +  this.id1 + '/', {
+                        decomol_troca: decomol.producao
+                    })
+                }
+                else if(id==2){
+                    axios.put(process.env.VUE_APP_ROOT_URL_TROCA +  this.id2 + '/', {
+                        decomol_troca: decomol.producao
+                    })
+                }
+                else{
+                    axios.put(process.env.VUE_APP_ROOT_URL_TROCA +  this.id3 + '/', {
+                        decomol_troca: decomol.producao
+                    })
+                }
             },
 
             produzirDecomol(decomol){

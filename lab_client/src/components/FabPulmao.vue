@@ -6,8 +6,8 @@
                     <image href="../assets/tanques/PULMÃO1.svg" alt="sla" width="275" y="-15%" x="3%"/>
                 </svg>
                 <p><b>{{pulmao1.tanque}}</b></p> <br>
-                <p>Resultado Cor: {{pulmao1.resultado_cor}}</p>
-                <p>Última Ánalise: {{formatData(pulmao1.data_analise)}}</p>
+                <p>Resultado Cor: <b>{{pulmao1.resultado_cor}}</b></p>
+                <p>Última Ánalise: <b>{{formatData(pulmao1.data_analise)}}</b></p>
                 <div class="historico">
                     <router-link class="links" to='/pulmao/historico/1'>Ver Mais</router-link>
                 </div>
@@ -17,8 +17,8 @@
                     <image href="../assets/tanques/PULMÃO2.svg" alt="sla" width="275" y="-15%" x="3%"/>
                 </svg>
                 <p><b>{{pulmao2.tanque}}</b></p> <br>
-                <p>Resultado Cor: {{pulmao2.resultado_cor}}</p>
-                <p>Última Ánalise: {{formatData(pulmao2.data_analise)}}</p>
+                <p>Resultado Cor: <b>{{pulmao2.resultado_cor}}</b></p>
+                <p>Última Ánalise: <b>{{formatData(pulmao2.data_analise)}}</b></p>
                 <div class="historico">
                     <router-link class="links" to='/pulmao/historico/2'>Ver Mais</router-link>
                 </div>

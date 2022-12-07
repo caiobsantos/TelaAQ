@@ -4,4 +4,4 @@ from .models import TrocaHistorico
 class DecomolTrocaSerializer(serializers.ModelSerializer):
     class Meta:
         model = TrocaHistorico
-        fields = ['id', 'data_troca', 'decomol_troca']
+        fields = ['id', 'data_troca', 'decomol_troca', 'data_fim']
