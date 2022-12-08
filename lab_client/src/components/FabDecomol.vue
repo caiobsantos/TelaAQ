@@ -300,39 +300,50 @@ import moment from 'moment'
             },
 
             concluirDecomol(decomol, id){
-                axios.put(process.env.VUE_APP_ROOT_URL + decomol.id + '/', {
+                const c = confirm("Deseja finalizar a regeneração do " + decomol.producao+"?")
+                if(c){
+                    axios.put(process.env.VUE_APP_ROOT_URL + decomol.id + '/', {
                         producao: decomol.producao,
                         regenerando: false,
                     })
-                if(id==1){
-                    axios.put(process.env.VUE_APP_ROOT_URL_TROCA +  this.id1 + '/', {
-                        decomol_troca: decomol.producao
-                    })
-                }
-                else if(id==2){
-                    axios.put(process.env.VUE_APP_ROOT_URL_TROCA +  this.id2 + '/', {
-                        decomol_troca: decomol.producao
-                    })
-                }
-                else{
-                    axios.put(process.env.VUE_APP_ROOT_URL_TROCA +  this.id3 + '/', {
-                        decomol_troca: decomol.producao
-                    })
+                    if(id==1){
+                        axios.put(process.env.VUE_APP_ROOT_URL_TROCA +  this.id1 + '/', {
+                            decomol_troca: decomol.producao
+                        })
+                    }
+                    else if(id==2){
+                        axios.put(process.env.VUE_APP_ROOT_URL_TROCA +  this.id2 + '/', {
+                            decomol_troca: decomol.producao
+                        })
+                    }
+                    else{
+                        axios.put(process.env.VUE_APP_ROOT_URL_TROCA +  this.id3 + '/', {
+                            decomol_troca: decomol.producao
+                        })
+                    }
                 }
             },
 
             produzirDecomol(decomol){
+
                 if(decomol.produzindo == true){
-                    axios.put(process.env.VUE_APP_ROOT_URL + decomol.id + '/', {
-                        producao: decomol.producao,
-                        produzindo: false,
+                    const c = confirm("Deseja finalizar a produção do " + decomol.producao+"?")
+                    if(c){
+                        axios.put(process.env.VUE_APP_ROOT_URL + decomol.id + '/', {
+                            producao: decomol.producao,
+                            produzindo: false,
                     })
+                    }
                 }
+                
                 else{
-                    axios.put(process.env.VUE_APP_ROOT_URL + decomol.id + '/', {
-                        producao: decomol.producao,
-                        produzindo: true,
+                    const c = confirm("Deseja iniciar a produção do " + decomol.producao+"?")
+                    if(c){
+                        axios.put(process.env.VUE_APP_ROOT_URL + decomol.id + '/', {
+                            producao: decomol.producao,
+                            produzindo: true,
                     })
+                    }
                }
             },
 
