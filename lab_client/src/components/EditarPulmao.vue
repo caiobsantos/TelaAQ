@@ -68,7 +68,7 @@
                         this.nameTanque = 'Tanque 2'
                     }
                     try {
-                    axios.put('http://172.16.19.182:8000/pulmao/'  + this.id + '/',{
+                    axios.put(process.env.VUE_APP_ROOT_URL_PULMAO+this.id+'/',{
                         tanque: this.nameTanque,
                         resultado_cor: this.resultado_cor,
                         sensorial: this.sensorial,
@@ -76,7 +76,7 @@
                         brix: this.brix,
                     })
 
-                    axios.post('http://172.16.19.182:8000/historico/pulmao' ,{
+                    axios.post('http://172.16.19.182:8000/historico/pulmao',{
                     tanque: this.nameTanque,
                     resultado_cor: this.resultado_cor,
                     sensorial: this.sensorial,
