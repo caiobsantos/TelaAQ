@@ -16,19 +16,20 @@ import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# INITIALIZE ENVIRONMENT VARIABLES
+env = environ.Env()
+environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-pr3=&$l%z(n^1g3ra6r)nj@uivz2jdp8mq=(mzgx05xw(b&t2w'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# INITIALIZE ENVIRONMENT VARIABLES
-env = environ.Env()
-environ.Env.read_env()
+
 
 # CORS_ORIGINS_ALLOW_ALL = True
 ALLOWED_HOSTS = ['172.16.19.182']
@@ -97,7 +98,7 @@ DATABASES = {
        'ENGINE': 'django.db.backends.postgresql',
        'NAME': 'aplicacao_aq',
        'USER': 'postgres',
-       'PASSWORD': 'Engenharia199',
+       'PASSWORD': env('DATABASE_PASS'),
        'HOST': 'Taiwan',
        'PORT': '5432',
    }
