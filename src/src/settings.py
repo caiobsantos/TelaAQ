@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import environ
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,7 +33,7 @@ DEBUG = True
 
 
 # CORS_ORIGINS_ALLOW_ALL = True
-ALLOWED_HOSTS = ['172.16.19.182']
+ALLOWED_HOSTS = ['172.16.19.182', 'localhost', '10.15.100.110']
 CORS_ALLOWED_ORIGINS = (
       'http://localhost:8080',
       'http://172.16.19.182:8080',
@@ -139,10 +140,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CSRF_COOKIE_SECURE = False
+
+SESSION_COOKIE_SECURE = False
