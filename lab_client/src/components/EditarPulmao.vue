@@ -76,7 +76,7 @@
                         brix: this.brix,
                     })
 
-                    axios.post('http://172.16.19.182:8000/historico/pulmao',{
+                    axios.post('http://10.15.100.110:50003/historico/pulmao',{
                     tanque: this.nameTanque,
                     resultado_cor: this.resultado_cor,
                     sensorial: this.sensorial,

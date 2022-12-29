@@ -49,7 +49,7 @@
 
     methods: {
         getPulmao(){
-            axios.get('http://172.16.19.182:8000/historico/pulmao', {
+            axios.get('http://10.15.100.110:50003/historico/pulmao', {
             }) .then (response => this.pulmoes = response.data)
         },
 

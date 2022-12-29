@@ -52,14 +52,14 @@
             getPulmao1(){
                 axios({
                     method: 'get',
-                    url: 'http://172.16.19.182:8000/pulmao/' + '1',
+                    url: 'http://10.15.100.110:50003/pulmao/' + '1',
                 }) .then(response => this.pulmao1 = response.data) 
             },
 
             getPulmao2(){
                 axios({
                     method: 'get',
-                    url: 'http://172.16.19.182:8000/pulmao/' + '2',
+                    url: 'http://10.15.100.110:50003/pulmao/' + '2',
                 }) .then(response => this.pulmao2 = response.data) 
             },
 
