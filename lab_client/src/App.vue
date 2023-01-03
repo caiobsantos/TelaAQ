@@ -10,6 +10,7 @@
         <router-link to="/fab/pulmao">Pulmão</router-link>
       </nav>
     </div>
+    <router-view/>
   </div>
 </template>
 

@@ -34,11 +34,11 @@ DEBUG = False
 
 # CORS_ORIGINS_ALLOW_ALL = True
 ALLOWED_HOSTS = ['172.16.19.182', '10.15.100.110', 'localhost']
-CORS_ALLOWED_ORIGINS = (
-      'http://localhost:8080',
-      'http://172.16.19.182:8080',
-    'http://10.15.100.110'
-  )
+# CORS_ALLOWED_ORIGINS = (
+#       'http://localhost:8080',
+#       'http://172.16.19.182:8080',
+#     'http://10.15.100.110'
+#   )
 
 
 # Application definition
@@ -70,6 +70,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'src.urls'
 

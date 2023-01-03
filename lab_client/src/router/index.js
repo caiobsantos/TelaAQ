@@ -11,17 +11,29 @@ import HistoricoPulmaoView from '../components/HistoricoPulmao.vue'
 import FabPulmaoView from '../components/FabPulmao.vue'
 import FabHistoricoView from '../components/FabHistorico.vue'
 import FabHistoricoTrocaView from '../components/FabHistoricoTrocas.vue'
+import HomeView from '../views/Home.vue'
+import PageNotFound from '../views/NotFound.vue'
 
 
 const routes = [
-  // {
-  //   path: '/aq',
-  //   name: 'aq',
-  //   component: AQView,
-  //   meta: {
-  //     isLab: true,
-  //    }
-  // },
+  {
+     path: '/',
+     name: 'Home',
+     component: HomeView,
+     meta: {
+      hideNavbar: true,
+      }
+   },
+
+   {
+    // path: "*",
+    path: "/:catchAll(.*)",
+    name: "NotFound",
+    component: PageNotFound,
+    meta: {
+      hideNavbar: true,
+    }
+  },
 
   {
     path: '/aq/decomol',
