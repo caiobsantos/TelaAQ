@@ -11,32 +11,30 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-import environ
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # INITIALIZE ENVIRONMENT VARIABLES
-env = environ.Env()
-environ.Env.read_env()
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = '0zh#n(((o4!)v-kaimlran#$7r8cfa#^3_mgv1mmc6q6cd@1!g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 
 # CORS_ORIGINS_ALLOW_ALL = True
-ALLOWED_HOSTS = ['172.16.19.182', '10.15.100.110', 'localhost']
+ALLOWED_HOSTS = ['*']
 CORS_ALLOWED_ORIGINS = (
-      'http://localhost:8080',
-      'http://172.16.19.182:8080',
+    'http://localhost:8080',
+    'http://172.16.19.182:8080',
     'http://10.15.100.110'
   )
 
@@ -97,13 +95,9 @@ WSGI_APPLICATION = 'src.wsgi.application'
 
 DATABASES = {
     'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'aplicacao_aq',
-       'USER': 'postgres',
-       'PASSWORD': env('DATABASE_PASS'),
-       'HOST': 'Taiwan',
-       'PORT': '5432',
-   }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
+    }
 }
 
 
@@ -142,13 +136,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfilses')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfilses')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = False
 
-SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = False

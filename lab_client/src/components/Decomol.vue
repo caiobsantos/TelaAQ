@@ -157,13 +157,12 @@
             this.getDecomol1()
             this.getDecomol2()
             this.getDecomol3()
-            this.getSignalDecomol()
         },
         methods: {
             getDecomol1() {
                 axios({
                     method: 'get',
-                    url: process.env.VUE_APP_ROOT_URL + '1',
+                    url: 'http://192.168.0.199:8000/' + '1',
                 }) .then (response => this.decomol1 = response.data)
                 setTimeout(this.getDecomol1, 2000)
             },
@@ -171,7 +170,7 @@
             getDecomol2() {
                 axios({
                     method: 'get',
-                    url: process.env.VUE_APP_ROOT_URL + '2',
+                    url: 'http://192.168.0.199:8000/' + '2',
                 }) .then (response => this.decomol2 = response.data)
                 setTimeout(this.getDecomol2, 2000)
             },
@@ -179,33 +178,10 @@
             getDecomol3() {
                 axios({
                     method: 'get',
-                    url: process.env.VUE_APP_ROOT_URL + '3',
+                    url: 'http://192.168.0.199:8000/' + '3',
                 }) .then (response => this.decomol3 = response.data)
                 setTimeout(this.getDecomol3, 2000)
             },
-
-            getSignalDecomol(){
-                var axios = require('axios');
-                var data = JSON.stringify("DECOMOL");
-
-                var config = {
-                method: 'post',
-                url: 'http://10.15.100.110:50000/api/ObterValores',
-                headers: { 
-                    'Content-Type': 'application/json'
-                },
-                data : data
-                };
-
-                axios(config)
-                .then(response =>
-                    this.sinal = response.data
-                )
-                .catch(function (error) {
-                console.log(error);
-                });
-            },
-
 
             getProducao(nome){ 
                 for(let i = 0; i < this.sinal.length; i++){
@@ -271,7 +247,6 @@
         this.getDecomol1()
         this.getDecomol2()
         this.getDecomol3()
-        this.getSignalDecomol()
         }
     }
 </script>
