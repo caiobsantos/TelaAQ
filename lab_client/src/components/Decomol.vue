@@ -1,12 +1,14 @@
 <template>
-    <div class="decomol-container">
+    <div class="decomol-container" v-if="component=='AQDecomolView'">
         <div class="columns">
                     <div class="column is-one-third" v-if="decomol1.regenerando">
                         <svg class="svg" width="300" height="300">
                             <image href="../assets/tanques/Regenerando.svg" alt="sla" width="275" y="-15%" x="3%"/>
                         </svg>
                         <!-- colocar um ONFOCUS mostrando os resultados da ultima analise -->
-                        <p><router-link class="historico" v-bind:to="'/historico/decomol1'"><b>Decomol 1</b></router-link></p>
+                        <a href="http://10.15.100.110/Painel/PainelEngenharia">
+                            <p class="historico"><b>Decomol 1</b></p>
+                        </a>
                         <div class="spec">
                             Início Regeneração: {{formatData(decomol1.data_liberacao)}} <br>
                         </div>
@@ -135,18 +137,26 @@
                     </div>
         </div>
     </div>
+    <div v-else>
+        <component :is="component"></component>
+    </div>
 </template>
 
 <script>
     import axios from 'axios'
     import moment from 'moment'
+    import AQPulmaoView from '@/components/Pulmao.vue'
 
     // criar funcionalidade para a pagina atualizar apenas quando houver alguma alteracao nos elementos
 
     export default {
         name: 'AQDecomolView',
+        components: {
+            AQPulmaoView
+        },
         data() {
             return{
+                component:"AQDecomolView",
                 decomol1: [],
                 decomol2: [],
                 decomol3: [],
@@ -160,6 +170,10 @@
             this.getSignalDecomol()
         },
         methods: {
+            selPulmao(){
+                this.component = "AQPulmaoView"
+            },
+
             getDecomol1() {
                 axios({
                     method: 'get',
