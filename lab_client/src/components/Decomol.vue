@@ -6,7 +6,7 @@
                             <image href="../assets/tanques/Regenerando.svg" alt="sla" width="275" y="-15%" x="3%"/>
                         </svg>
                         <!-- colocar um ONFOCUS mostrando os resultados da ultima analise -->
-                        <p><router-link class="historico" v-bind:to="'/historico/decomol1'"><b>Decomol 1</b></router-link></p>
+                        <p class="historico"><router-link  v-bind:to="'/historico/decomol1'"><b>Decomol 1</b></router-link></p>
                         <div class="spec">
                             Início Regeneração: {{formatData(decomol1.data_liberacao)}} <br>
                         </div>
@@ -282,12 +282,23 @@
 }
     .decomol-container { 
         position: relative;
-        margin-top: 1.5rem;
+        margin-top: 5rem;
+        color: black;
     }
 
     .columns {
         position: relative;
         /* margin-top: 20vh; */
+    }
+
+    .column{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .historico{
+        padding-top: 10px;
     }
 
     button {

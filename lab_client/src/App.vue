@@ -2,7 +2,7 @@
   <div>
     <div v-if="! $route.meta.hideNavbar" >
       <nav v-if="$route.meta.isLab">
-        <router-link to="/aq/decomol">Decomol</router-link> |
+        <router-link to="/aq/decomol">Decomol </router-link> |
         <router-link to="/aq/pulmao">Pulmão</router-link>
       </nav>
       <nav v-else>
@@ -31,19 +31,35 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: white;
+  min-height: 100vh;
+  background-color: lightgray;
 }
 
 nav {
-  padding: 30px;
+  display: flex;
+  padding: 15px;
+  height: 60px;
+  border-bottom: 3px white solid;
+  justify-content: center;
+  align-items: center;
+  background-color: #282A35;
+  gap: 5px;
 }
 
 nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: white;
+  border: 1px solid transparent;
+}
+
+nav a:hover{
+  color: white;
+  border-bottom: 1px solid darkgray;
+  transition-delay: 50ms;
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: lightgreen;
 }
 </style>
