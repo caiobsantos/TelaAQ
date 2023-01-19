@@ -1,6 +1,7 @@
 <template>
     <div class="all">
         <form class="box">
+            <h1 class="title is-5">{{ 'Decomol '+ id }}</h1>
             <div class="column">
                 <div class="field">
                     <label class="label">Resultado Cor</label>
@@ -47,6 +48,7 @@
                     <button class="button is-link" @click="editDecomol()">Salvar</button>
                 </div>
         </form>
+        
     </div>
 </template>
 
@@ -110,34 +112,56 @@
 
 <style scoped>
 
+    *{
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;    
+    }
     .label {
-        position: relative;
         text-align: left;
-        margin-left: 0.25rem;
+        padding-left: 0.25rem;
+        font-size: 17px;
+        font-weight: bold;
     }
 
-    .field {
-        margin-top: 1.0rem;
-        margin-bottom: 1.0rem;
-        margin-left: 1.5rem;
-        margin-right: 1.5rem;
+    .field { 
+        padding-bottom: 1rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
     }
 
     .box {
-        margin-left: 150px;
-        margin-right: 150px;
-        margin-top: 50px;
+        width: 1000px;
+        /* border: 1px #282A35 solid; */
+        background-color: white;
+    }
+
+    .all{
+        display: flex;
+        justify-content: center;
+        padding-top: 1.5rem;
+        color: black;
+        padding-bottom: 1.5rem;   
+        min-height: auto;
     }
 
     .box-button {
-        margin-left: 143vh;
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 1.5rem; 
+        padding-top: 1rem;
     }
-
     
 
     .StatusDecomol {
-        margin-top: 1.5rem;
-        margin-bottom: 1.5rem;
+        padding-top: 1rem;
+        font-size: 17px;
+        color: #363636;
+        font-weight: 500;
+    }
+
+    h1{
+        padding-top: 0.75rem;
     }
 
 </style>

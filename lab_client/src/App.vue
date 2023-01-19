@@ -26,7 +26,7 @@
 </script>
 
 <style>
-#app {
+ #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -34,7 +34,7 @@
   color: white;
   min-height: 100vh;
   background-color: lightgray;
-}
+} 
 
 nav {
   display: flex;
@@ -59,7 +59,7 @@ nav a:hover{
   transition-delay: 50ms;
 }
 
-nav a.router-link-exact-active {
+nav a.router-link-active {
   color: lightgreen;
 }
 </style>
