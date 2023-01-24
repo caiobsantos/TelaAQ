@@ -1,7 +1,8 @@
 <template>
     <div class="decomol-container">
-        <div class="columns">
-                    <div class="column is-one-third" v-if="decomol1.regenerando">
+        <navbar></navbar>
+        <div class="decs">
+                    <div class="dec" v-if="decomol1.regenerando">
                         Decomol 1
                         <svg class="svg" width="300" height="300">
                             <image href="../assets/tanques/Regenerando.svg" alt="sla" width="275" y="-15%" x="3%"/>
@@ -14,7 +15,7 @@
                         <!-- <router-link class="links" to='/historico/decomol1'><span class="historico">Ver Mais</span></router-link> <br> -->
                         <router-link class="links" v-bind:to="'/decomol/' + decomol1.id"><span class='tag is-link'>Registrar Análise</span></router-link>
                     </div>
-                    <div class="column is-one-third" v-else-if="decomol1.liberado">
+                    <div class="dec" v-else-if="decomol1.liberado">
                         <div v-if="decomol1.produzindo">
                             <svg class="svg" width="300" height="300">
                                 <image href="../assets/tanques/Produzindo.svg" alt="sla" width="275" y="-15%" x="3%"/>
@@ -36,7 +37,7 @@
                             <router-link class="links" v-bind:to="'/decomol/' + decomol1.id"><span class='tag is-link'>Registrar Análise</span></router-link> <br>
                         </div>
                     </div>
-                    <div class="column is-one-third" v-else>
+                    <div class="dec" v-else>
                         <svg class="svg" width="300" height="300">
                             <image href="../assets/tanques/V.svg" alt="sla" width="135" y="0%" x="26%"/>
                         </svg>
@@ -47,7 +48,7 @@
                         <router-link class="links" v-bind:to="'/decomol/' + decomol1.id"><span class='tag is-link'>Registrar Análise</span></router-link>
                     </div>
                 
-                    <div class="column is-one-third" v-if="decomol2.regenerando">
+                    <div class="dec" v-if="decomol2.regenerando">
                         <svg class="svg" width="300" height="300">
                             <image href="../assets/tanques/Regenerando.svg" alt="sla" width="275" y="-15%" x="3%"/>
                         </svg>  
@@ -58,7 +59,7 @@
                         </div>
                         <router-link class="links" v-bind:to="'/decomol/' + decomol2.id"><span class='tag is-link'>Registrar Análise</span></router-link>
                     </div>
-                    <div class="column is-one-third" v-else-if="decomol2.liberado">
+                    <div class="dec" v-else-if="decomol2.liberado">
                         <div v-if="decomol2.produzindo">
                             <svg class="svg" width="300" height="300">
                                 <image href="../assets/tanques/Produzindo.svg" alt="sla" width="275" y="-15%" x="3%"/>
@@ -80,7 +81,7 @@
                             <router-link class="links" v-bind:to="'/decomol/' + decomol2.id"><span class='tag is-link'>Registrar Análise</span></router-link> <br>
                         </div>
                     </div>
-                    <div class="column is-one-third" v-else>
+                    <div class="dec" v-else>
                         <svg class="svg" width="300" height="300">
                             <image href="../assets/tanques/V.svg" alt="sla" width="135" y="0%" x="26%"/>
                         </svg>
@@ -91,7 +92,7 @@
                         <router-link class="links" v-bind:to="'/decomol/' + decomol2.id"><span class='tag is-link'>Registrar Análise</span></router-link>
                     </div>
 
-                    <div class="column is-one-third" v-if="decomol3.regenerando">
+                    <div class="dec" v-if="decomol3.regenerando">
                         <svg class="svg" width="300" height="300">
                             <image href="../assets/tanques/Regenerando.svg" alt="sla" width="275" y="-15%" x="3%"/>
                         </svg>
@@ -102,7 +103,7 @@
                         </div>
                         <router-link class="links" v-bind:to="'/decomol/' + decomol3.id"><span class='tag is-link'>Registrar Análise</span></router-link>
                     </div>
-                    <div class="column is-one-third" v-else-if="decomol3.liberado">
+                    <div class="dec" v-else-if="decomol3.liberado">
                         <div v-if="decomol3.produzindo">
                             <svg class="svg" width="300" height="300">
                                 <image href="../assets/tanques/Produzindo.svg" alt="sla" width="275" y="-15%" x="3%"/>
@@ -124,7 +125,7 @@
                             <router-link class="links" v-bind:to="'/decomol/' + decomol3.id"><span class='tag is-link'>Registrar Análise</span></router-link> <br>
                         </div>
                     </div>
-                    <div class="column is-one-third" v-else>
+                    <div class="dec" v-else>
                         <svg class="svg" width="300" height="300">
                             <image href="../assets/tanques/V.svg" alt="sla" width="135" y="0%" x="26%"/>
                         </svg>
@@ -141,11 +142,13 @@
 <script>
     import axios from 'axios'
     import moment from 'moment'
+    import navbar from '@/components/NavBarLab.vue'
 
     // criar funcionalidade para a pagina atualizar apenas quando houver alguma alteracao nos elementos
 
     export default {
         name: 'AQDecomolView',
+        components: {navbar},
         data() {
             return{
                 decomol1: [],
@@ -231,15 +234,26 @@
     }
 
     .decomol-container { 
-        padding-top: 5rem;
-        color: black;
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        background-color: lightgray;
     }
 
-    .column{
+    .decs{
         display: flex;
-        flex-direction: column;
         align-items: center;
         flex-wrap: wrap;
+        justify-content: space-around;
+        min-height: 90vh;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    .dec{
+        display: flex;
+        flex-direction: column;
         justify-content: center;
     }
 
@@ -267,6 +281,27 @@
 
    .spec{
     color: black;
+   }
+
+   @media(max-width: 1000px){
+    .tag {
+        position: relative;
+        margin-top: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+   }
+
+   @media (max-width: 1150px){
+    .decs{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        min-height: 90vh;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        gap: 50px;
+    }
    }
 
 </style>

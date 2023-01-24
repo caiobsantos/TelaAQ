@@ -1,7 +1,8 @@
 <template>
-    <div class="pulmao">
-        <div class="columns">
-            <div class="column is-half">
+    <div class="pulmao-container">
+        <navbar></navbar>
+        <div class="pulmoes">
+            <div class="pulmao">
                 <svg class="svg" width="300" height="300">
                     <image href="../assets/tanques/PULMÃO1.svg" alt="sla" width="275" y="-15%" x="3%"/>
                 </svg>
@@ -12,7 +13,7 @@
                 </p> -->
                 <router-link class="links" v-bind:to="'/pulmao/' + pulmao1.id"><span class='tag is-link'>Registrar Análise</span></router-link>
             </div>
-            <div class="column">
+            <div class="pulmao">
                 <svg class="svg" width="300" height="300">
                     <image href="../assets/tanques/PULMÃO2.svg" alt="sla" width="275" y="-15%" x="3%"/>
                 </svg>
@@ -27,11 +28,13 @@
 <script>
     import axios from 'axios'
     import moment from 'moment'
+    import navbar from '@/components/NavBarLab.vue'
 
     // criar funcionalidade para a pagina atualizar apenas quando houver alguma alteracao nos elementos
 
     export default {
         name: 'AQPulmaoView',
+        components: {navbar},
         data() {
             return{
                 pulmao1: [],
@@ -74,17 +77,29 @@
         padding: 0px;
         box-sizing: border-box;
     }
-    .column{
+    .pulmao-container { 
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        background-color: lightgray;
+        color: black;
+    }
+
+    .pulmoes{
         display: flex;
-        flex-direction: column;
         align-items: center;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: space-around;
+        min-height: 90vh;
+        padding-top: 50px;
+        padding-bottom: 50px;
     }
-     .pulmao {
-        padding-top: 5rem;
-        color: black;  
-        transition-delay: 50ms;
+
+    .pulmao{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .historico{
@@ -97,6 +112,25 @@
         position: relative;
         margin-top: 1.5rem;
         margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 800px){
+        .pulmoes{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        min-height: 90vh;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        gap: 50px;
+    }
+    .tag {
+        position: relative;
+        margin-top: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
     }
 
 </style>

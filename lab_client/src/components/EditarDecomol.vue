@@ -1,62 +1,66 @@
 <template>
-    <div class="all">
-        <form class="box">
-            <h1 class="title is-5">{{ 'Decomol '+ id }}</h1>
-            <div class="column">
-                <div class="field">
-                    <label class="label">Resultado Cor</label>
-                        <div class="control">
-                            <input class="input" type="text" v-model="resultado_cor" required>
+    <div class="editar-container">
+        <navbar></navbar>
+        <div class="all">
+            <form class="box">
+                <h1 class="title is-5">{{ 'Decomol '+ id }}</h1>
+                <div class="column">
+                    <div class="field">
+                        <label class="label">Resultado Cor</label>
+                            <div class="control">
+                                <input class="input" type="text" v-model="resultado_cor" required>
+                            </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Sensorial</label>
+                            <div class="control">
+                                <input class="input" type="text" v-model="sensorial" required>
+                            </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column">
+                            <div class="field">
+                                <label class="label">PH</label>
+                                    <div class="control">
+                                        <input class="input" type="number" min="0" max="14" v-model="ph" placeholder="0.00" required>
+                                    </div>
+                            </div>
                         </div>
-                </div>
-                <div class="field">
-                    <label class="label">Sensorial</label>
-                        <div class="control">
-                            <input class="input" type="text" v-model="sensorial" required>
-                        </div>
-                </div>
-                <div class="columns">
-                    <div class="column">
-                        <div class="field">
-                            <label class="label">PH</label>
-                                <div class="control">
-                                    <input class="input" type="number" min="0" max="14" v-model="ph" placeholder="0.00" required>
-                                </div>
+                        <div class="column">
+                            <div class="field">
+                                <label class="label">Brix</label>
+                                    <div class="control">
+                                        <input class="input" type="number" v-model="brix" required>
+                                    </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="column">
-                        <div class="field">
-                            <label class="label">Brix</label>
-                                <div class="control">
-                                    <input class="input" type="number" v-model="brix" required>
-                                </div>
-                        </div>
+                </div>
+                    <div class="StatusDecomol">
+                            <label class="radio">
+                                <input type="radio" name="answer" value="true" v-model="liberado" required>
+                                Liberado
+                            </label>
+                            <label class="radio">
+                                <input type="radio" name="answer" value="false" v-model="liberado">
+                                Não Liberado
+                            </label>
                     </div>
-                </div>
-            </div>
-                <div class="StatusDecomol">  
-                        <label class="radio">
-                            <input type="radio" name="answer" value="true" v-model="liberado" required>
-                            Liberado
-                        </label>
-                        <label class="radio">
-                            <input type="radio" name="answer" value="false" v-model="liberado">
-                            Não Liberado
-                        </label>
-                </div>
-                <div class="box-button">
-                    <button class="button is-link" @click="editDecomol()">Salvar</button>
-                </div>
-        </form>
-        
+                    <div class="box-button">
+                        <button class="button is-link" @click="editDecomol()">Salvar</button>
+                    </div>
+            </form>
+        </div>
     </div>
 </template>
 
 <script>
     import axios from 'axios'
+    import navbar from '@/components/NavBarLab.vue'
 
     export default {
         name: 'EditView',
+        components: {navbar},
         data() {
             return{
                 id: this.$route.params.id,
@@ -117,6 +121,15 @@
         margin: 0px;
         box-sizing: border-box;    
     }
+
+    .editar-container { 
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        background-color: lightgray;
+        color: black;
+    }
     .label {
         text-align: left;
         padding-left: 0.25rem;
@@ -131,18 +144,18 @@
     }
 
     .box {
-        width: 1000px;
-        /* border: 1px #282A35 solid; */
+        width: 170vh;  
         background-color: white;
     }
 
     .all{
         display: flex;
         justify-content: center;
+        align-items: center;
         padding-top: 1.5rem;
         color: black;
         padding-bottom: 1.5rem;   
-        min-height: auto;
+        min-height: 90vh;
     }
 
     .box-button {
@@ -164,4 +177,11 @@
         padding-top: 0.75rem;
     }
 
+    @media (max-width: 768px){
+        .box-button {
+        display: flex;
+        justify-content: center;
+        padding-top: 3rem;
+    }
+    }
 </style>
