@@ -21,6 +21,7 @@
   align-items: center;
   background-color: #282A35;
   gap: 5px;
+  color: white;
 }
 
 nav a {
