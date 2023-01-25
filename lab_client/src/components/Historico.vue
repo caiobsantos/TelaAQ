@@ -131,7 +131,7 @@
   }
 </script>
 
-<style scoped>
+<style>
     nav {
         display: flex;
         padding: 15px;

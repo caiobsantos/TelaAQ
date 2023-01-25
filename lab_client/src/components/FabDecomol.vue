@@ -1,24 +1,25 @@
 <template>
     <div class="decomol-container">
-        <div class="columns">
-                <div class="column is-one-third" v-if="decomol1.regenerando">
+        <navbar></navbar>
+        <div class="decs">
+                <div class="dec" v-if="decomol1.regenerando">
                         <svg class="svg" width="300" height="300">
                             <image href="../assets/tanques/Regenerando.svg" alt="sla" width="275" y="-15%" x="3%"/>
                         </svg>
                         <!-- colocar um ONFOCUS mostrando os resultados da ultima analise -->
-                        <p><router-link class="historico" v-bind:to="'/fab/historico/decomol1'"><b>Decomol 1</b></router-link></p>
+                        <p class="historico"><router-link class="historico" v-bind:to="'/fab/historico/decomol1'"><b>Decomol 1</b></router-link></p>
                         <div class="spec">
                             <p>Início Regeneração: {{formatData(decomol1.data_liberacao)}}</p>
                             <p><b>{{decomolStatus(decomol1.liberado)}}</b></p>
                         </div>
                         <button class="button" @click="concluirDecomol(decomol1, id=1)">Concluir Regeneração</button>
                     </div>
-                    <div class="column is-one-third" v-else-if="decomol1.liberado">
+                    <div class="dec" v-else-if="decomol1.liberado">
                         <div v-if="decomol1.produzindo">
                             <svg class="svg" width="300" height="300">
                                 <image href="../assets/tanques/Produzindo.svg" alt="sla" width="275" y="-15%" x="3%"/>
                             </svg>
-                            <p><router-link class="historico" v-bind:to="'/fab/historico/decomol1'"><b>Decomol 1</b></router-link></p>
+                            <p class="historico"><router-link class="historico" v-bind:to="'/fab/historico/decomol1'"><b>Decomol 1</b></router-link></p>
                             <div class="spec">
                                 Última Análise: {{formatData(decomol1.data_liberacao)}} <br>
                             </div>
@@ -39,7 +40,7 @@
                             <svg class="svg" width="300" height="300">
                                 <image href="../assets/tanques/Standby.svg" alt="sla" width="275" y="-15%" x="3%"/>
                             </svg>
-                            <p><router-link class="historico" v-bind:to="'/fab/historico/decomol1'"><b>Decomol 1</b></router-link></p>
+                            <p class="historico"><router-link class="historico" v-bind:to="'/fab/historico/decomol1'"><b>Decomol 1</b></router-link></p>
                             <div class="spec">
                                 Última Análise: {{formatData(decomol1.data_liberacao)}} <br>
                             </div>
@@ -58,35 +59,35 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column is-one-third" v-else>
+                    <div class="dec" v-else>
                         <svg class="svg" width="300" height="300">
                             <image href="../assets/tanques/V.svg" alt="sla" width="135" y="0%" x="26%"/>
                         </svg>
-                        <p><router-link class="historico" v-bind:to="'/fab/historico/decomol1'"><b>Decomol 1</b></router-link></p>
+                        <p class="historico"><router-link class="historico" v-bind:to="'/fab/historico/decomol1'"><b>Decomol 1</b></router-link></p>
                         <div class="spec">
                             Última Análise: {{formatData(decomol1.data_liberacao)}} <br>
                         </div>
                         <button class="button" @click="trocarDecomol(decomol1, id=1)">Regenerar Decomol</button>
                     </div>
                 
-                    <div class="column" v-if="decomol2.regenerando">
+                    <div class="dec" v-if="decomol2.regenerando">
                         <svg class="svg" width="300" height="300">
                             <image href="../assets/tanques/Regenerando.svg" alt="sla" width="275" y="-15%" x="3%"/>
                         </svg>  
                         <!-- colocar um ONFOCUS mostrando os resultados da ultima analise -->
-                        <p><router-link class="historico" v-bind:to="'/fab/historico/decomol2'"><b>Decomol 2</b></router-link></p>
+                        <p class="historico"><router-link class="historico" v-bind:to="'/fab/historico/decomol2'"><b>Decomol 2</b></router-link></p>
                         <div class="spec">
                             <p>Início Regeneração: {{formatData(decomol2.data_liberacao)}}</p>
                             <p><b>{{decomolStatus(decomol2.liberado)}}</b></p>
                         </div>
                         <button class="button" @click="concluirDecomol(decomol2, id=2)">Concluir Regeneração</button>
                     </div>
-                    <div class="column is-one-third" v-else-if="decomol2.liberado">
+                    <div class="dec" v-else-if="decomol2.liberado">
                         <div v-if="decomol2.produzindo">
                             <svg class="svg" width="300" height="300">
                                 <image href="../assets/tanques/Produzindo.svg" alt="sla" width="275" y="-15%" x="3%"/>
                             </svg>
-                            <p><router-link class="historico" v-bind:to="'/fab/historico/decomol2'"><b>Decomol 2</b></router-link></p>
+                            <p class="historico"><router-link class="historico" v-bind:to="'/fab/historico/decomol2'"><b>Decomol 2</b></router-link></p>
                             <div class="spec">
                                 Última Análise: {{formatData(decomol2.data_liberacao)}} <br>
                             </div>
@@ -107,7 +108,7 @@
                             <svg class="svg" width="300" height="300">
                                 <image href="../assets/tanques/Standby.svg" alt="sla" width="275" y="-15%" x="3%"/>
                             </svg>
-                            <p><router-link class="historico" v-bind:to="'/fab/historico/decomol2'"><b>Decomol 2</b></router-link></p>
+                            <p class="historico"><router-link class="historico" v-bind:to="'/fab/historico/decomol2'"><b>Decomol 2</b></router-link></p>
                             <div class="spec">
                                 Última Análise: {{formatData(decomol2.data_liberacao)}} <br>
                             </div>
@@ -125,35 +126,35 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column is-one-third" v-else>
+                    <div class="dec" v-else>
                         <svg class="svg" width="300" height="300">
                             <image href="../assets/tanques/V.svg" alt="sla" width="135" y="0%" x="26%"/>
                         </svg>
-                        <p><router-link class="historico" v-bind:to="'/fab/historico/decomol2'"><b>Decomol 2</b></router-link></p>
+                        <p class="historico"><router-link class="historico" v-bind:to="'/fab/historico/decomol2'"><b>Decomol 2</b></router-link></p>
                         <div class="spec">
                             Última Análise: {{formatData(decomol2.data_liberacao)}} <br>
                         </div>
                         <button class="button" @click="trocarDecomol(decomol2, id=2)">Regenerar Decomol</button>
                     </div>
 
-                    <div class="column" v-if="decomol3.regenerando">
+                    <div class="dec" v-if="decomol3.regenerando">
                         <svg class="svg" width="300" height="300">
                             <image href="../assets/tanques/Regenerando.svg" alt="sla" width="275" y="-15%" x="3%"/>
                         </svg>
                         <!-- colocar um ONFOCUS mostrando os resultados da ultima analise -->
-                        <p><router-link class="historico" v-bind:to="'/fab/historico/decomol3'"><b>Decomol 3</b></router-link></p>
+                        <p class="historico"><router-link class="historico" v-bind:to="'/fab/historico/decomol3'"><b>Decomol 3</b></router-link></p>
                         <div class="spec">
                             <p>Início Regeneração: {{formatData(decomol3.data_liberacao)}}</p>
                             <p><b>{{decomolStatus(decomol3.liberado)}}</b></p>
                         </div>
                         <button class="button" @click="concluirDecomol(decomol3, id=3)">Concluir Regeneração</button>
                     </div>
-                    <div class="column is-one-third" v-else-if="decomol3.liberado">
+                    <div class="dec" v-else-if="decomol3.liberado">
                         <div v-if="decomol3.produzindo">
                             <svg class="svg" width="300" height="300">
                                 <image href="../assets/tanques/Produzindo.svg" alt="sla" width="275" y="-15%" x="3%"/>
                             </svg>
-                            <p><router-link class="historico" v-bind:to="'/fab/historico/decomol3'"><b>Decomol 3</b></router-link></p>
+                            <p class="historico"><router-link class="historico" v-bind:to="'/fab/historico/decomol3'"><b>Decomol 3</b></router-link></p>
                             <div class="spec">
                                 Última Análise: {{formatData(decomol3.data_liberacao)}} <br>
                             </div>
@@ -174,7 +175,7 @@
                             <svg class="svg" width="300" height="300">
                                 <image href="../assets/tanques/Standby.svg" alt="sla" width="275" y="-15%" x="3%"/>
                             </svg>
-                            <p><router-link class="historico" v-bind:to="'/fab/historico/decomol3'"><b>Decomol 3</b></router-link></p>
+                            <p class="historico"><router-link class="historico" v-bind:to="'/fab/historico/decomol3'"><b>Decomol 3</b></router-link></p>
                             <div class="spec">
                                 Última Análise: {{formatData(decomol3.data_liberacao)}} <br>
                             </div>
@@ -192,11 +193,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column is-one-third" v-else>
+                    <div class="dec" v-else>
                         <svg class="svg" width="300" height="300">
                             <image href="../assets/tanques/V.svg" alt="sla" width="135" y="0%" x="26%"/>
                         </svg>
-                        <p><router-link class="historico" v-bind:to="'/fab/historico/decomol3'"><b>Decomol 3</b></router-link></p>
+                        <p class="historico"><router-link class="historico" v-bind:to="'/fab/historico/decomol3'"><b>Decomol 3</b></router-link></p>
                         <div class="spec">
                             Última Análise: {{formatData(decomol3.data_liberacao)}} <br>
                         </div>
@@ -207,11 +208,13 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "axios"
 import moment from 'moment'
+import navbar from '@/components/NavBarFab.vue'
 
     export default {
         name: 'FabDecomolView',
+        components: {navbar},
         data() {
             return{
                 decomol1: [],
@@ -362,44 +365,81 @@ import moment from 'moment'
 </script>
 
 <style scoped>
-    .block:not(:last-child) {
-        margin-bottom: 1.5rem;
+    *{
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box; 
     }
+
     .decomol-container { 
-        margin-top: 1.5rem;
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        background-color: lightgray;
     }
 
-    .columns {
-        position: relative;
-        /* margin-top: 40vh; */
+    .decs{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        min-height: 90vh;
+        padding-top: 50px;
+        padding-bottom: 50px;
     }
 
-    button {
-        margin-bottom: 1.0rem;
+    .dec{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .historico{
+        padding-top: 5px;
+        font-size: 18px;
+        color: black;
+    }
+
+    .historico :hover{
+        color: black;
+        border-bottom: 1px black solid;
+        transition-delay: 50ms;
     }
 
     .tag {
         position: relative;
-        margin-top: 0.5rem;
-        margin-bottom: 1.0rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
     }
 
-    .spec{
-        position: inherit;
-        text-align: center;
-        margin-top: 5px;
-        margin-bottom: 0.5rem;
-    }
+   .svg{
+        position: relative;
+   }
 
-    #maior{
-        margin-left: 3.0rem;
-    }
+   .spec{
+    color: black;
+   }
 
-    .field{
+   @media(max-width: 1000px){
+    .tag {
+        position: relative;
+        margin-top: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+   }
+
+   @media (max-width: 1150px){
+    .decs{
         display: flex;
-        padding: auto;  
-        margin-top: 1.0rem;
-        margin-left: 3.75rem;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        min-height: 90vh;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        gap: 50px;
     }
+   }
 
 </style>

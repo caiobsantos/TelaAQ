@@ -39,7 +39,6 @@
             return{
                 pulmao1: [],
                 pulmao2: [],
-                i: true,
             } 
         },
         
@@ -104,7 +103,7 @@
 
     .historico{
         padding-top: 5px;
-        font-size: 18px;
+        font-size: 16px;
         color: black;
     }
 
