@@ -9,10 +9,10 @@
                         <!-- colocar um ONFOCUS mostrando os resultados da ultima analise -->
                         <p class="historico"><router-link class="historico" v-bind:to="'/fab/historico/decomol1'"><b>Decomol 1</b></router-link></p>
                         <div class="spec">
-                            <p>Início Regeneração: {{formatData(decomol1.data_liberacao)}}</p>
+                            <p>Última Análise: {{formatData(decomol1.data_liberacao)}}</p>
                             <p><b>{{decomolStatus(decomol1.liberado)}}</b></p>
                         </div>
-                        <button class="button" @click="concluirDecomol(decomol1, id=1)">Concluir Regeneração</button>
+                        <div class="field"><button class="button is-success" @click="concluirDecomol(decomol1, id=1)">Concluir Regeneração</button></div>
                     </div>
                     <div class="dec" v-else-if="decomol1.liberado">
                         <div v-if="decomol1.produzindo">
@@ -23,7 +23,7 @@
                             <div class="spec">
                                 Última Análise: {{formatData(decomol1.data_liberacao)}} <br>
                             </div>
-                            <div class="field is-grouped" id="maior">
+                            <div class="field is-grouped">
                                 <p class="control">
                                     <button class="button is-warning" @click="produzirDecomol(decomol1)">
                                         Finalizar Produção
@@ -67,7 +67,10 @@
                         <div class="spec">
                             Última Análise: {{formatData(decomol1.data_liberacao)}} <br>
                         </div>
-                        <button class="button" @click="trocarDecomol(decomol1, id=1)">Regenerar Decomol</button>
+                            <div class="field">
+                                <button class="button is-danger" @click="trocarDecomol(decomol1, id=1)">Regenerar Decomol
+                                </button>
+                            </div>
                     </div>
                 
                     <div class="dec" v-if="decomol2.regenerando">
@@ -77,10 +80,10 @@
                         <!-- colocar um ONFOCUS mostrando os resultados da ultima analise -->
                         <p class="historico"><router-link class="historico" v-bind:to="'/fab/historico/decomol2'"><b>Decomol 2</b></router-link></p>
                         <div class="spec">
-                            <p>Início Regeneração: {{formatData(decomol2.data_liberacao)}}</p>
+                            <p>Última Análise: {{formatData(decomol2.data_liberacao)}}</p>
                             <p><b>{{decomolStatus(decomol2.liberado)}}</b></p>
                         </div>
-                        <button class="button" @click="concluirDecomol(decomol2, id=2)">Concluir Regeneração</button>
+                        <div class="field"><button class="button is-success" @click="concluirDecomol(decomol2, id=2)">Concluir Regeneração</button></div>
                     </div>
                     <div class="dec" v-else-if="decomol2.liberado">
                         <div v-if="decomol2.produzindo">
@@ -134,7 +137,10 @@
                         <div class="spec">
                             Última Análise: {{formatData(decomol2.data_liberacao)}} <br>
                         </div>
-                        <button class="button" @click="trocarDecomol(decomol2, id=2)">Regenerar Decomol</button>
+                        <div class="field">
+                                <button class="button is-danger" @click="trocarDecomol(decomol2, id=2)">Regenerar Decomol
+                                </button>
+                            </div>
                     </div>
 
                     <div class="dec" v-if="decomol3.regenerando">
@@ -144,10 +150,10 @@
                         <!-- colocar um ONFOCUS mostrando os resultados da ultima analise -->
                         <p class="historico"><router-link class="historico" v-bind:to="'/fab/historico/decomol3'"><b>Decomol 3</b></router-link></p>
                         <div class="spec">
-                            <p>Início Regeneração: {{formatData(decomol3.data_liberacao)}}</p>
+                            <p>Última Análise: {{formatData(decomol3.data_liberacao)}}</p>
                             <p><b>{{decomolStatus(decomol3.liberado)}}</b></p>
                         </div>
-                        <button class="button" @click="concluirDecomol(decomol3, id=3)">Concluir Regeneração</button>
+                        <div class="field"><button class="button is-success" @click="concluirDecomol(decomol3, id=3)">Concluir Regeneração</button></div>
                     </div>
                     <div class="dec" v-else-if="decomol3.liberado">
                         <div v-if="decomol3.produzindo">
@@ -201,7 +207,10 @@
                         <div class="spec">
                             Última Análise: {{formatData(decomol3.data_liberacao)}} <br>
                         </div>
-                        <button class="button" @click="trocarDecomol(decomol3, id=3)">Regenerar Decomol</button>
+                        <div class="field">
+                                <button class="button is-danger" @click="trocarDecomol(decomol3, id=3)">Regenerar Decomol
+                                </button>
+                            </div>
                     </div>
         </div>
     </div>
@@ -271,18 +280,18 @@ import navbar from '@/components/NavBarFab.vue'
             trocarDecomol(decomol, id){
                 const c = confirm("Deseja regenerar o " + decomol.producao+"?")
                 if (c) {
-                    axios.post(process.env.VUE_APP_ROOT_URL_TROCA, {
-                        decomol_troca: decomol.producao
-                    }) .then(response => {
-                        if(id==1){
-                            this.id1 = response.data.id
+                    if(id==1){
+                            this.id1 = 1
                         }
                         else if(id==2){
-                            this.id2 = response.data.id
+                            this.id2 = 2
                         }
                         else{
-                            this.id3 = response.data.id
+                            this.id3 = 3
                         }
+                    
+                    axios.post(process.env.VUE_APP_ROOT_URL_TROCA, {
+                        decomol_troca: decomol.producao
                     })
 
                     axios.put(process.env.VUE_APP_ROOT_URL + decomol.id + '/', {
@@ -303,6 +312,7 @@ import navbar from '@/components/NavBarFab.vue'
             },
 
             concluirDecomol(decomol, id){
+                console.log(this.id1)
                 const c = confirm("Deseja finalizar a regeneração do " + decomol.producao+"?")
                 if(c){
                     axios.put(process.env.VUE_APP_ROOT_URL + decomol.id + '/', {
@@ -407,10 +417,10 @@ import navbar from '@/components/NavBarFab.vue'
         transition-delay: 50ms;
     }
 
-    .tag {
+    .field {
         position: relative;
-        margin-top: 1.5rem;
-        margin-bottom: 1.5rem;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
     }
 
    .svg{
@@ -422,10 +432,10 @@ import navbar from '@/components/NavBarFab.vue'
    }
 
    @media(max-width: 1000px){
-    .tag {
+    .field {
         position: relative;
-        margin-top: 0.75rem;
-        margin-bottom: 0.75rem;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
     }
    }
 

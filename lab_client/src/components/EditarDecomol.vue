@@ -90,12 +90,12 @@
                         sensorial: this.sensorial,
                         ph: this.ph,
                         brix: this.brix,
-                        producao: 'Decomol' + this.id,
+                        producao: 'Decomol ' + this.id,
                         liberado: this.liberado,
                     }) 
 
                         axios.post(process.env.VUE_APP_ROOT_URL_HISTORICO,{
-                        decomol: 'Decomol' + this.id,
+                        decomol: 'Decomol ' + this.id,
                         resultado_cor: this.resultado_cor,
                         sensorial: this.sensorial,
                         ph: this.ph,

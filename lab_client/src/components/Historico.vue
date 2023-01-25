@@ -37,8 +37,8 @@
                         <th>Data da Análise</th>
                         <th>Resultado Análise</th>
                     </tr>
-                    <tbody v-for="dec in filterDecomol()"  v-bind:key="dec.id">
-                            <tr v-if="comparaNome(dec)">
+                    <tbody v-for="dec in filterDecomol()"  :key="dec.id">
+                            <tr v-if="comparaDecomol(dec)">
                                 <td>{{ dec.decomol }}</td>
                                 <td>{{ dec.resultado_cor }}</td>
                                 <td>{{ dec.sensorial }}</td>
@@ -65,11 +65,11 @@
         return {
             decomol_nome: this.$route.params.id,
             decs: [],
-            dec: [],
+            deco: [],
         }
     },
 
-    mounted() {
+    created() {
         this.getDecomol()
     },
 
@@ -92,27 +92,12 @@
             }
         },
 
-        // comparaDecomol(nome){
-        //     nome = nome.decomol.replace(/\W+/g, '').toLowerCase()
-        //     if(nome == this.decomol_nome){
-        //         return true
-        //     }
-            
-        //     else{
-        //         return false
-        //     }
-        // },
-
-        comparaNome(dec){
-            if(dec.decomol == 'Decomol 1' && this.id == 1){
+        comparaDecomol(nome){
+            nome = nome.decomol.replace(/\W+/g, '').toLowerCase()
+            if(nome == this.decomol_nome){
                 return true
             }
-            else if(dec.decomol == 'Decomol 2' && this.id == 2){
-                return true
-            }
-            else if(dec.decomol == 'Decomol 3' && this.id == 3){
-                return true
-            }
+ 
             else{
                 return false
             }
@@ -120,9 +105,9 @@
 
         filterDecomol(){
             for (let index = this.decs.length-1; index >=0; index--) {
-                this.dec.push(this.decs[index])
+                this.deco.push(this.decs[index])
                 if(index==0){
-                    return this.dec
+                    return this.deco
                 }
             }
             return 0

@@ -9,7 +9,7 @@
                         <!-- colocar um ONFOCUS mostrando os resultados da ultima analise -->
                         <p class="historico"><router-link class="historico" v-bind:to="'/historico/decomol1'"><b>Decomol 1</b></router-link></p>
                         <div class="spec">
-                            Início Regeneração: {{formatData(decomol1.data_liberacao)}} <br>
+                            Última Análise: {{formatData(decomol1.data_liberacao)}} <br>
                         </div>
                         <!-- <router-link class="links" to='/historico/decomol1'><span class="historico">Ver Mais</span></router-link> <br> -->
                         <router-link class="links" v-bind:to="'/decomol/' + decomol1.id"><span class='tag is-link'>Registrar Análise</span></router-link>
@@ -54,7 +54,7 @@
                         <!-- colocar um ONFOCUS mostrando os resultados da ultima analise -->
                         <p class="historico"><router-link class="historico" v-bind:to="'/historico/decomol2'"><b>Decomol 2</b></router-link></p>
                         <div class="spec">
-                            Início Regeneração: {{formatData(decomol2.data_liberacao)}} <br>
+                            Última Análise: {{formatData(decomol2.data_liberacao)}} <br>
                         </div>
                         <router-link class="links" v-bind:to="'/decomol/' + decomol2.id"><span class='tag is-link'>Registrar Análise</span></router-link>
                     </div>
@@ -98,7 +98,7 @@
                         <!-- colocar um ONFOCUS mostrando os resultados da ultima analise -->
                         <p class="historico"><router-link class="historico" v-bind:to="'/historico/decomol3'"><b>Decomol 3</b></router-link></p>
                         <div class="spec">
-                            Início Regeneração: {{formatData(decomol3.data_liberacao)}} <br>
+                            Última Análise: {{formatData(decomol3.data_liberacao)}} <br>
                         </div>
                         <router-link class="links" v-bind:to="'/decomol/' + decomol3.id"><span class='tag is-link'>Registrar Análise</span></router-link>
                     </div>
