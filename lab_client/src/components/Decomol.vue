@@ -3,7 +3,6 @@
         <navbar></navbar>
         <div class="decs">
                     <div class="dec" v-if="decomol1.regenerando">
-                        Decomol 1
                         <svg class="svg" width="300" height="300">
                             <image href="../assets/tanques/Regenerando.svg" alt="sla" width="275" y="-15%" x="3%"/>
                         </svg>

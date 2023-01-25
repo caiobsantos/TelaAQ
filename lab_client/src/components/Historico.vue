@@ -1,29 +1,28 @@
 <template>
     <div class="historico-container">
-        <!-- <div v-if="decomol_nome=='decomol1'">
+        <div v-if="decomol_nome=='decomol1'">
             <nav>
                 <router-link to="/historico/decomol1">Histórico de Análises</router-link> |
                 <router-link to="/historico/decomol1/troca">Histórico de Regeneração</router-link>
             </nav>
         </div>
-            <div v-else-if="decomol_nome=='decomol2'">
-                <nav>
-                    <router-link to="/historico/decomol2">Histórico de Análises</router-link> |
-                    <router-link to="/historico/decomol2/troca">Histórico de Regeneração</router-link>
-                </nav>
-            </div>
-            <div v-else>
-                <nav>
-                    <router-link to="/historico/decomol3">Histórico de Análises</router-link> |
-                    <router-link to="/historico/decomol3/troca">Histórico de Regeneração</router-link>
-                </nav>
-            </div> -->
-        <navbar></navbar>
+        <div v-else-if="decomol_nome=='decomol2'">
+            <nav>
+                <router-link to="/historico/decomol2">Histórico de Análises</router-link> |
+                <router-link to="/historico/decomol2/troca">Histórico de Regeneração</router-link>
+            </nav>
+        </div>
+        <div v-else>
+            <nav>
+                <router-link to="/historico/decomol3">Histórico de Análises</router-link> |
+                <router-link to="/historico/decomol3/troca">Histórico de Regeneração</router-link>
+            </nav>
+        </div>
         <div class="content">
             <div class="voltar">
             <router-link to="/aq/decomol">
                 <button>
-                    Voltar
+                    Início
                 </button>
             </router-link>
             </div>
@@ -38,8 +37,8 @@
                         <th>Data da Análise</th>
                         <th>Resultado Análise</th>
                     </tr>
-                    <tbody class="reverse" v-for="dec in decs.reverse()"  v-bind:key="dec.id">
-                            <tr v-if="comparaDecomol(dec)">
+                    <tbody v-for="dec in filterDecomol()"  v-bind:key="dec.id">
+                            <tr v-if="comparaNome(dec)">
                                 <td>{{ dec.decomol }}</td>
                                 <td>{{ dec.resultado_cor }}</td>
                                 <td>{{ dec.sensorial }}</td>
@@ -58,16 +57,15 @@
 <script>
   import axios from 'axios'  
   import moment from 'moment'
-  import navbar from '@/components/NavBarLab.vue'
 
   export default {
     name: 'HistoricoView',
-    components: {navbar},
 
     data(){
         return {
             decomol_nome: this.$route.params.id,
             decs: [],
+            dec: [],
         }
     },
 
@@ -94,21 +92,73 @@
             }
         },
 
-        comparaDecomol(nome){
-            nome = nome.decomol.replace(/\W+/g, '').toLowerCase()
-            if(nome == this.decomol_nome){
+        // comparaDecomol(nome){
+        //     nome = nome.decomol.replace(/\W+/g, '').toLowerCase()
+        //     if(nome == this.decomol_nome){
+        //         return true
+        //     }
+            
+        //     else{
+        //         return false
+        //     }
+        // },
+
+        comparaNome(dec){
+            if(dec.decomol == 'Decomol 1' && this.id == 1){
                 return true
             }
-            
+            else if(dec.decomol == 'Decomol 2' && this.id == 2){
+                return true
+            }
+            else if(dec.decomol == 'Decomol 3' && this.id == 3){
+                return true
+            }
             else{
                 return false
             }
+        },
+
+        filterDecomol(){
+            for (let index = this.decs.length-1; index >=0; index--) {
+                this.dec.push(this.decs[index])
+                if(index==0){
+                    return this.dec
+                }
+            }
+            return 0
         },
     }
   }
 </script>
 
 <style scoped>
+    nav {
+        display: flex;
+        padding: 15px;
+        height: 10vh;
+        border-bottom: 3px white solid;
+        justify-content: center;
+        align-items: center;
+        background-color: #282A35;
+        gap: 5px;
+        color: white;
+    }
+
+    nav a {
+        font-weight: bold;
+        color: white;
+        border: 1px solid transparent;
+    }
+
+    nav a:hover{
+        color: white;
+        border-bottom: 1px solid darkgray;
+        transition-delay: 50ms;
+    }
+
+    nav a.router-link-active {
+        color: lightgreen;
+}
 
     .historico-container { 
         font-family: Avenir, Helvetica, Arial, sans-serif;
