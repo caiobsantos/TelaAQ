@@ -51,14 +51,14 @@
             getPulmao1(){
                 axios({
                     method: 'get',
-                    url: 'http://10.15.100.110:50003/pulmao/' + '1',
+                    url: process.env.VUE_APP_ROOT_URL_PULMAO + '1',
                 }) .then(response => this.pulmao1 = response.data) 
             },
 
             getPulmao2(){
                 axios({
                     method: 'get',
-                    url: 'http://10.15.100.110:50003/pulmao/' + '2',
+                    url: process.env.VUE_APP_ROOT_URL_PULMAO + '2',
                 }) .then(response => this.pulmao2 = response.data) 
             },
 

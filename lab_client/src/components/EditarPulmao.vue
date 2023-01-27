@@ -82,7 +82,7 @@
                         brix: this.brix,
                     })
 
-                    axios.post('http://10.15.100.110:50003/historico/pulmao',{
+                    axios.post(process.env.VUE_APP_ROOT_URL_HPULMAO,{
                     tanque: this.nameTanque,
                     resultado_cor: this.resultado_cor,
                     sensorial: this.sensorial,

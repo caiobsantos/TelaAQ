@@ -68,7 +68,7 @@
             return 0
         },
         getPulmao(){
-            axios.get('http://10.15.100.110:50003/historico/pulmao', {
+            axios.get(process.env.VUE_APP_ROOT_URL_HPULMAO, {
             }) .then (response => this.pulmoes = response.data)
         },
 
