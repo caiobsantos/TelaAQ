@@ -33,12 +33,9 @@ DEBUG = True
 
 
 # CORS_ORIGINS_ALLOW_ALL = True
-ALLOWED_HOSTS = ['172.16.19.182', '10.15.100.110', 'localhost', '172.29.76.110']
+ALLOWED_HOSTS = ['localhost']
 CORS_ALLOWED_ORIGINS = (
     'http://localhost:8080',
-    'http://172.16.19.182:8080',
-    'http://10.15.100.110'
-    'localhost'
   )
 
 
