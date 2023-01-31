@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import AQDecomolView from '../components/Decomol.vue'
 import AQPulmaoView from '../components/Pulmao.vue'
 import EditView from '../components/EditarDecomol.vue'
@@ -152,7 +152,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(process.env.BASE_URL),
   routes
 })
 
