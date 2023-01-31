@@ -28,16 +28,17 @@ environ.Env.read_env()
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 
 # CORS_ORIGINS_ALLOW_ALL = True
-ALLOWED_HOSTS = ['172.16.19.182', '10.15.100.110', 'localhost']
+ALLOWED_HOSTS = ['172.16.19.182', '10.15.100.110', 'localhost', '172.29.76.110']
 CORS_ALLOWED_ORIGINS = (
     'http://localhost:8080',
     'http://172.16.19.182:8080',
     'http://10.15.100.110'
+    'localhost'
   )
 
 
@@ -97,14 +98,20 @@ WSGI_APPLICATION = 'src.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
+#     'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'aplicacao_aq',
+#        'USER': 'postgres',
+#        'PASSWORD': env('DATABASE_PASS'),
+#        'HOST': 'Taiwan',
+#        'PORT': '5432',
+#    }
+
     'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'aplicacao_aq',
-       'USER': 'postgres',
-       'PASSWORD': env('DATABASE_PASS'),
-       'HOST': 'Taiwan',
-       'PORT': '5432',
-   }
+        'ENGINE': 'django.db.backends.sqlite3',
+    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+
 }
 
 
@@ -150,6 +157,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfilses')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = False
 
-SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = False
