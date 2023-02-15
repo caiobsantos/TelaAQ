@@ -33,7 +33,7 @@ DEBUG = True
 
 
 # CORS_ORIGINS_ALLOW_ALL = True
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', '172.16.19.182']
 CORS_ALLOWED_ORIGINS = (
     'http://localhost:8080',
   )
@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'troca',
     'pulmao',
     'historico_pulmao',
+    'oleo'
 ]
 
 MIDDLEWARE = [
@@ -94,6 +95,8 @@ WSGI_APPLICATION = 'src.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+DATABASE_ROUTERS = ['routers.oleo_router.OleoRouter']
+
 DATABASES = {
 #     'default': {
 #        'ENGINE': 'django.db.backends.postgresql',
@@ -107,7 +110,16 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    },
+
+    'oleo_db': {
+       'ENGINE': 'django.db.backends.postgresql',
+       'NAME': 'oleo_manual',
+       'USER': 'postgres',
+       'PASSWORD': env('DATABASE_PASS'),
+       'HOST': 'Taiwan',
+       'PORT': '5432',
+   }
 
 }
 
