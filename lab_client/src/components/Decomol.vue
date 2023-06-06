@@ -238,6 +238,9 @@
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
         background-color: lightgray;
+        /* background-image: url('../assets/background_img3.jpeg');
+        background-repeat: no-repeat;
+        background-size: cover; */
     }
 
     .decs{
