@@ -33,9 +33,10 @@ DEBUG = True
 
 
 # CORS_ORIGINS_ALLOW_ALL = True
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', env('ALLOWED_HOST')]
 CORS_ALLOWED_ORIGINS = (
     'http://localhost:8080',
+    env('CORS_ALLOWED_HOST'),
   )
 
 
