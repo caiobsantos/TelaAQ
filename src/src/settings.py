@@ -33,9 +33,10 @@ DEBUG = True
 
 
 # CORS_ORIGINS_ALLOW_ALL = True
-ALLOWED_HOSTS = ['localhost', '172.16.19.182']
+ALLOWED_HOSTS = ['localhost', '172.16.19.86', '10.15.100.110']
 CORS_ALLOWED_ORIGINS = (
     'http://localhost:8080',
+    'http://10.15.100.110',
   )
 
 
@@ -98,19 +99,19 @@ WSGI_APPLICATION = 'src.wsgi.application'
 DATABASE_ROUTERS = ['routers.oleo_router.OleoRouter']
 
 DATABASES = {
-#     'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': 'aplicacao_aq',
-#        'USER': 'postgres',
-#        'PASSWORD': env('DATABASE_PASS'),
-#        'HOST': 'Taiwan',
-#        'PORT': '5432',
-#    }
-
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+     'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'aplicacao_aq',
+        'USER': 'postgres',
+        'PASSWORD': env('DATABASE_PASS'),
+        'HOST': 'Taiwan',
+        'PORT': '5432',
     },
+
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # },
 
     'oleo_db': {
        'ENGINE': 'django.db.backends.postgresql',
