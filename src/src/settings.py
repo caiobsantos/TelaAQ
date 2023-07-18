@@ -33,7 +33,7 @@ DEBUG = True
 
 
 # CORS_ORIGINS_ALLOW_ALL = True
-ALLOWED_HOSTS = ['localhost', '172.16.19.86', '10.15.100.110']
+ALLOWED_HOSTS = ['localhost', env('ALLOWED_HOST'), '172.16.18.193']
 CORS_ALLOWED_ORIGINS = (
     'http://localhost:8080',
     'http://10.15.100.110',
@@ -57,7 +57,8 @@ INSTALLED_APPS = [
     'troca',
     'pulmao',
     'historico_pulmao',
-    'oleo'
+    'oleo',
+    'lavadora'
 ]
 
 MIDDLEWARE = [

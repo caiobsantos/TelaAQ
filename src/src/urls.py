@@ -24,4 +24,5 @@ urlpatterns = [
     path('', include('pulmao.urls')),
     path('', include('historico_pulmao.urls')),
     path('', include('oleo.urls')),
+    path('', include('lavadora.urls')),
 ]
