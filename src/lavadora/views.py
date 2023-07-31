@@ -7,7 +7,7 @@ from rest_framework import generics
 
 
 class ConfiguracaoList(generics.ListCreateAPIView):
-    queryset = Configuracao.objects.all()
+    queryset = Configuracao.objects.all().order_by('id').values()
     serializer_class = ConfiguracaoSerializer
 
 
